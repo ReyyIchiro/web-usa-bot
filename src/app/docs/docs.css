@@ -34,43 +34,7 @@
   }
 }
 
-/* ── Sidebar nav links ───────────────────────────────────────────────────────── */
-[class*="sidebar"] a,
-[class*="Sidebar"] a {
-  border-radius: 8px !important;
-  font-size: 0.9rem !important;
-  color: var(--text-muted) !important;
-  transition: all 0.2s cubic-bezier(0.22, 1, 0.36, 1) !important;
-  padding: 0.45rem 0.75rem !important;
-  margin-bottom: 0.125rem !important;
-}
-[class*="sidebar"] a:hover,
-[class*="Sidebar"] a:hover {
-  background: var(--surface-2) !important;
-  color: var(--text-primary) !important;
-  transform: translateX(3px) !important; /* Premium subtle slide */
-}
-[class*="sidebar"] a[data-active="true"],
-[class*="sidebar"] a[aria-current="page"],
-[class*="Sidebar"] a[data-active="true"],
-[class*="Sidebar"] a[aria-current="page"] {
-  background: var(--accent-dim) !important;
-  color: var(--accent) !important;
-  font-weight: 600 !important;
-  box-shadow: -2px 0 0 var(--accent) inset !important;
-}
 
-/* Category / group label */
-[class*="sidebar"] [class*="separator"],
-[class*="sidebar"] [class*="folder"] > [class*="trigger"],
-[class*="sidebar"] [class*="label"] {
-  font-size: 0.75rem !important;
-  font-weight: 700 !important;
-  text-transform: uppercase !important;
-  letter-spacing: 0.08em !important;
-  color: var(--text-subtle) !important;
-  padding: 1.25rem 0.75rem 0.35rem !important;
-}
 
 /* ── Prose / MDX content (Typography Overhaul) ───────────────────────────────── */
 article, .nd-article, .fd-prose, .prose {
@@ -267,19 +231,7 @@ article hr, .prose hr {
     font-size: 1.75rem !important;
   }
 
-  [class*="sidebar-overlay"],
-  [class*="SidebarOverlay"] {
-    background: rgba(0,0,0,.6) !important;
-    backdrop-filter: blur(8px) !important;
-  }
 
-  /* Ensure sidebar panel has proper styling on mobile */
-  [class*="sidebar-panel"],
-  [class*="SidebarPanel"] {
-    background: var(--bg) !important;
-    border-right: 1px solid var(--border) !important;
-    box-shadow: 10px 0 40px rgba(0,0,0,.6) !important;
-  }
 
   article table, .prose table {
     display: block !important;
@@ -288,15 +240,117 @@ article hr, .prose hr {
   }
 }
 
+
+
 /* ── Hide Redundant Theme Toggle (Fumadocs default) ──────────────────────────── */
-.fd-sidebar [aria-label*="Theme"],
-.nd-sidebar [aria-label*="Theme"],
-.fd-sidebar [class*="theme-toggle"],
-.nd-sidebar [class*="theme-toggle"],
-.fd-sidebar button svg.lucide-moon,
-.nd-sidebar button svg.lucide-moon,
-[class*="ThemeToggle"] {
+.fd-sidebar [data-theme-toggle] {
   display: none !important;
+}
+
+
+/* ── Remodel Sidebar (Premium UX) ────────────────────────────────────────────── */
+/* Premium styling for sidebar links and folder toggles with more spacing */
+#nd-sidebar [data-radix-scroll-area-viewport] a,
+#nd-sidebar [data-radix-scroll-area-viewport] button {
+  border-radius: 12px !important;
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1) !important;
+  margin-bottom: 8px !important;
+  padding-top: 0.75rem !important;
+  padding-bottom: 0.75rem !important;
+  position: relative !important;
+  overflow: hidden !important;
+  border: 1px solid transparent !important;
+}
+
+/* Premium Hover Effect */
+#nd-sidebar [data-radix-scroll-area-viewport] a:hover,
+#nd-sidebar [data-radix-scroll-area-viewport] button:hover {
+  background: var(--surface-2) !important;
+  color: var(--text-primary) !important;
+  transform: translateX(6px) !important;
+  border-color: var(--border) !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.03) !important;
+}
+
+/* Active Item - Stunning gradient and glow */
+#nd-sidebar [data-radix-scroll-area-viewport] a[data-active="true"],
+#nd-sidebar [data-radix-scroll-area-viewport] a[aria-current="page"] {
+  background: linear-gradient(90deg, var(--accent-dim) 0%, transparent 100%) !important;
+  color: var(--accent) !important;
+  font-weight: 600 !important;
+  box-shadow: inset 4px 0 0 var(--accent), 0 4px 15px rgba(0,0,0,0.05) !important;
+  border-color: var(--border) !important;
+}
+
+/* Add a subtle glow to the active item text */
+#nd-sidebar [data-radix-scroll-area-viewport] a[data-active="true"]::before,
+#nd-sidebar [data-radix-scroll-area-viewport] a[aria-current="page"]::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at left, var(--accent) 0%, transparent 70%);
+  opacity: 0.15;
+  pointer-events: none;
+}
+
+/* Folder/Accordion open state slightly highlighted */
+#nd-sidebar [data-radix-scroll-area-viewport] button[aria-expanded="true"] {
+  color: var(--text-primary) !important;
+  font-weight: 600 !important;
+}
+
+/* Sidebar Header / Logo area */
+#nd-sidebar .font-medium {
+  font-weight: 700 !important;
+  letter-spacing: -0.01em !important;
+}
+
+/* Position the collapse button right next to the title */
+#nd-sidebar > div > div.flex > a {
+  margin-inline-end: 0 !important;
+}
+#nd-sidebar button[aria-label="Collapse Sidebar"] {
+  margin-left: 0.75rem !important;
+  margin-right: auto !important;
+  margin-top: 0.5rem !important;
+  border-radius: 8px !important;
+  transition: all 0.2s ease !important;
+}
+#nd-sidebar button[aria-label="Collapse Sidebar"]:hover {
+  background: var(--surface-2) !important;
+  color: var(--text-primary) !important;
+}
+
+/* Floating Collapsed Sidebar Panel (Premium Pill / Dynamic Island) */
+[data-sidebar-panel] {
+  gap: 0.5rem !important;
+  padding: 0.35rem 0.5rem !important;
+  border-radius: 100px !important;
+  background: rgba(20, 20, 20, 0.7) !important;
+  border: 1px solid var(--border) !important;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.2) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  
+  /* Move to top center like a Dynamic Island to avoid overlapping the title */
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  top: 1.5rem !important;
+}
+.light [data-sidebar-panel] {
+  background: rgba(255, 255, 255, 0.7) !important;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.08) !important;
+}
+[data-sidebar-panel] button {
+  border-radius: 100px !important;
+  transition: all 0.2s ease !important;
+}
+[data-sidebar-panel] button:hover {
+  background: var(--surface-2) !important;
+  color: var(--text-primary) !important;
 }
 
 /* ── Light mode overrides ────────────────────────────────────────────────────── */
@@ -319,8 +373,4 @@ article hr, .prose hr {
 .light article th,
 .light .prose th {
   background: #f8f9fa !important;
-}
-.light [class*="sidebar-panel"],
-.light [class*="SidebarPanel"] {
-  background: #fff !important;
 }
