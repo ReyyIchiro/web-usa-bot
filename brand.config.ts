@@ -13,8 +13,7 @@ export const brand = {
 
   // URL & Links
   url: "https://usacore.vercel.app", // Ganti dengan domain final
-  inviteUrl:
-    "https://discord.com/oauth2/authorize?client_id=1531622222828142633&permissions=8&integration_type=0&scope=bot+applications.commands",
+  inviteUrl: "https://discord.com/oauth2/authorize?client_id=1531622222828142633",
   supportServerUrl: "https://discord.gg/CnHuMnpKkV",
   githubUrl: "https://github.com/ReyyIchiro",
   clientId: "1531622222828142633",
