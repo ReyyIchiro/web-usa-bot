@@ -1,0 +1,248 @@
+---
+title: Security & Automod
+description: Referensi command keamanan dan moderasi otomatis USA Core.
+---
+
+
+
+Semua command keamanan memerlukan permission **Manage Server** kecuali disebutkan berbeda.
+
+---
+
+## `/automod`
+
+**Deskripsi:** Membuka Security & Auto-Moderation Control Center — dashboard visual untuk mengonfigurasi semua fitur keamanan server.
+
+### Opsi
+Tidak ada opsi. Command ini membuka dashboard interaktif dengan tombol-tombol konfigurasi.
+
+### Permission
+- **Manage Guild** (Manage Server) — wajib
+
+### Tier
+Fitur dasar: **Free**. SOC penuh (scan malware, ghost mode): **Pro**
+
+### Cooldown
+Tidak ada cooldown khusus.
+
+### Contoh Penggunaan
+```
+/automod
+```
+Bot akan mengirim embed dashboard dengan tombol: Toggle Channel, Punishment, Sensitivity, Ghost Mode, Role Whitelist, Custom Sticky, Refresh.
+
+### Command Terkait
+- [`/autoscan`](/docs/perintah/security#autoscan) — Konfigurasi SOC
+- [`/blacklist`](/docs/perintah/security#blacklist) — Kelola blacklist global
+- [`/logsetup`](/docs/perintah/security#logsetup) — Setup log channel
+
+### Error Umum
+| Error | Penyebab | Solusi |
+|-------|----------|--------|
+| Akses ditolak | Tier tidak cukup | Upgrade ke Pro |
+| Rate limit | Terlalu sering membuka | Tunggu beberapa detik |
+
+---
+
+## `/autoscan`
+
+**Deskripsi:** Membuka Security Operation Center (SOC) — konfigurasi Auto-Scan heuristik yang memindai lampiran berbahaya secara stealth.
+
+### Opsi
+Tidak ada opsi langsung. Konfigurasi dilakukan via tombol interaktif di embed.
+
+### Permission
+- **Manage Guild** (Manage Server) — wajib
+
+### Tier
+**Pro** — Fitur SOC tidak tersedia di tier Free.
+
+### Fitur yang Dikonfigurasi
+- **Punishment Level** (1–4): Hapus pesan + DM warning / Timeout 1 jam / Kick / Ban permanen
+- **Sensitivity Mode**: Standard atau Strict (Paranoia)
+- **Ghost Mode**: ON (privasi penuh, tindakan diam-diam) / OFF (Forum mode, tindakan diumumkan)
+- **Role Whitelist**: Role yang immune dari scan
+- **Channel Sectors**: Channel mana yang dilindungi
+
+### File yang Di-scan
+`.lua`, `.luac`, `.cs`, `.asi`, `.txt`
+
+### Contoh Penggunaan
+```
+/autoscan
+```
+Bot mengirim embed SOC Dashboard dengan konfigurasi saat ini dan tombol-tombol pengaturan.
+
+### Error Umum
+| Error | Penyebab | Solusi |
+|-------|----------|--------|
+| "Fitur hanya Pro" | Tier Free | Upgrade ke Pro |
+| Toggle channel tidak bisa | Bot tidak punya akses channel | Cek permission bot di channel |
+
+---
+
+## `/blacklist`
+
+**Deskripsi:** Kelola global blacklist — tandai akun Discord sebagai berbahaya lintas server. Server lain yang menggunakan USA Core akan mendapat perlindungan dari akun yang di-blacklist.
+
+### Opsi
+
+| Nama | Tipe | Wajib | Deskripsi |
+|------|------|-------|-----------|
+| `subcommand` | Choice | Ya | `add` / `remove` / `list` |
+| `user_id` | String | Ya (untuk add/remove) | Discord User ID yang ingin di-blacklist |
+| `alasan` | String | Ya (untuk add) | Alasan blacklist |
+
+### Permission
+- **Manage Guild** — wajib
+
+### Tier
+**Pro**
+
+### Contoh Penggunaan
+```
+/blacklist add user_id:123456789 alasan:Scammer RTM terbukti
+/blacklist remove user_id:123456789
+/blacklist list
+```
+
+### Command Terkait
+- [`/modpanel`](/docs/perintah/security#modpanel) — Panel moderasi dengan riwayat kasus
+
+---
+
+## `/bypass`
+
+**Deskripsi:** Bypass shortlink berbayar/beriklan dan scan URL untuk keamanan sebelum member mengklik.
+
+### Subcommand
+
+#### `/bypass link`
+
+| Nama | Tipe | Wajib | Deskripsi |
+|------|------|-------|-----------|
+| `url` | String | Ya | URL shortlink yang ingin di-bypass |
+
+#### `/bypass supported`
+Menampilkan daftar domain shortlink yang didukung dan domain yang dilindungi Cloudflare.
+
+### Permission
+Tidak ada — bisa digunakan semua member.
+
+### Tier
+- Free: **5x/hari per user**
+- Pro: **Unlimited**
+
+### Cooldown
+Tergantung tier. Cache hasil bypass: **6 jam** (link yang sama tidak diproses ulang).
+
+### Domain yang Didukung
+linkvertise.com, lootlabs.gg, sfl.gl, bicolink.com, dan 30+ domain lainnya. Gunakan `/bypass supported` untuk daftar lengkap.
+
+### Contoh Penggunaan
+```
+/bypass link url:https://linkvertise.com/abc123
+/bypass supported
+```
+
+**Hasil sukses:**
+```
+✅ Bypass Berhasil!
+Link Asal: https://linkvertise.com/abc123
+Direct Link: https://example.com/actual-file.lua
+```
+
+**Hasil terdeteksi berbahaya:**
+```
+🚨 URL Terindikasi Berbahaya!
+Link mengandung pola phishing/malware. Tidak diproses.
+```
+
+### Error Umum
+| Error | Penyebab | Solusi |
+|-------|----------|--------|
+| URL tidak valid | Format URL salah | Pastikan diawali https:// atau http:// |
+| Domain dilindungi Cloudflare | Cloudflare JS Challenge | Buka manual di browser |
+| Link expired | Shortlink sudah kedaluarsa | Minta link baru dari sumber |
+
+### Command Terkait
+- [`/autoscan`](/docs/perintah/security#autoscan) — Scan malware otomatis
+
+---
+
+## `/purge`
+
+**Deskripsi:** Hapus pesan dalam jumlah banyak dari channel dengan berbagai filter.
+
+### Opsi
+
+| Nama | Tipe | Wajib | Default | Deskripsi |
+|------|------|-------|---------|-----------|
+| `jumlah` | Integer (1–100) | Ya | — | Jumlah pesan yang akan dihapus |
+| `user` | User | Tidak | — | Filter hanya pesan dari user ini |
+| `berisi` | String | Tidak | — | Filter pesan yang mengandung teks ini |
+| `bot` | Boolean | Tidak | false | Hanya hapus pesan dari bot |
+
+### Permission
+- **Manage Messages** — wajib untuk member
+- **Manage Messages** — wajib untuk bot
+
+### Tier
+**Free**
+
+### Batasan
+Pesan lebih dari 14 hari tidak bisa dihapus secara bulk (batasan Discord API).
+
+### Contoh Penggunaan
+```
+/purge jumlah:50
+/purge jumlah:100 user:@spammer
+/purge jumlah:20 berisi:link
+```
+
+---
+
+## `/modpanel`
+
+**Deskripsi:** Panel moderasi dengan riwayat kasus, log aksi, dan manajemen punishment member.
+
+### Permission
+- **Moderate Members** — wajib
+
+### Tier
+**Free** (basic) / **Pro** (riwayat lengkap + advanced search)
+
+### Contoh Penggunaan
+```
+/modpanel
+```
+
+---
+
+## `/logsetup`
+
+**Deskripsi:** Konfigurasi channel tujuan untuk berbagai jenis log moderasi dan event server.
+
+### Opsi
+
+| Nama | Tipe | Wajib | Deskripsi |
+|------|------|-------|-----------|
+| `tipe` | Choice | Ya | Jenis log: `moderasi`, `join_leave`, `message`, `voice`, `role`, `security`, `ticket` |
+| `channel` | Channel | Ya | Channel Discord tujuan log |
+
+### Permission
+- **Manage Guild** — wajib
+
+### Tier
+- Dasar (1 webhook per tipe): **Free**
+- Webhook terpisah per tipe event: **Pro**
+
+### Contoh Penggunaan
+```
+/logsetup tipe:moderasi channel:#mod-log
+/logsetup tipe:security channel:#security-log
+/logsetup tipe:ticket channel:#ticket-log
+```
+
+### Catatan
+Setiap tipe log bisa memiliki channel tujuan berbeda untuk audit granular.

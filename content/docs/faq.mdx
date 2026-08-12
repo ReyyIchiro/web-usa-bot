@@ -1,0 +1,121 @@
+---
+title: FAQ
+description: Pertanyaan yang sering diajukan seputar USA Core Bot.
+---
+
+
+
+## Umum
+
+### Apakah USA Core gratis?
+
+Ya. Tier Free tersedia selamanya tanpa kartu kredit. Fitur-fitur dasar seperti automod, leveling, giveaway, party matching, ticket (1 kategori), SSRP manual, dan name generator bisa digunakan gratis.
+
+Fitur advanced seperti SOC A.E.G.I.S., Scripter Tools, RTM Marketplace, TikTok notify, dan AI memerlukan tier **Pro** atau **Enterprise**.
+
+### Bagaimana cara invite USA Core ke server saya?
+
+Klik [Invite Bot](/invite) atau gunakan link:
+```
+https://discord.com/oauth2/authorize?client_id=1531622222828142633&permissions=8&scope=bot+applications.commands
+```
+
+### Apakah USA Core memerlukan permission Administrator?
+
+**Tidak.** USA Core mengikuti prinsip **minimal permission**. Bot hanya meminta permission yang benar-benar digunakan. Tidak ada permission blanket Administrator.
+
+---
+
+## Permission & Keamanan
+
+### Mengapa automod tidak bekerja di channel tertentu?
+
+Cek apakah:
+1. Role USA Core memiliki akses baca/tulis di channel tersebut
+2. Channel sudah diaktifkan di pengaturan automod (`/automod` → Toggle Channel)
+3. Jika ada role whitelist, pastikan member tidak memiliki role tersebut
+
+### Apakah bot bisa membaca pesan DM anggota?
+
+**Tidak.** Bot hanya bisa membaca pesan di channel yang memiliki izin "Read Messages". Konten DM antar member tidak bisa diakses oleh bot.
+
+### Apa itu Ghost Mode di SOC?
+
+Ghost Mode adalah mode operasi diam-diam. Ketika diaktifkan:
+- Tindakan moderasi (hapus pesan, timeout, dll.) dilakukan tanpa notifikasi publik
+- Member tidak menerima DM bahwa mereka terkena tindakan moderasi
+- Hanya log moderasi internal yang mencatat aksi
+
+Mode ini berguna untuk komunitas yang tidak ingin "mempermalukan" member secara publik.
+
+---
+
+## RTM Marketplace
+
+### Siapa yang bisa melihat identitas saya di RTM?
+
+Identitas Anda (Discord ID yang terhubung ke iklan) disimpan terenkripsi dan **tidak pernah ditampilkan kepada pembeli atau penjual lain** secara publik.
+
+Identitas hanya bisa diungkap oleh admin marketplace dalam kondisi:
+- Investigasi sengketa/penipuan yang valid
+- Permintaan dari penegak hukum dengan dokumentasi resmi
+
+Setiap akses dicatat dalam audit log permanen.
+
+### Bagaimana jika terjadi sengketa transaksi?
+
+1. Hubungi admin server via ticket support
+2. Admin akan menggunakan `/rtmAdmin reveal` untuk investigasi (dengan alasan yang tercatat)
+3. Berdasarkan bukti, admin memutuskan penyelesaian sengketa
+4. Dana escrow dilepaskan sesuai keputusan
+
+---
+
+## Boombox & Audio
+
+### Platform apa saja yang didukung Boombox?
+
+YouTube, TikTok, SoundCloud, Spotify, Apple Music, Deezer, dan beberapa platform lain. Gunakan `/bypass supported` untuk daftar lengkap.
+
+### Mengapa link Boombox expired?
+
+Link audio yang dihasilkan aktif selama **24 jam** (konversi) atau **7 hari** (upload custom). Ini karena alasan storage dan bandwidth. Gunakan `/convertbb` ulang untuk mendapatkan link baru.
+
+### Apakah link Boombox bisa langsung dipakai di SA-MP?
+
+Ya. Format link yang dihasilkan kompatibel dengan command `/boombox url [link]` di SA-MP menggunakan MoonLoader. Pastikan server SA-MP Anda mengizinkan konten dari domain CDN kami.
+
+---
+
+## Scripter Tools
+
+### Apakah decompile Lua legal?
+
+Penggunaan yang sah meliputi:
+- Memulihkan kode milik Anda sendiri yang source-nya hilang
+- Analisis keamanan mod untuk komunitas
+- Tujuan edukasi
+
+Penggunaan untuk mencuri atau mendistribusikan ulang karya orang lain adalah pelanggaran ToS dan berpotensi melanggar hukum hak cipta.
+
+### Apakah file yang saya upload disimpan?
+
+File yang diupload untuk compile/decompile/scan hanya tersimpan sementara di server kami selama proses berlangsung, kemudian **langsung dihapus**. Kami tidak menyimpan file mod Anda.
+
+---
+
+## Teknis
+
+### Bot offline / tidak merespons. Apa yang harus dilakukan?
+
+1. Cek [halaman Status](/status) untuk status real-time bot
+2. Tunggu 5 menit — mungkin sedang restart otomatis
+3. Jika lebih dari 15 menit, lapor ke [Discord Support Server](https://discord.gg/CnHuMnpKkV)
+
+### Bagaimana cara pindah tier ke server lain?
+
+Gunakan `/redeem [key]` di server baru. Key otomatis menonaktifkan tier di server lama. Key tidak bisa aktif di 2 server bersamaan.
+
+### Apakah USA Core mendukung multiple language?
+
+Saat ini USA Core menggunakan **Bahasa Indonesia** sebagai bahasa utama. Respons bot dan embed dalam Bahasa Indonesia.

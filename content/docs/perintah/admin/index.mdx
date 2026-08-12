@@ -1,0 +1,200 @@
+---
+title: Admin & Konfigurasi
+description: Command admin untuk konfigurasi server, audit log, backup, webhook, dan manajemen tier.
+---
+
+
+
+---
+
+## `/help`
+
+**Deskripsi:** Tampilkan daftar semua command yang tersedia dengan filter kategori.
+
+### Opsi
+
+| Nama | Tipe | Wajib | Deskripsi |
+|------|------|-------|-----------|
+| `kategori` | Choice | Tidak | Filter: `security`, `scripter`, `roleplay`, `boombox`, `rtm`, `engagement`, `admin` |
+
+### Permission
+Tidak ada.
+
+### Tier
+**Free**
+
+### Contoh Penggunaan
+```
+/help
+/help kategori:security
+```
+
+---
+
+## `/redeem`
+
+**Deskripsi:** Aktifkan key Pro atau Enterprise untuk server Anda.
+
+### Opsi
+
+| Nama | Tipe | Wajib | Deskripsi |
+|------|------|-------|-----------|
+| `key` | String | Ya | Key aktivasi yang diterima |
+
+### Permission
+- **Administrator** — wajib
+
+### Tier
+Tersedia untuk semua tier (untuk upgrade).
+
+### Contoh Penggunaan
+```
+/redeem key:USACORE-XXXX-XXXX-XXXX
+```
+
+**Hasil sukses:**
+```
+✅ Tier Berhasil Diaktifkan!
+Server: My Server
+Tier: Pro
+Berlaku: 30 hari (hingga 11 Sep 2026)
+Fitur baru diaktifkan!
+```
+
+### Catatan
+- Key bersifat portable — tidak terikat ke server tertentu
+- Key yang sama bisa dipindah ke server lain via `/redeem` di server baru (otomatis menonaktifkan server lama)
+- Key tidak bisa digunakan bersamaan di 2 server
+
+---
+
+## `/tierinfo`
+
+**Deskripsi:** Tampilkan informasi tier aktif server, tanggal kadaluarsa, dan kuota penggunaan.
+
+### Permission
+- **Manage Server** — wajib
+
+### Contoh Penggunaan
+```
+/tierinfo
+```
+
+**Hasil:**
+```
+📋 Informasi Tier Server
+
+Tier: Pro
+Aktif sejak: 12 Agt 2026
+Berlaku hingga: 11 Sep 2026
+Sisa: 29 hari
+
+Kuota Bulan Ini:
+• Boombox Converts: 234/∞
+• Bypass: 87/∞
+• Scan: 45/∞
+• AI Requests: 156/∞
+```
+
+---
+
+## `/auditlog`
+
+**Deskripsi:** Tampilkan riwayat audit log server dengan filter.
+
+### Opsi
+
+| Nama | Tipe | Wajib | Deskripsi |
+|------|------|-------|-----------|
+| `tipe` | Choice | Tidak | Jenis event yang difilter |
+| `user` | User | Tidak | Filter berdasarkan user |
+| `limit` | Integer (1–50) | Tidak | Jumlah entri (default: 20) |
+
+### Permission
+- **View Audit Log** — wajib
+
+### Tier
+- **Free**: 7 hari terakhir
+- **Pro**: 90 hari terakhir
+
+---
+
+## `/backup`
+
+**Deskripsi:** Buat atau restore backup konfigurasi server USA Core.
+
+### Subcommand
+
+#### `/backup create`
+Buat snapshot konfigurasi saat ini.
+
+#### `/backup restore`
+Restore konfigurasi dari backup.
+
+| Nama | Tipe | Wajib | Deskripsi |
+|------|------|-------|-----------|
+| `backup_id` | String | Ya | ID backup yang ingin di-restore |
+
+#### `/backup list`
+Tampilkan daftar backup tersedia.
+
+### Permission
+- **Administrator** — wajib
+
+### Tier
+**Pro**
+
+---
+
+## `/serverinfo`
+
+**Deskripsi:** Tampilkan informasi detail server Discord.
+
+### Permission
+Tidak ada.
+
+### Tier
+**Free**
+
+---
+
+## `/tiktok`
+
+Lihat dokumentasi lengkap di [Engagement Commands](/docs/perintah/engagement#tiktok).
+
+---
+
+## `/aimodel`
+
+**Deskripsi:** Konfigurasi model AI custom untuk server — persona, knowledge base, dan batasan.
+
+### Subcommand
+
+#### `/aimodel setup`
+
+| Nama | Tipe | Wajib | Deskripsi |
+|------|------|-------|-----------|
+| `persona` | String | Ya | Deskripsi kepribadian AI (max 500 karakter) |
+| `nama` | String | Tidak | Nama AI (default: nama bot) |
+
+#### `/aimodel knowledge`
+Tambah knowledge base untuk AI server.
+
+| Nama | Tipe | Wajib | Deskripsi |
+|------|------|-------|-----------|
+| `file` | Attachment | Ya | File .txt atau .md berisi knowledge base |
+
+#### `/aimodel channel`
+Set channel di mana AI aktif merespons.
+
+### Permission
+- **Manage Server** — wajib
+
+### Tier
+**Pro**
+
+### Contoh Penggunaan
+```
+/aimodel setup persona:"Kamu adalah Asisten Moderasi Komunitas dengan nama 'Sentinel'. Kamu berbicara formal, tegas, dan membantu."
+/aimodel channel #ai-chat
+```

@@ -1,0 +1,78 @@
+---
+title: Changelog
+description: Riwayat perubahan dan update USA Core Bot.
+---
+
+
+
+## v3.2.0 — Agustus 2026
+
+### ✨ Fitur Baru
+- **RTM Marketplace v2** — Rebuild sistem RTM dengan rekber/escrow resmi dan audit trail untuk reveal identity
+- **AI Model Custom** — Setiap server sekarang bisa memiliki AI dengan persona dan knowledge base sendiri
+- **TikTok Realtime Notify** — Event-driven via Supabase Realtime, tidak lagi polling-based
+- **Party Matching v2** — Mode password, auto-expire party, dan notifikasi ketika party penuh
+- **SSRP Auto-Builder AI** — Deskripsikan scene, AI yang build screenshot RP-nya
+- **Backup & Restore** — Snapshot konfigurasi server USA Core
+
+### 🔧 Peningkatan
+- **SOC heuristik lebih akurat** — Reduced false positives 40%, improved malware signature database
+- **Boombox queue lebih cepat** — Response time turun dari ~8s ke ~2.5s rata-rata
+- **Ticket transcript** — Format HTML yang lebih baik dengan syntax highlighting untuk kode
+- **Embed builder** — Support timestamp, mention, dan custom footer icon
+- **Leveling** — Perbaikan bug double XP saat pesan dikirim rapid-fire
+
+### 🐛 Bug Fix
+- Fix: TikTok notify tidak mengirim notifikasi jika channel di-rename
+- Fix: `/bypass` tidak menangani redirect chain lebih dari 3 hop
+- Fix: Automod timeout tidak bekerja jika member memiliki 2+ role yang di-whitelist
+- Fix: `/giveaway reroll` memilih pemenang yang sama jika hanya 1 partisipan
+
+### ⚠️ Breaking Changes
+- Konfigurasi TikTok tracking lama perlu di-reconfigure ulang via `/tiktok tambah` karena perubahan arsitektur event-driven
+
+---
+
+## v3.1.5 — Juli 2026
+
+### 🔧 Peningkatan
+- Upgrade LuaJIT ke versi terbaru untuk Scripter Tools
+- Boombox menambahkan dukungan Apple Music dan Deezer
+- SOC menambahkan 127 signature malware baru
+
+### 🐛 Bug Fix
+- Fix: `/compilelua` kadang gagal untuk file dengan karakter non-ASCII di nama
+- Fix: RTM embed tidak ter-update saat iklan diedit
+- Fix: Poll tidak menutup otomatis saat durasi habis jika bot di-restart
+
+---
+
+## v3.1.0 — Juni 2026
+
+### ✨ Fitur Baru
+- **Boombox Audio Converter** — Konversi dari YouTube, TikTok, SoundCloud, Spotify ke link SA-MP
+- **SOC Ghost Mode** — Mode stealth untuk tindakan moderasi tanpa eksposur publik
+- **URL Scanner** — Scan link sebelum member mengklik via `/bypass`
+- **Global Blacklist** — Sharing data akun berbahaya lintas server
+
+### 🔧 Peningkatan
+- Automod sekarang mendukung regex pattern untuk filter kata terlarang
+- `/ticket` mendukung multi-kategori (Pro)
+- Leveling system rewrite — lebih akurat dan real-time
+
+---
+
+## v3.0.0 — Mei 2026
+
+Rilis major dengan arsitektur baru berbasis Supabase + event-driven.
+
+### ✨ Fitur Baru
+- **A.E.G.I.S SOC** — Security Operation Center dengan scan heuristik
+- **Scripter Tools** — Compile/decompile/obfuscate Lua untuk SA-MP
+- **RTM Marketplace** — Marketplace anonim dengan rekber
+- **SSRP Builder** — Screenshot roleplay builder visual
+- **Party Matching** — Sistem LFG untuk gaming
+
+### Breaking Changes dari v2.x
+- Seluruh konfigurasi harus di-setup ulang (sistem command baru menggunakan slash commands)
+- Data ekonomi v2 tidak dimigrasi ke v3

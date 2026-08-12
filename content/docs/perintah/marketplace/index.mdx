@@ -1,0 +1,147 @@
+---
+title: RTM Marketplace
+description: Command RTM (Reyy Trade Market) — marketplace anonim dengan sistem rekber/escrow terintegrasi.
+---
+
+
+
+RTM (Reyy Trade Market) adalah sistem marketplace anonim yang terintegrasi langsung di Discord. Identitas penjual dan pembeli tidak pernah terekspos secara publik.
+
+> ℹ️ **Catatan:** RTM tersedia mulai tier **Pro**. Admin marketplace memiliki akses tambahan untuk investigasi sengketa (lihat `/rtmAdmin`).
+
+---
+
+## `/rtm`
+
+**Deskripsi:** Akses dashboard RTM Marketplace untuk melihat, membuat, dan mengelola iklan.
+
+### Subcommand
+
+#### `/rtm buat`
+Buat iklan baru di marketplace.
+
+| Nama | Tipe | Wajib | Deskripsi |
+|------|------|-------|-----------|
+| `judul` | String | Ya | Judul iklan (max 100 karakter) |
+| `deskripsi` | String | Ya | Deskripsi detail produk/jasa |
+| `harga` | String | Ya | Harga dalam format bebas (e.g., "50K", "Nego", "200.000") |
+| `kategori` | Choice | Ya | `jual`, `beli`, `jasa`, `tukar` |
+| `foto` | Attachment | Tidak | Foto produk (max 3 foto) |
+
+#### `/rtm lihat`
+Lihat semua iklan aktif dengan filter opsional.
+
+| Nama | Tipe | Wajib | Deskripsi |
+|------|------|-------|-----------|
+| `kategori` | Choice | Tidak | Filter berdasarkan kategori |
+| `cari` | String | Tidak | Cari iklan berdasarkan kata kunci |
+
+#### `/rtm saya`
+Lihat semua iklan yang Anda buat.
+
+#### `/rtm tutup`
+Tutup/hapus iklan yang Anda buat.
+
+| Nama | Tipe | Wajib | Deskripsi |
+|------|------|-------|-----------|
+| `id_iklan` | String | Ya | ID iklan yang ingin ditutup |
+
+### Permission
+Tidak ada (semua member bisa menggunakan).
+
+### Tier
+**Pro**
+
+### Contoh Penggunaan
+```
+/rtm buat judul:"Jual Script Lua MoonLoader Custom" deskripsi:"Script custom buatan sendiri, anti-crash" harga:"Nego" kategori:jual
+/rtm lihat kategori:jual cari:lua
+/rtm saya
+```
+
+### Catatan
+- Iklan aktif selama 7 hari, setelah itu otomatis diarsipkan
+- Identitas penjual tidak pernah ditampilkan ke pembeli secara publik
+- Interaksi jual-beli dilakukan via sistem DM bot
+
+---
+
+## `/reputasi`
+
+**Deskripsi:** Lihat reputasi RTM dari pengguna atau diri sendiri berdasarkan riwayat transaksi.
+
+### Opsi
+
+| Nama | Tipe | Wajib | Deskripsi |
+|------|------|-------|-----------|
+| `user` | User | Tidak | User yang ingin dilihat reputasinya (default: diri sendiri) |
+
+### Permission
+Tidak ada.
+
+### Tier
+**Pro**
+
+### Contoh Penggunaan
+```
+/reputasi
+/reputasi user:@teman
+```
+
+**Hasil:**
+```
+⭐ Reputasi RTM
+
+Rating: ⭐⭐⭐⭐⭐ (5.0)
+Total Transaksi: 23
+Berhasil: 23 | Sengketa: 0 | Pending: 0
+Seller sejak: 1 Jan 2025
+```
+
+### Catatan
+Nama/ID Discord tidak ditampilkan di profil reputasi untuk menjaga anonimitas.
+
+---
+
+## `/rtmAdmin`
+
+**Deskripsi:** Panel admin RTM untuk investigasi sengketa dan manajemen marketplace.
+
+> ⚠️ **Perhatian:** Command ini memiliki akses ke identitas asli pengguna RTM. Setiap penggunaan **dicatat penuh** dalam audit log yang tidak bisa dihapus.
+
+### Subcommand
+
+#### `/rtmAdmin reveal`
+Ungkap identitas asli pengguna RTM untuk keperluan investigasi.
+
+| Nama | Tipe | Wajib | Deskripsi |
+|------|------|-------|-----------|
+| `id_iklan` | String | Ya | ID iklan yang terkait sengketa |
+| `alasan` | String | Ya | Alasan mengungkap identitas (wajib, diaudit) |
+
+#### `/rtmAdmin tutup`
+Tutup paksa iklan yang melanggar aturan.
+
+| Nama | Tipe | Wajib | Deskripsi |
+|------|------|-------|-----------|
+| `id_iklan` | String | Ya | ID iklan yang ditutup |
+| `alasan` | String | Ya | Alasan penutupan |
+
+#### `/rtmAdmin suspend`
+Suspend akses RTM pengguna.
+
+### Permission
+- **Administrator** atau role khusus `RTM Admin` yang di-set via `/logsetup`
+
+### Tier
+**Pro** (admin fitur)
+
+### Audit Log
+Setiap penggunaan `/rtmAdmin reveal` menghasilkan log permanen yang berisi:
+- Discord ID admin yang mengakses
+- Timestamp akses
+- ID iklan yang diinvestigasi
+- Alasan yang dicantumkan
+- Identitas yang diungkap
+
+Log ini tidak bisa dihapus dan bisa diaudit kapan saja oleh owner server.

@@ -1,0 +1,204 @@
+---
+title: Scripter Tools
+description: Referensi command tools untuk pengembang mod SA-MP — compile, decompile, obfuscate, dan scan malware Lua.
+---
+
+
+
+> ⚠️ **Disclaimer:** Gunakan fitur ini secara bertanggung jawab. Hanya untuk pengembangan mod yang sah dan analisis keamanan. Pelanggaran mengakibatkan akses dicabut.
+
+Semua Scripter Tools memerlukan tier **Pro**. Semua file melewati scan malware sebelum diproses.
+
+---
+
+## `/compilelua`
+
+**Deskripsi:** Compile file `.lua` menjadi bytecode `.luac` menggunakan LuaJIT. Berguna untuk mendistribusikan mod tanpa mengekspos source code.
+
+### Opsi
+
+| Nama | Tipe | Wajib | Deskripsi |
+|------|------|-------|-----------|
+| `file` | Attachment | Ya | File `.lua` yang ingin dikompilasi |
+
+### Batasan
+- Hanya file `.lua` yang diterima
+- Ukuran maksimal: **500KB**
+
+### Permission
+Tidak ada — semua member bisa gunakan (dengan rate limit tier).
+
+### Tier
+**Pro** — Tidak tersedia di Free.
+
+### Cooldown
+Tergantung kuota tier.
+
+### Contoh Penggunaan
+```
+/compilelua file:[upload file.lua]
+```
+
+**Hasil:**
+```
+✅ File berhasil dikompilasi menjadi bytecode .luac.
+[lampiran: compiled_nama-file.luac]
+```
+
+### Proses Internal
+1. File diunduh dari Discord
+2. Nama file di-sanitize (path traversal protection)
+3. Scan malware dijalankan sebelum kompilasi
+4. LuaJIT mengkompilasi ke bytecode
+5. File hasil dikirim dan temporary file dihapus
+6. Log dikirim ke Security Log channel
+
+### Error Umum
+| Error | Penyebab | Solusi |
+|-------|----------|--------|
+| Hanya file .lua yang didukung | Upload file bukan .lua | Upload file dengan ekstensi .lua |
+| Ukuran terlalu besar | File >500KB | Split file atau kompres kode |
+| Gagal compile | Syntax error di kode Lua | Cek syntax file terlebih dahulu |
+| Terdeteksi malware | File mengandung pola berbahaya | File tidak bisa diproses |
+
+### Command Terkait
+- [`/decompilelua`](#decompilelua) — Decompile bytecode kembali ke Lua
+- [`/scan`](#scan) — Scan malware file tanpa compile
+
+---
+
+## `/decompilelua`
+
+**Deskripsi:** Decompile file `.luac` (bytecode) kembali ke kode Lua yang dapat dibaca. Berguna untuk debugging mod yang source-nya hilang.
+
+### Opsi
+
+| Nama | Tipe | Wajib | Deskripsi |
+|------|------|-------|-----------|
+| `file` | Attachment | Ya | File `.luac` yang ingin di-decompile |
+
+### Batasan
+- Hanya file `.luac` yang diterima
+- Ukuran maksimal: **500KB**
+- Hasil decompile mungkin tidak identik dengan source asli (bytecode tidak menyimpan komentar dan nama variabel lokal)
+
+### Permission
+Tidak ada.
+
+### Tier
+**Pro**
+
+### Contoh Penggunaan
+```
+/decompilelua file:[upload file.luac]
+```
+
+**Hasil:**
+```
+✅ Decompile selesai.
+[lampiran: decompiled_nama-file.lua]
+```
+
+### Error Umum
+| Error | Penyebab | Solusi |
+|-------|----------|--------|
+| Hanya file .luac | Upload file salah | Upload file dengan ekstensi .luac |
+| Gagal decompile | File corrupt atau diproteksi | File tidak bisa direcovery |
+
+---
+
+## `/obfuscate`
+
+**Deskripsi:** Obfuscate kode Lua untuk melindungi intellectual property mod dari pembacaan langsung.
+
+### Opsi
+
+| Nama | Tipe | Wajib | Deskripsi |
+|------|------|-------|-----------|
+| `file` | Attachment | Ya | File `.lua` yang ingin di-obfuscate |
+
+### Permission
+Tidak ada.
+
+### Tier
+**Pro**
+
+### Peringatan
+Obfuscation bukan enkripsi — kode tetap bisa di-reverse dengan upaya yang cukup. Gunakan sebagai lapisan perlindungan tambahan, bukan satu-satunya proteksi.
+
+### Contoh Penggunaan
+```
+/obfuscate file:[upload file.lua]
+```
+
+### Command Terkait
+- [`/deobfuscate`](#deobfuscate) — Analisis kode yang di-obfuscate
+
+---
+
+## `/deobfuscate`
+
+**Deskripsi:** Analisis dan deobfuscate kode Lua yang telah di-obfuscate. Berguna untuk analisis keamanan mod yang mencurigakan.
+
+### Opsi
+
+| Nama | Tipe | Wajib | Deskripsi |
+|------|------|-------|-----------|
+| `file` | Attachment | Ya | File `.lua` yang di-obfuscate |
+
+### Permission
+Tidak ada.
+
+### Tier
+**Pro**
+
+### Catatan
+Hasilnya mungkin tidak 100% identik dengan source asli — variabel dan fungsi mungkin memiliki nama yang di-generate.
+
+---
+
+## `/scan`
+
+**Deskripsi:** Scan manual file Lua untuk mendeteksi pola malware sebelum dijalankan di server SA-MP.
+
+### Opsi
+
+| Nama | Tipe | Wajib | Deskripsi |
+|------|------|-------|-----------|
+| `file` | Attachment | Ya | File yang ingin di-scan |
+
+### File yang Didukung
+`.lua`, `.luac`, `.cs`, `.asi`, `.txt`
+
+### Permission
+Tidak ada.
+
+### Tier
+- **Free**: 3x/hari per user
+- **Pro**: Unlimited
+
+### Contoh Penggunaan
+```
+/scan file:[upload file.lua]
+```
+
+**Hasil bersih:**
+```
+✅ File Aman
+Tidak ditemukan pola berbahaya dalam file.
+Checksum: abc123...
+```
+
+**Hasil terdeteksi:**
+```
+🚨 Malware Terdeteksi!
+Pola yang ditemukan:
+- Token stealer pattern (baris 45)
+- Suspicious network call (baris 103)
+```
+
+### Error Umum
+| Error | Penyebab | Solusi |
+|-------|----------|--------|
+| Tipe file tidak didukung | Upload file selain yang didukung | Gunakan file dengan ekstensi yang valid |
+| File terlalu besar | Melebihi batas ukuran | Split atau kompres file |

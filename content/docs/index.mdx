@@ -1,0 +1,83 @@
+---
+title: Mulai Cepat
+description: Panduan awal menggunakan USA Core Bot — dari invite hingga setup pertama selesai dalam 5 menit.
+---
+
+Selamat datang di dokumentasi **USA Core** — bot Discord infrastruktur untuk komunitas SA-MP dan gaming.
+
+## Apa itu USA Core?
+
+USA Core adalah bot Discord multi-fitur yang dirancang khusus untuk komunitas GTA SA-MP Indonesia. Tidak seperti bot umum, USA Core menyediakan alat-alat yang benar-benar dibutuhkan komunitas gaming:
+
+- 🛡️ **Keamanan enterprise** — SOC heuristik, scan malware mod Lua, URL scanner
+- 🔧 **Scripter Tools** — Compile/decompile Lua, obfuscate, scan malware
+- 🎮 **SA-MP Native** — Boombox audio, SSRP builder, server directory
+- 🛒 **RTM Marketplace** — Jual-beli anonim dengan rekber resmi
+- 🤖 **AI per server** — Chat, character story, SSRP auto-builder
+
+## Permission yang Diminta
+
+USA Core mengikuti prinsip **permission minimal** — kami tidak meminta `Administrator` secara blanket. Berikut permission yang dibutuhkan dan alasannya:
+
+| Permission | Kegunaan |
+|-----------|----------|
+| Read Messages / History | Membaca pesan untuk moderasi |
+| Send Messages + Embeds | Mengirim response dan embed |
+| Manage Messages | Hapus pesan yang melanggar automod |
+| Manage Roles | Auto-role dan role menu |
+| Moderate Members | Timeout untuk punishment automod |
+| Kick/Ban Members | Punishment level 3 dan 4 |
+| Attach Files | Mengirim hasil compile/decompile |
+| Use Slash Commands | Menjalankan semua command |
+| Create Threads | Auto-thread per channel |
+| Manage Threads | Kelola thread yang dibuat bot |
+
+## 5 Langkah Setup Pertama
+
+### Langkah 1: Invite Bot
+
+Klik tombol [Invite Bot](/invite) atau jalankan:
+
+```
+https://discord.com/oauth2/authorize?client_id=1531622222828142633&permissions=8&scope=bot+applications.commands
+```
+
+### Langkah 2: Cek Permission
+
+Pastikan role **USA Core** ada di atas role yang ingin di-manage. Tanpa ini, automod tidak bisa timeout/kick member dengan role tinggi.
+
+### Langkah 3: Setup Automod (Opsional tapi Direkomendasikan)
+
+```
+/automod
+```
+
+Buka dashboard automod visual. Aktifkan filter yang diinginkan, set channel log, dan tentukan punishment level.
+
+### Langkah 4: Setup Log Channel
+
+```
+/logsetup
+```
+
+Tentukan channel untuk berbagai jenis log: moderasi, join/leave, ticket, dll.
+
+### Langkah 5: Eksplorasi Fitur
+
+Jalankan `/help` untuk melihat semua command yang tersedia, atau langsung ke [Command Reference](/docs/perintah) untuk panduan lengkap per command.
+
+## Struktur Dokumentasi
+
+- **[Command Reference](/docs/perintah)** — Referensi lengkap semua command (format standar: opsi, permission, tier, contoh, error)
+- **[Panduan Setup](/docs/panduan)** — Panduan naratif per modul (step-by-step)
+- **[Langganan & Tier](/docs/langganan)** — Cara kerja tier Free/Pro/Enterprise dan redeem key
+- **[FAQ](/docs/faq)** — Pertanyaan yang sering diajukan
+- **[Changelog](/docs/changelog)** — Riwayat perubahan dan update
+
+## Butuh Bantuan?
+
+Bergabung ke [Discord Support Server](https://discord.gg/CnHuMnpKkV) untuk:
+- Melaporkan bug
+- Minta bantuan setup
+- Diskusi fitur baru
+- Info update terbaru

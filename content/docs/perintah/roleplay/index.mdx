@@ -1,0 +1,145 @@
+---
+title: Roleplay & SA-MP
+description: Command untuk komunitas GTA SA-MP — SSRP, karakter RP, Boombox, name generator, server directory.
+---
+
+
+
+---
+
+## `/ssrp`
+
+**Deskripsi:** SSRP (Screenshot Roleplay) — Buat screenshot RP berkualitas tinggi langsung dari Discord dengan layout dan frame profesional.
+
+### Subcommand
+
+#### `/ssrp buat`
+
+| Nama | Tipe | Wajib | Deskripsi |
+|------|------|-------|-----------|
+| `nama_karakter` | String | Ya | Nama lengkap karakter RP |
+| `deskripsi` | String | Ya | Narasi/deskripsi scene RP (max 500 karakter) |
+| `foto` | Attachment | Tidak | Foto/screenshot karakter (opsional) |
+
+#### `/ssrp auto` (Pro)
+
+| Nama | Tipe | Wajib | Deskripsi |
+|------|------|-------|-----------|
+| `scene` | String | Ya | Deskripsi scene dalam bahasa natural — AI akan membangun SSRP secara otomatis |
+
+### Permission
+Tidak ada.
+
+### Tier
+- Manual (`/ssrp buat`): **Free**
+- Auto AI (`/ssrp auto`): **Pro**
+
+### Contoh Penggunaan
+```
+/ssrp buat nama_karakter:"Ahmad Santoso" deskripsi:"Sedang memimpin rapat darurat geng di gudang tua Pelabuhan Los Santos"
+```
+
+```
+/ssrp auto scene:"Penembakan di pusat kota, karakter adalah detektif yang tiba di TKP"
+```
+
+---
+
+## `/namegen`
+
+**Deskripsi:** Generate nama karakter RP Indonesia yang realistis sesuai setting GTA SA-MP.
+
+### Opsi
+
+| Nama | Tipe | Wajib | Default | Deskripsi |
+|------|------|-------|---------|-----------|
+| `jumlah` | Integer (1–10) | Tidak | 5 | Jumlah nama yang di-generate |
+| `gender` | Choice | Tidak | Random | `laki-laki` / `perempuan` |
+| `etnis` | Choice | Tidak | Random | `jawa`, `sunda`, `batak`, `melayu`, `chinese`, `betawi` |
+
+### Permission
+Tidak ada.
+
+### Tier
+**Free**
+
+### Contoh Penggunaan
+```
+/namegen jumlah:10 gender:laki-laki etnis:jawa
+```
+
+**Hasil:**
+```
+🎭 10 Nama Karakter RP:
+1. Budi Santoso
+2. Agus Wijaya
+3. Hendra Kusuma
+...
+```
+
+---
+
+## `/createcs`
+
+**Deskripsi:** Generate character story (latar belakang karakter) menggunakan AI. Hasil dalam format naratif yang kaya.
+
+### Opsi
+
+| Nama | Tipe | Wajib | Deskripsi |
+|------|------|-------|-----------|
+| `nama` | String | Ya | Nama karakter |
+| `profesi` | String | Ya | Pekerjaan/latar belakang karakter (e.g., "polisi korup", "pedagang senjata", "dokter") |
+| `kepribadian` | String | Tidak | Deskripsi kepribadian singkat |
+
+### Permission
+Tidak ada.
+
+### Tier
+- **Free**: 2x/hari per user
+- **Pro**: Unlimited
+
+### Contoh Penggunaan
+```
+/createcs nama:"Reza Mahardika" profesi:"mantan tentara yang menjadi mercenary" kepribadian:"dingin, taktis, tidak percaya siapapun"
+```
+
+---
+
+## `/serverdirectory`
+
+**Deskripsi:** Cari dan tampilkan informasi server SA-MP secara real-time.
+
+### Subcommand
+
+#### `/serverdirectory cari`
+
+| Nama | Tipe | Wajib | Deskripsi |
+|------|------|-------|-----------|
+| `query` | String | Ya | Nama server atau IP:Port |
+
+#### `/serverdirectory popular`
+Tampilkan daftar server SA-MP dengan player count terbanyak saat ini.
+
+### Permission
+Tidak ada.
+
+### Tier
+**Free**
+
+### Contoh Penggunaan
+```
+/serverdirectory cari query:"Indonesia Roleplay"
+/serverdirectory popular
+```
+
+**Hasil:**
+```
+🌐 Server SA-MP Ditemukan
+
+Nama: Indonesia Roleplay Universe
+IP: 146.190.xx.xx:7777
+Players: 847/1000
+Gamemode: Indonesia Roleplay 4.5
+Map: San Andreas
+Language: Indonesian
+```

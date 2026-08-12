@@ -1,0 +1,177 @@
+---
+title: Panduan Setup
+description: Panduan lengkap setup USA Core Bot untuk berbagai fitur — dari automod hingga RTM Marketplace.
+---
+
+
+
+Panduan ini akan memandu Anda step-by-step dalam mengonfigurasi fitur-fitur USA Core dari awal.
+
+---
+
+## Panduan 1: Setup Awal (5 Menit)
+
+### Langkah 1: Invite Bot
+
+Gunakan link invite dan pastikan semua permission yang diminta diizinkan.
+
+### Langkah 2: Posisi Role Bot
+
+Buka **Server Settings → Roles**. Drag role **USA Core** ke atas semua role yang ingin bisa di-manage oleh bot (untuk timeout/kick/ban via automod).
+
+### Langkah 3: Setup Log Channels
+
+Buat channel-channel log (opsional tapi sangat direkomendasikan):
+
+```
+#bot-log          ← moderasi umum
+#security-log     ← SOC & scan events
+#ticket-log       ← transcript ticket
+```
+
+Kemudian:
+```
+/logsetup tipe:moderasi channel:#bot-log
+/logsetup tipe:security channel:#security-log
+/logsetup tipe:ticket channel:#ticket-log
+```
+
+### Langkah 4: Aktifkan Automod Dasar
+
+```
+/automod
+```
+
+Klik **Toggle Channel** → pilih channel yang ingin dilindungi.
+Klik **Punishment** → set level 1 (hapus + DM warning) untuk mulai.
+
+---
+
+## Panduan 2: Setup SOC A.E.G.I.S (Pro)
+
+### Prasyarat
+- Tier **Pro** aktif
+- Sudah setup log channel security
+
+### Langkah 1: Buka Dashboard SOC
+
+```
+/autoscan
+```
+
+### Langkah 2: Pilih Ghost Mode
+
+- **Ghost Mode ON**: Tindakan diam-diam, privasi terjaga, cocok untuk komunitas besar
+- **Ghost Mode OFF**: Tindakan diumumkan, transparan, cocok untuk komunitas kecil
+
+### Langkah 3: Set Punishment Level
+
+| Level | Aksi |
+|-------|------|
+| 1 | Hapus file + DM warning |
+| 2 | Hapus + DM + Timeout 1 jam |
+| 3 | Hapus + DM + Kick |
+| 4 | Hapus + DM + Ban permanen |
+
+Rekomendasi untuk mulai: **Level 2** untuk file mencurigakan.
+
+### Langkah 4: Whitelist Role Scripter
+
+Jika server punya role "Scripter" atau "Developer" yang sering upload file Lua:
+Klik **Role Whitelist** → tambahkan role tersebut agar tidak ter-scan.
+
+### Langkah 5: Aktifkan Channel
+
+Klik **Toggle Channel Sectors** → pilih channel yang ingin dilindungi SOC (biasanya semua channel publik).
+
+---
+
+## Panduan 3: Setup RTM Marketplace (Pro)
+
+### Langkah 1: Setup Channel
+
+Buat channel khusus untuk RTM:
+```
+#rtm-marketplace
+```
+
+### Langkah 2: Konfigurasi RTM
+
+Jalankan `/rtm` dan ikuti panduan interaktif.
+
+### Langkah 3: Assign Admin RTM
+
+Siapkan role untuk admin RTM yang berwenang menangani sengketa. Pastikan hanya orang terpercaya yang memiliki role ini — mereka akan punya akses ke `/rtmAdmin reveal`.
+
+### Langkah 4: Sosialisasi Aturan
+
+Posting aturan RTM di channel `#rtm-marketplace`:
+- Tidak boleh bypass proses escrow
+- Tidak boleh menjual konten ilegal
+- Sengketa diselesaikan melalui ticket support
+
+---
+
+## Panduan 4: Setup Ticket Support
+
+### Langkah 1: Buat Channel Panel
+
+```
+#buka-ticket
+```
+
+### Langkah 2: Setup Panel Ticket
+
+```
+/ticket setup channel:#buka-ticket
+```
+
+### Langkah 3: Tambah Kategori
+
+```
+/ticket kategori tambah nama:"General" emoji:🎫 staff_role:@Staff
+/ticket kategori tambah nama:"RTM Sengketa" emoji:⚖️ staff_role:@RTM Admin
+/ticket kategori tambah nama:"Report Bug" emoji:🐛 staff_role:@Developer
+```
+
+### Langkah 4: Pastikan Bot Punya Permission
+
+Bot membutuhkan **Manage Channels** dan **Manage Permissions** di kategori Discord yang akan digunakan untuk membuat channel ticket privat.
+
+---
+
+## Panduan 5: Setup Boombox Audio
+
+### Untuk Member
+
+Tidak ada setup khusus. Member bisa langsung menggunakan:
+```
+/convertbb link:[url youtube/soundcloud/dll]
+```
+
+### Untuk Admin (Opsional)
+
+Set channel khusus Boombox agar permintaan tidak memenuhi semua channel:
+- Gunakan permission Discord untuk membatasi penggunaan `/convertbb` hanya di channel tertentu
+
+---
+
+## Panduan 6: Setup TikTok Notify (Pro)
+
+### Langkah 1: Buat Channel Notifikasi
+
+```
+#tiktok-live
+#tiktok-videos
+```
+
+### Langkah 2: Tambahkan Akun TikTok
+
+```
+/tiktok tambah username:namaakun channel:#tiktok-live tipe:live ping_role:@Member
+/tiktok tambah username:namaakun channel:#tiktok-videos tipe:video pesan:"Video baru dari {username}! 🎬"
+```
+
+### Langkah 3: Test
+
+Bot akan konfirmasi tracking berhasil. Notifikasi akan datang saat akun mulai live atau upload video baru (event-driven, tidak ada delay polling).

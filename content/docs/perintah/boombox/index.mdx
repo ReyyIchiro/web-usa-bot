@@ -1,0 +1,153 @@
+---
+title: Boombox Audio
+description: Command Boombox untuk konversi audio dari berbagai platform ke link yang kompatibel dengan SA-MP in-game.
+---
+
+
+
+Boombox adalah fitur yang mengkonversi audio dari platform streaming (YouTube, TikTok, Spotify, dll.) ke link audio HTTP langsung yang bisa diputar menggunakan command `/boombox` **in-game** di SA-MP dengan mod seperti MoonLoader.
+
+---
+
+## `/convertbb`
+
+**Deskripsi:** Konversi link dari platform streaming ke link audio langsung untuk Boombox SA-MP.
+
+### Opsi
+
+| Nama | Tipe | Wajib | Deskripsi |
+|------|------|-------|-----------|
+| `link` | String | Ya | Link video/lagu dari platform yang didukung |
+| `format` | Choice | Tidak | `mp3` (default) / `ogg` / `wav` |
+| `kualitas` | Choice | Tidak | `low` (64kbps) / `medium` (128kbps, default) / `high` (256kbps) |
+
+### Platform yang Didukung
+- **YouTube** — youtube.com, youtu.be
+- **TikTok** — tiktok.com
+- **SoundCloud** — soundcloud.com
+- **Spotify** — spotify.com (ekstrak metadata, download dari sumber alternatif)
+- **Apple Music** — music.apple.com (ekstrak metadata)
+- **Deezer** — deezer.com
+
+### Permission
+Tidak ada.
+
+### Tier
+- **Free**: 5x/hari per user
+- **Pro**: Unlimited
+
+### Cooldown
+10 detik per konversi.
+
+### Contoh Penggunaan
+```
+/convertbb link:https://www.youtube.com/watch?v=dQw4w9WgXcQ
+/convertbb link:https://soundcloud.com/artist/song format:mp3 kualitas:medium
+```
+
+**Hasil:**
+```
+✅ Konversi Boombox Berhasil!
+
+Judul: Rick Astley - Never Gonna Give You Up
+Durasi: 3:33
+Format: MP3 | Kualitas: 128kbps
+
+Direct Link untuk /boombox in-game:
+https://cdn.usacore.io/bb/abc123.mp3
+(Expired dalam 24 jam)
+
+Cara pakai: /boombox url https://cdn.usacore.io/bb/abc123.mp3
+```
+
+### Error Umum
+| Error | Penyebab | Solusi |
+|-------|----------|--------|
+| Link tidak valid | Format URL salah | Salin ulang link dari browser |
+| Platform tidak didukung | Domain tidak ada di daftar | Gunakan `/convertbb` dengan platform yang didukung |
+| Video privat/copyright | Konten dibatasi | Gunakan konten yang tersedia publik |
+| Rate limit | Kuota harian habis | Upgrade ke Pro atau tunggu reset besok |
+
+### Command Terkait
+- [`/searchbb`](#searchbb) — Cari lagu langsung
+- [`/uploadbb`](#uploadbb) — Upload file audio custom
+
+---
+
+## `/searchbb`
+
+**Deskripsi:** Cari lagu dan langsung dapatkan link Boombox tanpa perlu link eksternal.
+
+### Opsi
+
+| Nama | Tipe | Wajib | Deskripsi |
+|------|------|-------|-----------|
+| `query` | String | Ya | Nama lagu atau artis yang dicari |
+| `sumber` | Choice | Tidak | `youtube` (default) / `soundcloud` |
+
+### Permission
+Tidak ada.
+
+### Tier
+- **Free**: 5x/hari
+- **Pro**: Unlimited
+
+### Contoh Penggunaan
+```
+/searchbb query:"Dewa 19 Kangen"
+/searchbb query:"Sheila On 7 Anugerah Terindah" sumber:youtube
+```
+
+**Hasil:**
+```
+🎵 Hasil Pencarian Boombox
+
+1. Dewa 19 - Kangen (Official)
+   Durasi: 5:12 | YouTube
+   [Gunakan] → /convertbb link:https://...
+
+2. Dewa 19 - Kangen (Live)
+   Durasi: 6:48 | YouTube
+   [Gunakan] → /convertbb link:https://...
+```
+
+---
+
+## `/uploadbb`
+
+**Deskripsi:** Upload file audio kustom dan dapatkan link Boombox dari file lokal.
+
+### Opsi
+
+| Nama | Tipe | Wajib | Deskripsi |
+|------|------|-------|-----------|
+| `file` | Attachment | Ya | File audio (.mp3, .ogg, .wav) |
+
+### Batasan
+- Format: `.mp3`, `.ogg`, `.wav`
+- Ukuran: Maksimal 25MB
+- Storage: Link aktif selama 7 hari
+
+### Permission
+Tidak ada.
+
+### Tier
+**Pro** — Upload custom tidak tersedia di Free.
+
+### Contoh Penggunaan
+```
+/uploadbb file:[upload file.mp3]
+```
+
+**Hasil:**
+```
+✅ Upload Berhasil!
+
+File: my-song.mp3
+Size: 4.2 MB
+Durasi: ~3:20
+
+Boombox Link:
+https://cdn.usacore.io/bb/custom_abc123.mp3
+(Aktif 7 hari)
+```

@@ -1,0 +1,304 @@
+---
+title: Engagement & Utilitas
+description: Command untuk giveaway, polling, ticket, sticky message, embed, TikTok notify, leveling, dan utilitas komunitas lainnya.
+---
+
+
+
+---
+
+## `/giveaway`
+
+**Deskripsi:** Buat giveaway dengan konfigurasi lengkap — durasi custom, multiple winners, dan requirement role.
+
+### Subcommand
+
+#### `/giveaway buat`
+
+| Nama | Tipe | Wajib | Deskripsi |
+|------|------|-------|-----------|
+| `hadiah` | String | Ya | Hadiah yang diperebutkan |
+| `durasi` | String | Ya | Durasi giveaway (e.g., `1h`, `2d`, `30m`) |
+| `pemenang` | Integer (1–20) | Tidak | Jumlah pemenang (default: 1) |
+| `requirement` | Role | Tidak | Role yang wajib dimiliki untuk ikut |
+| `channel` | Channel | Tidak | Channel giveaway (default: channel saat ini) |
+
+#### `/giveaway end`
+Akhiri giveaway lebih awal dan undi pemenang.
+
+| Nama | Tipe | Wajib | Deskripsi |
+|------|------|-------|-----------|
+| `message_id` | String | Ya | ID pesan giveaway |
+
+#### `/giveaway reroll`
+Undi ulang pemenang giveaway yang sudah selesai.
+
+### Permission
+- **Manage Server** atau role admin
+
+### Tier
+**Free**
+
+### Contoh Penggunaan
+```
+/giveaway buat hadiah:"Upgrade Pro 1 Bulan" durasi:2d pemenang:3 requirement:@Member
+```
+
+---
+
+## `/poll`
+
+**Deskripsi:** Buat polling interaktif dengan multiple choice dan hasil real-time.
+
+### Opsi
+
+| Nama | Tipe | Wajib | Deskripsi |
+|------|------|-------|-----------|
+| `pertanyaan` | String | Ya | Pertanyaan polling |
+| `opsi` | String | Ya | Opsi-opsi (pisahkan dengan `;`) |
+| `durasi` | String | Tidak | Durasi polling aktif (default: selamanya sampai di-end) |
+| `anonim` | Boolean | Tidak | Sembunyikan siapa yang vote (default: false) |
+
+### Permission
+Tidak ada.
+
+### Tier
+**Free**
+
+### Contoh Penggunaan
+```
+/poll pertanyaan:"Event apa yang ingin kalian adakan bulan ini?" opsi:"Giveaway;Tournament;Movie Night;Game Session" durasi:7d
+```
+
+---
+
+## `/suggest`
+
+**Deskripsi:** Kirim saran ke channel suggestions dengan sistem voting komunitas.
+
+### Opsi
+
+| Nama | Tipe | Wajib | Deskripsi |
+|------|------|-------|-----------|
+| `saran` | String | Ya | Isi saran (max 1000 karakter) |
+
+### Permission
+Tidak ada.
+
+### Tier
+**Free**
+
+### Catatan
+Admin bisa menandai saran sebagai Approved / Rejected / Under Review via tombol interaktif.
+
+---
+
+## `/sticky`
+
+**Deskripsi:** Buat pesan yang "tempel" di posisi terbawah channel — selalu terlihat sebagai pesan terbaru.
+
+### Opsi
+
+| Nama | Tipe | Wajib | Deskripsi |
+|------|------|-------|-----------|
+| `isi` | String | Ya | Konten pesan sticky |
+
+### Subcommand
+- `/sticky set` — Aktifkan sticky di channel saat ini
+- `/sticky remove` — Hapus sticky dari channel
+- `/sticky list` — Daftar sticky aktif di semua channel
+
+### Permission
+- **Manage Messages** — wajib
+
+### Tier
+**Free**
+
+---
+
+## `/embed`
+
+**Deskripsi:** Buat embed Discord kustom dengan color, image, fields, author, footer, dan timestamp.
+
+### Opsi
+Command ini membuka builder interaktif dengan modal form.
+
+### Permission
+- **Manage Messages** — wajib
+
+### Tier
+**Free**
+
+---
+
+## `/rolemenu`
+
+**Deskripsi:** Buat dropdown menu interaktif untuk self-assign role.
+
+### Opsi
+
+| Nama | Tipe | Wajib | Deskripsi |
+|------|------|-------|-----------|
+| `judul` | String | Ya | Judul menu role |
+| `deskripsi` | String | Tidak | Deskripsi singkat menu |
+| `mode` | Choice | Tidak | `single` (hanya bisa pilih 1) / `multi` (bisa pilih banyak, default) |
+
+### Permission
+- **Manage Roles** — wajib
+
+### Tier
+**Free**
+
+### Contoh Penggunaan
+```
+/rolemenu judul:"Pilih Game Favoritmu" mode:multi
+```
+Setelah command, bot membuka modal untuk menambahkan role-role yang tersedia.
+
+---
+
+## `/ticket`
+
+**Deskripsi:** Sistem ticket support dengan kategori, assignment staff, dan transcript HTML otomatis.
+
+### Subcommand
+
+#### `/ticket setup`
+Setup panel ticket di channel yang ditentukan.
+
+| Nama | Tipe | Wajib | Deskripsi |
+|------|------|-------|-----------|
+| `channel` | Channel | Ya | Channel tempat panel ticket ditempatkan |
+
+#### `/ticket kategori tambah`
+Tambah kategori ticket baru.
+
+| Nama | Tipe | Wajib | Deskripsi |
+|------|------|-------|-----------|
+| `nama` | String | Ya | Nama kategori |
+| `emoji` | String | Tidak | Emoji kategori |
+| `staff_role` | Role | Tidak | Role staff yang handle kategori ini |
+
+#### `/ticket close`
+Tutup ticket dan buat transcript HTML.
+
+### Permission
+- **Manage Server** untuk setup
+- **Manage Channels** untuk membuat channel ticket
+
+### Tier
+- **Free**: 1 kategori ticket
+- **Pro**: Unlimited kategori, custom embed panel, webhook transcript
+
+---
+
+## `/tiktok`
+
+**Deskripsi:** Setup notifikasi otomatis saat akun TikTok yang di-track mulai live atau upload video baru.
+
+### Subcommand
+
+#### `/tiktok tambah`
+
+| Nama | Tipe | Wajib | Deskripsi |
+|------|------|-------|-----------|
+| `username` | String | Ya | Username TikTok (tanpa @) |
+| `channel` | Channel | Ya | Channel Discord untuk notifikasi |
+| `tipe` | Choice | Tidak | `live`, `video`, `keduanya` (default) |
+| `pesan` | String | Tidak | Pesan kustom untuk notifikasi |
+| `ping_role` | Role | Tidak | Role yang di-ping saat notifikasi |
+
+#### `/tiktok hapus`
+
+| Nama | Tipe | Wajib | Deskripsi |
+|------|------|-------|-----------|
+| `username` | String | Ya | Username TikTok yang dihapus |
+
+#### `/tiktok list`
+Tampilkan semua tracking aktif.
+
+### Permission
+- **Manage Server** — wajib
+
+### Tier
+- **Pro**: Maksimal **3 akun** TikTok per server
+- **Enterprise**: Unlimited
+
+### Catatan
+Notifikasi live bersifat event-driven via Supabase Realtime — tidak polling.
+
+---
+
+## `/leveling`
+
+**Deskripsi:** Konfigurasi sistem leveling dan XP server.
+
+### Subcommand
+
+#### `/leveling toggle` — Aktifkan/nonaktifkan leveling
+#### `/leveling xp-rate` — Atur rate XP per pesan
+#### `/leveling reward` — Set reward role saat mencapai level tertentu
+#### `/leveling leaderboard` — Tampilkan leaderboard server
+#### `/leveling rank` — Cek rank member tertentu
+
+### Permission
+- **Manage Server** untuk setup
+- Tidak ada untuk melihat rank/leaderboard
+
+### Tier
+**Free** (basic) — Fitur advanced (reward roles, custom XP) gratis.
+
+---
+
+## `/party`
+
+**Deskripsi:** Buat atau cari party untuk berbagai game. Sistem matchmaking berbasis Discord.
+
+### Subcommand
+
+#### `/party create`
+
+| Nama | Tipe | Wajib | Deskripsi |
+|------|------|-------|-----------|
+| `game` | String | Ya | Nama game |
+| `deskripsi` | String | Tidak | Deskripsi party |
+| `kapasitas` | Integer | Ya | Kapasitas maksimal anggota |
+| `mode` | Choice | Tidak | `publik`, `approval`, `password` |
+| `password` | String | Tidak | Wajib jika mode=password |
+
+#### `/party list`
+Tampilkan semua party aktif.
+
+#### `/party join`
+Bergabung ke party yang tersedia.
+
+#### `/party leave`
+Keluar dari party yang sedang diikuti.
+
+### Permission
+Tidak ada.
+
+### Tier
+**Free**
+
+---
+
+## `/booster`
+
+**Deskripsi:** Konfigurasi notifikasi dan reward khusus untuk Server Booster.
+
+### Subcommand
+
+#### `/booster setup`
+
+| Nama | Tipe | Wajib | Deskripsi |
+|------|------|-------|-----------|
+| `channel` | Channel | Ya | Channel notifikasi boost |
+| `pesan` | String | Tidak | Pesan ucapan terima kasih custom |
+| `reward_role` | Role | Tidak | Role ekstra untuk booster |
+
+### Permission
+- **Manage Server** — wajib
+
+### Tier
+**Free**
