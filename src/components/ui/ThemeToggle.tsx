@@ -3,7 +3,7 @@
 import { useEffect, useState, useRef } from "react";
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
-
+import { flushSync } from "react-dom";
 
 
 /**
@@ -43,13 +43,9 @@ export function ThemeToggle() {
     );
 
     const transition = doc.startViewTransition(() => {
-      // Fast DOM mutation for instant view-transition capture
-      document.documentElement.classList.remove("light", "dark");
-      document.documentElement.classList.add(next);
-      document.documentElement.setAttribute("data-theme", next);
-      document.documentElement.style.colorScheme = next;
-      // Let React update state asynchronously
-      setTheme(next);
+      flushSync(() => {
+        setTheme(next);
+      });
     });
 
     transition.ready.then(() => {
@@ -58,26 +54,20 @@ export function ThemeToggle() {
         `circle(${endRadius}px at ${x}px ${y}px)`
       ];
 
-      const animation = document.documentElement.animate(
+      document.documentElement.animate(
         {
           clipPath: clipPath,
         },
         {
-          duration: 700, // Slower for a more relaxed and beautiful effect
+          duration: 800, // Agak lama dan smooth (800ms)
           easing: "cubic-bezier(0.4, 0, 0.2, 1)", 
           pseudoElement: "::view-transition-new(root)",
           fill: "forwards",
         }
       );
+    });
 
-      animation.onfinish = () => {
-        isTransitioning.current = false;
-      };
-      
-      animation.oncancel = () => {
-        isTransitioning.current = false;
-      };
-    }).catch(() => {
+    transition.finished.finally(() => {
       isTransitioning.current = false;
     });
   };
