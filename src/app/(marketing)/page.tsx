@@ -110,7 +110,7 @@ export default function HomePage() {
                   color: "var(--text-primary)",
                   marginBottom: "1.25rem",
                 }}>
-                  Alat Discord yang dibangun untuk<br />
+                  Bot Discord yang dibangun untuk<br />
                   komunitas <span className="text-gradient">SA&#8209;MP </span>
                 </h1>
 
