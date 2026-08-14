@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 
@@ -13,12 +13,15 @@ import { useTheme } from "next-themes";
 export function ThemeToggle() {
   const { theme, setTheme, resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const isTransitioning = useRef(false);
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
   const toggle = (e: React.MouseEvent) => {
+    if (isTransitioning.current) return;
+    
     const next = resolvedTheme === "dark" ? "light" : "dark";
     const doc = document as any;
 
@@ -26,6 +29,8 @@ export function ThemeToggle() {
       setTheme(next);
       return;
     }
+
+    isTransitioning.current = true;
 
     // Get click position
     const x = e.clientX;
@@ -39,7 +44,6 @@ export function ThemeToggle() {
 
     const transition = doc.startViewTransition(() => {
       // Fast DOM mutation for instant view-transition capture
-      // Avoids React flushSync which can block the main thread
       document.documentElement.classList.remove("light", "dark");
       document.documentElement.classList.add(next);
       document.documentElement.setAttribute("data-theme", next);
@@ -54,17 +58,27 @@ export function ThemeToggle() {
         `circle(${endRadius}px at ${x}px ${y}px)`
       ];
 
-      document.documentElement.animate(
+      const animation = document.documentElement.animate(
         {
           clipPath: clipPath,
         },
         {
-          duration: 350, // Faster and more responsive (was 500ms)
-          easing: "cubic-bezier(0.4, 0, 0.2, 1)", // Snappier easing
+          duration: 700, // Slower for a more relaxed and beautiful effect
+          easing: "cubic-bezier(0.4, 0, 0.2, 1)", 
           pseudoElement: "::view-transition-new(root)",
           fill: "forwards",
         }
       );
+
+      animation.onfinish = () => {
+        isTransitioning.current = false;
+      };
+      
+      animation.oncancel = () => {
+        isTransitioning.current = false;
+      };
+    }).catch(() => {
+      isTransitioning.current = false;
     });
   };
 
