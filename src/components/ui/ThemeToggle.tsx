@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 
-import { flushSync } from "react-dom";
+
 
 /**
  * ThemeToggle - tombol toggle dark/light mode.
@@ -38,9 +38,14 @@ export function ThemeToggle() {
     );
 
     const transition = doc.startViewTransition(() => {
-      flushSync(() => {
-        setTheme(next);
-      });
+      // Fast DOM mutation for instant view-transition capture
+      // Avoids React flushSync which can block the main thread
+      document.documentElement.classList.remove("light", "dark");
+      document.documentElement.classList.add(next);
+      document.documentElement.setAttribute("data-theme", next);
+      document.documentElement.style.colorScheme = next;
+      // Let React update state asynchronously
+      setTheme(next);
     });
 
     transition.ready.then(() => {
@@ -49,14 +54,13 @@ export function ThemeToggle() {
         `circle(${endRadius}px at ${x}px ${y}px)`
       ];
 
-
       document.documentElement.animate(
         {
           clipPath: clipPath,
         },
         {
-          duration: 500,
-          easing: "ease-out",
+          duration: 350, // Faster and more responsive (was 500ms)
+          easing: "cubic-bezier(0.4, 0, 0.2, 1)", // Snappier easing
           pseudoElement: "::view-transition-new(root)",
           fill: "forwards",
         }
