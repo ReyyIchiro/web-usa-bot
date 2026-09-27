@@ -151,7 +151,7 @@ export default async function HomePage() {
                   maxWidth: "520px",
                   marginBottom: "2rem",
                 }}>
-                  Gak perlu pusing setting manual atau copy-paste ID rumit. Dari Boombox audio in-game tercepat, SSRP Studio, scanner malware mod A.E.G.I.S, sampai Rekber QRIS otomatis — semua siap pakai langsung dari Discord kamu.
+                  Gak perlu pusing setting manual atau copy-paste ID rumit. Convert Boombox, SSRP Studio dilengkapi AI, scanner keylogger otomatis, Generated Character Story — semua siap pakai langsung dari Discord kamu.
                 </p>
 
                 <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>

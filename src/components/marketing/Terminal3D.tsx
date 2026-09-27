@@ -35,10 +35,10 @@ export function Terminal3D({
     { prompt: ">", cmd: `Sistem: Online | Ping: ${initialSnapshot?.ping_ms != null ? `${initialSnapshot.ping_ms}ms` : "18ms"} ✓`, delay: "0.3s", color: "#22c55e" },
     { prompt: ">", cmd: `Komunitas: ${initialSnapshot?.guild_count != null ? `${formatNumber(initialSnapshot.guild_count)} server terhubung` : "Aktif di puluhan server"} ✓`, delay: "0.6s", color: "#22c55e" },
     { prompt: "$", cmd: "/convertbb url=\"youtube.com/track\"", delay: "1.1s" },
-    { prompt: ">", cmd: "Stream in-game ready dlm 1.2s (TikWM / InnerTube) ✓", delay: "1.4s", color: "var(--accent)" },
+    { prompt: ">", cmd: "Link berhasil di convert dlm 1.2s (TikWM / InnerTube) ✓", delay: "1.4s", color: "var(--accent)" },
     { prompt: "$", cmd: "/scan file=\"mod_cleo.cs\"", delay: "1.8s" },
     { prompt: ">", cmd: "A.E.G.I.S: Bersih! Bebas keylogger & token stealer ✓", delay: "2.1s", color: "#22c55e" },
-    { prompt: "$", cmd: "/party create nama=\"Patroli SAPD Shift Malam\"", delay: "2.5s" },
+    { prompt: "$", cmd: "/party create nama=\"Ingfo party rob\"", delay: "2.5s" },
     { prompt: ">", cmd: "Terminal Mabar live! Slot 4/4 terisi otomatis ✓", delay: "2.8s", color: "#3b82f6" },
   ];
 
