@@ -5,6 +5,7 @@ import "fumadocs-ui/style.css";
 import { brand } from "../../brand.config";
 import { RootProvider } from "fumadocs-ui/provider/next";
 import Script from "next/script";
+import { CustomCursor } from "@/components/ui/CustomCursor";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -118,6 +119,7 @@ export default function RootLayout({
         style={{ fontFamily: "var(--font-inter, var(--font-sans))" }}
       >
         <div className="global-bg-grid" />
+        <CustomCursor />
         <Script
           id="json-ld"
           type="application/ld+json"
