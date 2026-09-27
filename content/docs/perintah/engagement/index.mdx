@@ -1,304 +1,70 @@
 ---
-title: Engagement & Utilitas
-description: Command untuk giveaway, polling, ticket, sticky message, embed, TikTok notify, leveling, dan utilitas komunitas lainnya.
+title: Terminal Mabar & Fitur Komunitas
+description: Panduan command party mabar (/party), notifikasi TikTok Live, reward booster, minigames, leveling XP, dan giveaway.
 ---
 
-
-
----
-
-## `/giveaway`
-
-**Deskripsi:** Buat giveaway dengan konfigurasi lengkap — durasi custom, multiple winners, dan requirement role.
-
-### Subcommand
-
-#### `/giveaway buat`
-
-| Nama | Tipe | Wajib | Deskripsi |
-|------|------|-------|-----------|
-| `hadiah` | String | Ya | Hadiah yang diperebutkan |
-| `durasi` | String | Ya | Durasi giveaway (e.g., `1h`, `2d`, `30m`) |
-| `pemenang` | Integer (1–20) | Tidak | Jumlah pemenang (default: 1) |
-| `requirement` | Role | Tidak | Role yang wajib dimiliki untuk ikut |
-| `channel` | Channel | Tidak | Channel giveaway (default: channel saat ini) |
-
-#### `/giveaway end`
-Akhiri giveaway lebih awal dan undi pemenang.
-
-| Nama | Tipe | Wajib | Deskripsi |
-|------|------|-------|-----------|
-| `message_id` | String | Ya | ID pesan giveaway |
-
-#### `/giveaway reroll`
-Undi ulang pemenang giveaway yang sudah selesai.
-
-### Permission
-- **Manage Server** atau role admin
-
-### Tier
-**Free**
-
-### Contoh Penggunaan
-```
-/giveaway buat hadiah:"Upgrade Pro 1 Bulan" durasi:2d pemenang:3 requirement:@Member
-```
+Bikin server Discord kamu makin ramai, seru, dan interaktif dengan fitur-fitur komunitas berikut.
 
 ---
 
-## `/poll`
+## `/party` — Terminal Mabar (LFG)
 
-**Deskripsi:** Buat polling interaktif dengan multiple choice dan hasil real-time.
+**Deskripsi:** Sistem pencarian rekan mabar yang simpel dan rapi. Cocok untuk ajak mabar faction (SAPD patroli, Faction war), misi robbery, trucking hauling, atau game lainnya!
 
-### Opsi
-
-| Nama | Tipe | Wajib | Deskripsi |
-|------|------|-------|-----------|
-| `pertanyaan` | String | Ya | Pertanyaan polling |
-| `opsi` | String | Ya | Opsi-opsi (pisahkan dengan `;`) |
-| `durasi` | String | Tidak | Durasi polling aktif (default: selamanya sampai di-end) |
-| `anonim` | Boolean | Tidak | Sembunyikan siapa yang vote (default: false) |
-
-### Permission
-Tidak ada.
-
-### Tier
-**Free**
-
-### Contoh Penggunaan
-```
-/poll pertanyaan:"Event apa yang ingin kalian adakan bulan ini?" opsi:"Giveaway;Tournament;Movie Night;Game Session" durasi:7d
-```
+### Cara Kerja:
+1. Ketik `/party` untuk membuat lobby mabar baru
+2. Tentukan nama aktivitas, jumlah slot anggota (misal: 4 orang), dan keterangan opsional
+3. Bot akan memposting embed lobi mabar lengkap dengan tombol **[Join]** dan **[Leave]**
+4. Member yang klik tombol akan langsung masuk ke daftar tim
+5. Begitu slot penuh atau waktu lobi habis, bot otomatis mengirimkan pemberitahuan ke semua anggota tim!
 
 ---
 
-## `/suggest`
+## `/tiktok` — Notifikasi TikTok Live & Video
 
-**Deskripsi:** Kirim saran ke channel suggestions dengan sistem voting komunitas.
-
-### Opsi
-
-| Nama | Tipe | Wajib | Deskripsi |
-|------|------|-------|-----------|
-| `saran` | String | Ya | Isi saran (max 1000 karakter) |
-
-### Permission
-Tidak ada.
-
-### Tier
-**Free**
-
-### Catatan
-Admin bisa menandai saran sebagai Approved / Rejected / Under Review via tombol interaktif.
+**Deskripsi:** Dapatkan notifikasi otomatis saat kreator atau streamer server kamu mulai siaran langsung (Live) atau upload video baru di TikTok.
+- Didukung oleh edge worker Cloudflare yang memeriksa status secara realtime tanpa delay
+- Bisa mengatur ping role khusus (misal: `@Warga`) agar semua member langsung tahu saat streamer favorit mereka on-air!
 
 ---
 
-## `/sticky`
+## `/setup-booster` — Server Booster Reward Banner
 
-**Deskripsi:** Buat pesan yang "tempel" di posisi terbawah channel — selalu terlihat sebagai pesan terbaru.
-
-### Opsi
-
-| Nama | Tipe | Wajib | Deskripsi |
-|------|------|-------|-----------|
-| `isi` | String | Ya | Konten pesan sticky |
-
-### Subcommand
-- `/sticky set` — Aktifkan sticky di channel saat ini
-- `/sticky remove` — Hapus sticky dari channel
-- `/sticky list` — Daftar sticky aktif di semua channel
-
-### Permission
-- **Manage Messages** — wajib
-
-### Tier
-**Free**
+**Deskripsi:** Berikan apresiasi spesial buat member yang sudah melakukan Server Boost di Discord kamu.
+- Mengirimkan pesan ucapan terima kasih otomatis begitu boost terdeteksi
+- Menampilkan gambar banner kustom server
+- Otomatis memberikan role eksklusif booster
 
 ---
 
-## `/embed`
+## `/start-game` & `/lms` — Minigames & Last Man Standing
 
-**Deskripsi:** Buat embed Discord kustom dengan color, image, fields, author, footer, dan timestamp.
-
-### Opsi
-Command ini membuka builder interaktif dengan modal form.
-
-### Permission
-- **Manage Messages** — wajib
-
-### Tier
-**Free**
+**Deskripsi:** Ramaikan obrolan server dengan game interaktif:
+- **Tebak Kata & Trivia:** Uji ketangkasan warga server menjawab pertanyaan berhadiah poin XP
+- **Last Man Standing (LMS):** Game bertahan hidup di mana pemain harus menekan tombol aman sebelum waktu habis
 
 ---
 
-## `/rolemenu`
+## `/leveling-hub` — Leveling XP & Leaderboard
 
-**Deskripsi:** Buat dropdown menu interaktif untuk self-assign role.
-
-### Opsi
-
-| Nama | Tipe | Wajib | Deskripsi |
-|------|------|-------|-----------|
-| `judul` | String | Ya | Judul menu role |
-| `deskripsi` | String | Tidak | Deskripsi singkat menu |
-| `mode` | Choice | Tidak | `single` (hanya bisa pilih 1) / `multi` (bisa pilih banyak, default) |
-
-### Permission
-- **Manage Roles** — wajib
-
-### Tier
-**Free**
-
-### Contoh Penggunaan
-```
-/rolemenu judul:"Pilih Game Favoritmu" mode:multi
-```
-Setelah command, bot membuka modal untuk menambahkan role-role yang tersedia.
+**Deskripsi:** Sistem rank pesan yang ringan dan bebas lag.
+- Member mendapatkan poin XP setiap kali mengobrol aktif di channel yang tidak di-blacklist
+- Sinkronisasi data berkala dengan database Supabase agar tidak membebani performa Discord
+- Atur role reward otomatis saat member mencapai level tertentu (Level 5, 10, 20, dll)
 
 ---
 
-## `/ticket`
+## `/giveaway` — Giveaway Modern
 
-**Deskripsi:** Sistem ticket support dengan kategori, assignment staff, dan transcript HTML otomatis.
-
-### Subcommand
-
-#### `/ticket setup`
-Setup panel ticket di channel yang ditentukan.
-
-| Nama | Tipe | Wajib | Deskripsi |
-|------|------|-------|-----------|
-| `channel` | Channel | Ya | Channel tempat panel ticket ditempatkan |
-
-#### `/ticket kategori tambah`
-Tambah kategori ticket baru.
-
-| Nama | Tipe | Wajib | Deskripsi |
-|------|------|-------|-----------|
-| `nama` | String | Ya | Nama kategori |
-| `emoji` | String | Tidak | Emoji kategori |
-| `staff_role` | Role | Tidak | Role staff yang handle kategori ini |
-
-#### `/ticket close`
-Tutup ticket dan buat transcript HTML.
-
-### Permission
-- **Manage Server** untuk setup
-- **Manage Channels** untuk membuat channel ticket
-
-### Tier
-- **Free**: 1 kategori ticket
-- **Pro**: Unlimited kategori, custom embed panel, webhook transcript
+**Deskripsi:** Buat undian berhadiah dengan sistem tombol join yang adil dan transparan.
+- Tentukan durasi giveaway (contoh: `2h`, `1d`), jumlah pemenang, dan hadiah
+- Bisa menetapkan syarat role tertentu untuk berpartisipasi
+- Mendukung fitur reroll instan jika pemenang tidak merespons
 
 ---
 
-## `/tiktok`
+## `/suggest` — Kotak Saran Interaktif
 
-**Deskripsi:** Setup notifikasi otomatis saat akun TikTok yang di-track mulai live atau upload video baru.
-
-### Subcommand
-
-#### `/tiktok tambah`
-
-| Nama | Tipe | Wajib | Deskripsi |
-|------|------|-------|-----------|
-| `username` | String | Ya | Username TikTok (tanpa @) |
-| `channel` | Channel | Ya | Channel Discord untuk notifikasi |
-| `tipe` | Choice | Tidak | `live`, `video`, `keduanya` (default) |
-| `pesan` | String | Tidak | Pesan kustom untuk notifikasi |
-| `ping_role` | Role | Tidak | Role yang di-ping saat notifikasi |
-
-#### `/tiktok hapus`
-
-| Nama | Tipe | Wajib | Deskripsi |
-|------|------|-------|-----------|
-| `username` | String | Ya | Username TikTok yang dihapus |
-
-#### `/tiktok list`
-Tampilkan semua tracking aktif.
-
-### Permission
-- **Manage Server** — wajib
-
-### Tier
-- **Pro**: Maksimal **3 akun** TikTok per server
-- **Enterprise**: Unlimited
-
-### Catatan
-Notifikasi live bersifat event-driven via Supabase Realtime — tidak polling.
-
----
-
-## `/leveling`
-
-**Deskripsi:** Konfigurasi sistem leveling dan XP server.
-
-### Subcommand
-
-#### `/leveling toggle` — Aktifkan/nonaktifkan leveling
-#### `/leveling xp-rate` — Atur rate XP per pesan
-#### `/leveling reward` — Set reward role saat mencapai level tertentu
-#### `/leveling leaderboard` — Tampilkan leaderboard server
-#### `/leveling rank` — Cek rank member tertentu
-
-### Permission
-- **Manage Server** untuk setup
-- Tidak ada untuk melihat rank/leaderboard
-
-### Tier
-**Free** (basic) — Fitur advanced (reward roles, custom XP) gratis.
-
----
-
-## `/party`
-
-**Deskripsi:** Buat atau cari party untuk berbagai game. Sistem matchmaking berbasis Discord.
-
-### Subcommand
-
-#### `/party create`
-
-| Nama | Tipe | Wajib | Deskripsi |
-|------|------|-------|-----------|
-| `game` | String | Ya | Nama game |
-| `deskripsi` | String | Tidak | Deskripsi party |
-| `kapasitas` | Integer | Ya | Kapasitas maksimal anggota |
-| `mode` | Choice | Tidak | `publik`, `approval`, `password` |
-| `password` | String | Tidak | Wajib jika mode=password |
-
-#### `/party list`
-Tampilkan semua party aktif.
-
-#### `/party join`
-Bergabung ke party yang tersedia.
-
-#### `/party leave`
-Keluar dari party yang sedang diikuti.
-
-### Permission
-Tidak ada.
-
-### Tier
-**Free**
-
----
-
-## `/booster`
-
-**Deskripsi:** Konfigurasi notifikasi dan reward khusus untuk Server Booster.
-
-### Subcommand
-
-#### `/booster setup`
-
-| Nama | Tipe | Wajib | Deskripsi |
-|------|------|-------|-----------|
-| `channel` | Channel | Ya | Channel notifikasi boost |
-| `pesan` | String | Tidak | Pesan ucapan terima kasih custom |
-| `reward_role` | Role | Tidak | Role ekstra untuk booster |
-
-### Permission
-- **Manage Server** — wajib
-
-### Tier
-**Free**
+**Deskripsi:** Memberikan wadah bagi warga server untuk menyampaikan ide dan masukan.
+- Setiap saran yang dikirim via `/suggest` otomatis dijadikan kartu embed dengan tombol Upvote dan Downvote
+- Staf server dapat menyetujui (`Approve`) atau menolak (`Reject`) saran tersebut lewat command `/suggest-manage`

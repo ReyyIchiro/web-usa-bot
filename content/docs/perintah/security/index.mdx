@@ -1,248 +1,65 @@
 ---
-title: Security & Automod
-description: Referensi command keamanan dan moderasi otomatis USA Core.
+title: Security & A.E.G.I.S SOC
+description: Panduan command keamanan, anti-malware mod SA-MP, crashlog analyzer, dan moderasi otomatis A.E.G.I.S.
 ---
 
-
-
-Semua command keamanan memerlukan permission **Manage Server** kecuali disebutkan berbeda.
+Sistem keamanan **A.E.G.I.S SOC (Security Operation Center)** bekerja tanpa henti di background untuk melindungi server dan warga komunitas kamu dari berbagai ancaman: virus mod, Discord token stealer, serangan raid bot, hingga shortlink phising berbahaya.
 
 ---
 
 ## `/automod`
 
-**Deskripsi:** Membuka Security & Auto-Moderation Control Center — dashboard visual untuk mengonfigurasi semua fitur keamanan server.
-
-### Opsi
-Tidak ada opsi. Command ini membuka dashboard interaktif dengan tombol-tombol konfigurasi.
-
-### Permission
-- **Manage Guild** (Manage Server) — wajib
-
-### Tier
-Fitur dasar: **Free**. SOC penuh (scan malware, ghost mode): **Pro**
-
-### Cooldown
-Tidak ada cooldown khusus.
-
-### Contoh Penggunaan
-```
-/automod
-```
-Bot akan mengirim embed dashboard dengan tombol: Toggle Channel, Punishment, Sensitivity, Ghost Mode, Role Whitelist, Custom Sticky, Refresh.
-
-### Command Terkait
-- [`/autoscan`](/docs/perintah/security#autoscan) — Konfigurasi SOC
-- [`/blacklist`](/docs/perintah/security#blacklist) — Kelola blacklist global
-- [`/logsetup`](/docs/perintah/security#logsetup) — Setup log channel
-
-### Error Umum
-| Error | Penyebab | Solusi |
-|-------|----------|--------|
-| Akses ditolak | Tier tidak cukup | Upgrade ke Pro |
-| Rate limit | Terlalu sering membuka | Tunggu beberapa detik |
+**Deskripsi:** Membuka dashboard visual Auto-Moderasi. Kamu bisa mengatur filter kata kotor, proteksi anti-spam pesan beruntun, larangan share link server lain, serta sistem honeypot anti-raid langsung lewat tombol interaktif.
 
 ---
 
 ## `/autoscan`
 
-**Deskripsi:** Membuka Security Operation Center (SOC) — konfigurasi Auto-Scan heuristik yang memindai lampiran berbahaya secara stealth.
-
-### Opsi
-Tidak ada opsi langsung. Konfigurasi dilakukan via tombol interaktif di embed.
-
-### Permission
-- **Manage Guild** (Manage Server) — wajib
-
-### Tier
-**Pro** — Fitur SOC tidak tersedia di tier Free.
-
-### Fitur yang Dikonfigurasi
-- **Punishment Level** (1–4): Hapus pesan + DM warning / Timeout 1 jam / Kick / Ban permanen
-- **Sensitivity Mode**: Standard atau Strict (Paranoia)
-- **Ghost Mode**: ON (privasi penuh, tindakan diam-diam) / OFF (Forum mode, tindakan diumumkan)
-- **Role Whitelist**: Role yang immune dari scan
-- **Channel Sectors**: Channel mana yang dilindungi
-
-### File yang Di-scan
-`.lua`, `.luac`, `.cs`, `.asi`, `.txt`
-
-### Contoh Penggunaan
-```
-/autoscan
-```
-Bot mengirim embed SOC Dashboard dengan konfigurasi saat ini dan tombol-tombol pengaturan.
-
-### Error Umum
-| Error | Penyebab | Solusi |
-|-------|----------|--------|
-| "Fitur hanya Pro" | Tier Free | Upgrade ke Pro |
-| Toggle channel tidak bisa | Bot tidak punya akses channel | Cek permission bot di channel |
+**Deskripsi:** Konfigurasi pemindaian file mod otomatis. Setiap kali ada member yang mengunggah file `.lua`, `.luac`, `.cs`, `.asi`, atau `.dll`, bot akan langsung membedah pola kodenya.
+- **Deteksi:** Token stealer, keylogger, Discord webhook logger, backdoor, dan downloader tersembunyi
+- **Ghost Mode:** Jika aktif, bot menindak file berbahaya dan memberikan peringatan via DM tanpa menimbulkan kepanikan di channel publik
 
 ---
 
-## `/blacklist`
+## `/setup-crashlog`
 
-**Deskripsi:** Kelola global blacklist — tandai akun Discord sebagai berbahaya lintas server. Server lain yang menggunakan USA Core akan mendapat perlindungan dari akun yang di-blacklist.
-
-### Opsi
-
-| Nama | Tipe | Wajib | Deskripsi |
-|------|------|-------|-----------|
-| `subcommand` | Choice | Ya | `add` / `remove` / `list` |
-| `user_id` | String | Ya (untuk add/remove) | Discord User ID yang ingin di-blacklist |
-| `alasan` | String | Ya (untuk add) | Alasan blacklist |
-
-### Permission
-- **Manage Guild** — wajib
-
-### Tier
-**Pro**
-
-### Contoh Penggunaan
-```
-/blacklist add user_id:123456789 alasan:Scammer RTM terbukti
-/blacklist remove user_id:123456789
-/blacklist list
-```
-
-### Command Terkait
-- [`/modpanel`](/docs/perintah/security#modpanel) — Panel moderasi dengan riwayat kasus
+**Deskripsi:** (Khusus Admin) Siapkan channel pendeteksi crash game GTA SA-MP.
+- Sering kali player GTA SA-MP bingung kenapa game mereka tiba-tiba *Crash to Desktop*
+- Dengan fitur ini, member cukup paste kode address crash (contoh: `Exception 0xC0000005 at 0x0040fb80`)
+- Bot secara otomatis membaca database crash address SA-MP dan memberi tahu mod animasi, texture, memory limit, atau file cleo mana yang jadi penyebabnya!
 
 ---
 
 ## `/bypass`
 
-**Deskripsi:** Bypass shortlink berbayar/beriklan dan scan URL untuk keamanan sebelum member mengklik.
-
-### Subcommand
-
-#### `/bypass link`
-
-| Nama | Tipe | Wajib | Deskripsi |
-|------|------|-------|-----------|
-| `url` | String | Ya | URL shortlink yang ingin di-bypass |
-
-#### `/bypass supported`
-Menampilkan daftar domain shortlink yang didukung dan domain yang dilindungi Cloudflare.
-
-### Permission
-Tidak ada — bisa digunakan semua member.
-
-### Tier
-- Free: **5x/hari per user**
-- Pro: **Unlimited**
-
-### Cooldown
-Tergantung tier. Cache hasil bypass: **6 jam** (link yang sama tidak diproses ulang).
-
-### Domain yang Didukung
-linkvertise.com, lootlabs.gg, sfl.gl, bicolink.com, dan 30+ domain lainnya. Gunakan `/bypass supported` untuk daftar lengkap.
-
-### Contoh Penggunaan
-```
-/bypass link url:https://linkvertise.com/abc123
-/bypass supported
-```
-
-**Hasil sukses:**
-```
-✅ Bypass Berhasil!
-Link Asal: https://linkvertise.com/abc123
-Direct Link: https://example.com/actual-file.lua
-```
-
-**Hasil terdeteksi berbahaya:**
-```
-🚨 URL Terindikasi Berbahaya!
-Link mengandung pola phishing/malware. Tidak diproses.
-```
-
-### Error Umum
-| Error | Penyebab | Solusi |
-|-------|----------|--------|
-| URL tidak valid | Format URL salah | Pastikan diawali https:// atau http:// |
-| Domain dilindungi Cloudflare | Cloudflare JS Challenge | Buka manual di browser |
-| Link expired | Shortlink sudah kedaluarsa | Minta link baru dari sumber |
-
-### Command Terkait
-- [`/autoscan`](/docs/perintah/security#autoscan) — Scan malware otomatis
-
----
-
-## `/purge`
-
-**Deskripsi:** Hapus pesan dalam jumlah banyak dari channel dengan berbagai filter.
+**Deskripsi:** Lewati link pendek iklan atau safelink receh (sfrm.in, ouo.io, exe.io, dll) dalam 1 detik.
+- Mengambil link file tujuan yang asli secara instan
+- Memeriksa apakah link tujuan mengandung phishing atau malware sebelum diklik member
 
 ### Opsi
 
-| Nama | Tipe | Wajib | Default | Deskripsi |
-|------|------|-------|---------|-----------|
-| `jumlah` | Integer (1–100) | Ya | — | Jumlah pesan yang akan dihapus |
-| `user` | User | Tidak | — | Filter hanya pesan dari user ini |
-| `berisi` | String | Tidak | — | Filter pesan yang mengandung teks ini |
-| `bot` | Boolean | Tidak | false | Hanya hapus pesan dari bot |
+| Nama | Tipe | Wajib | Deskripsi |
+|------|------|-------|-----------|
+| `url` | String | Ya | Link shortlink atau safelink yang ingin dilewati |
 
-### Permission
-- **Manage Messages** — wajib untuk member
-- **Manage Messages** — wajib untuk bot
+---
 
-### Tier
-**Free**
+## `/blacklist`
 
-### Batasan
-Pesan lebih dari 14 hari tidak bisa dihapus secara bulk (batasan Discord API).
-
-### Contoh Penggunaan
-```
-/purge jumlah:50
-/purge jumlah:100 user:@spammer
-/purge jumlah:20 berisi:link
-```
+**Deskripsi:** Kelola daftar hitam (blacklist) server. Akun yang terdaftar akan langsung dicekal atau diberi tanda peringatan jika bergabung. Bot juga terhubung dengan Global Blacklist komunitas untuk menyaring scammer lintas server.
 
 ---
 
 ## `/modpanel`
 
-**Deskripsi:** Panel moderasi dengan riwayat kasus, log aksi, dan manajemen punishment member.
-
-### Permission
-- **Moderate Members** — wajib
-
-### Tier
-**Free** (basic) / **Pro** (riwayat lengkap + advanced search)
-
-### Contoh Penggunaan
-```
-/modpanel
-```
+**Deskripsi:** Dashboard moderasi lengkap untuk staf server. Lakukan tindakan:
+- **Ban & Unban** (dengan pencatatan alasan permanen)
+- **Kick & Timeout**
+- **Warn** (peringatan bertingkat beserta riwayat kasus)
+- Semuanya dikendalikan melalui tombol tanpa perlu mengingat sintaks command panjang!
 
 ---
 
-## `/logsetup`
+## `/perms`
 
-**Deskripsi:** Konfigurasi channel tujuan untuk berbagai jenis log moderasi dan event server.
-
-### Opsi
-
-| Nama | Tipe | Wajib | Deskripsi |
-|------|------|-------|-----------|
-| `tipe` | Choice | Ya | Jenis log: `moderasi`, `join_leave`, `message`, `voice`, `role`, `security`, `ticket` |
-| `channel` | Channel | Ya | Channel Discord tujuan log |
-
-### Permission
-- **Manage Guild** — wajib
-
-### Tier
-- Dasar (1 webhook per tipe): **Free**
-- Webhook terpisah per tipe event: **Pro**
-
-### Contoh Penggunaan
-```
-/logsetup tipe:moderasi channel:#mod-log
-/logsetup tipe:security channel:#security-log
-/logsetup tipe:ticket channel:#ticket-log
-```
-
-### Catatan
-Setiap tipe log bisa memiliki channel tujuan berbeda untuk audit granular.
+**Deskripsi:** Audit perizinan role server. Fitur ini memindai apakah ada role publik yang tidak sengaja memiliki izin Administrator, Manage Channels, atau Mention Everyone yang berisiko disalahgunakan.

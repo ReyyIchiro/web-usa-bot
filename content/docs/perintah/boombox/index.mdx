@@ -1,153 +1,89 @@
 ---
-title: Boombox Audio
-description: Command Boombox untuk konversi audio dari berbagai platform ke link yang kompatibel dengan SA-MP in-game.
+title: Boombox Audio In-Game
+description: Panduan command Boombox untuk konversi audio YouTube, TikTok, SoundCloud, dan Spotify ke format in-game SA-MP.
 ---
 
+Fitur **Boombox Audio** mengubah link lagu dari berbagai platform menjadi direct stream URL audio HTTP yang siap kamu putar langsung di game GTA SA-MP lewat command `/boombox in-game`.
 
-
-Boombox adalah fitur yang mengkonversi audio dari platform streaming (YouTube, TikTok, Spotify, dll.) ke link audio HTTP langsung yang bisa diputar menggunakan command `/boombox` **in-game** di SA-MP dengan mod seperti MoonLoader.
+Engine konversi kami menggunakan arsitektur **Multi-Tier Fast Extraction** (TikWM & InnerTube youtubei.js native) yang sanggup memproses audio dalam 1–2 detik tanpa buffering dan hemat bandwidth.
 
 ---
 
 ## `/convertbb`
 
-**Deskripsi:** Konversi link dari platform streaming ke link audio langsung untuk Boombox SA-MP.
+**Deskripsi:** Mengubah link lagu streaming menjadi link audio langsung untuk in-game `/boombox`.
 
 ### Opsi
 
 | Nama | Tipe | Wajib | Deskripsi |
 |------|------|-------|-----------|
-| `link` | String | Ya | Link video/lagu dari platform yang didukung |
-| `format` | Choice | Tidak | `mp3` (default) / `ogg` / `wav` |
-| `kualitas` | Choice | Tidak | `low` (64kbps) / `medium` (128kbps, default) / `high` (256kbps) |
+| `url` | String | Ya | Link lagu atau video yang ingin kamu konversi |
 
 ### Platform yang Didukung
-- **YouTube** — youtube.com, youtu.be
-- **TikTok** — tiktok.com
-- **SoundCloud** — soundcloud.com
-- **Spotify** — spotify.com (ekstrak metadata, download dari sumber alternatif)
-- **Apple Music** — music.apple.com (ekstrak metadata)
-- **Deezer** — deezer.com
-
-### Permission
-Tidak ada.
-
-### Tier
-- **Free**: 5x/hari per user
-- **Pro**: Unlimited
-
-### Cooldown
-10 detik per konversi.
+- **YouTube & YouTube Music** — Pemrosesan native tercepat via InnerTube API
+- **TikTok** — Ekstraksi kilat via TikWM (~1-2 detik, bypass challenge)
+- **SoundCloud** — Audio original berkualitas jernih
+- **Spotify & Apple Music** — Ekstrak judul & artis otomatis, disinkronkan ke sumber audio terbaik
+- **File Audio Langsung** — `.mp3`, `.wav`, `.ogg`
 
 ### Contoh Penggunaan
 ```
-/convertbb link:https://www.youtube.com/watch?v=dQw4w9WgXcQ
-/convertbb link:https://soundcloud.com/artist/song format:mp3 kualitas:medium
+/convertbb url:https://www.youtube.com/watch?v=dQw4w9WgXcQ
+/convertbb url:https://vt.tiktok.com/ZSjxxxx/
 ```
 
-**Hasil:**
+**Hasil Respon Bot:**
 ```
-✅ Konversi Boombox Berhasil!
+✅ Boombox Ready!
+🎵 Judul: DJ San Andreas Remix Full Bass
+⏱️ Durasi: 03:25
+🌐 Host: Catbox CDN (Direct High-Speed Stream)
 
-Judul: Rick Astley - Never Gonna Give You Up
-Durasi: 3:33
-Format: MP3 | Kualitas: 128kbps
+In-Game Link:
+https://files.catbox.moe/xxxxxx.mp3
 
-Direct Link untuk /boombox in-game:
-https://cdn.usacore.io/bb/abc123.mp3
-(Expired dalam 24 jam)
-
-Cara pakai: /boombox url https://cdn.usacore.io/bb/abc123.mp3
+Cara pakai di GTA:
+Ketik /boombox di game, pilih set URL, lalu paste link di atas!
 ```
-
-### Error Umum
-| Error | Penyebab | Solusi |
-|-------|----------|--------|
-| Link tidak valid | Format URL salah | Salin ulang link dari browser |
-| Platform tidak didukung | Domain tidak ada di daftar | Gunakan `/convertbb` dengan platform yang didukung |
-| Video privat/copyright | Konten dibatasi | Gunakan konten yang tersedia publik |
-| Rate limit | Kuota harian habis | Upgrade ke Pro atau tunggu reset besok |
-
-### Command Terkait
-- [`/searchbb`](#searchbb) — Cari lagu langsung
-- [`/uploadbb`](#uploadbb) — Upload file audio custom
 
 ---
 
 ## `/searchbb`
 
-**Deskripsi:** Cari lagu dan langsung dapatkan link Boombox tanpa perlu link eksternal.
+**Deskripsi:** Gak punya link? Cari lagu langsung di Discord dan dapatkan link audio instan tanpa perlu repot buka browser.
 
 ### Opsi
 
 | Nama | Tipe | Wajib | Deskripsi |
 |------|------|-------|-----------|
-| `query` | String | Ya | Nama lagu atau artis yang dicari |
-| `sumber` | Choice | Tidak | `youtube` (default) / `soundcloud` |
-
-### Permission
-Tidak ada.
-
-### Tier
-- **Free**: 5x/hari
-- **Pro**: Unlimited
+| `query` | String | Ya | Judul lagu atau nama artis yang ingin dicari |
 
 ### Contoh Penggunaan
 ```
-/searchbb query:"Dewa 19 Kangen"
-/searchbb query:"Sheila On 7 Anugerah Terindah" sumber:youtube
-```
-
-**Hasil:**
-```
-🎵 Hasil Pencarian Boombox
-
-1. Dewa 19 - Kangen (Official)
-   Durasi: 5:12 | YouTube
-   [Gunakan] → /convertbb link:https://...
-
-2. Dewa 19 - Kangen (Live)
-   Durasi: 6:48 | YouTube
-   [Gunakan] → /convertbb link:https://...
+/searchbb query:Dewa 19 Kangen
+/searchbb query:DJ Tiba Tiba Aku Melayang
 ```
 
 ---
 
 ## `/uploadbb`
 
-**Deskripsi:** Upload file audio kustom dan dapatkan link Boombox dari file lokal.
+**Deskripsi:** Punya file rekaman suara, jingle radio server, atau lagu lokal sendiri? Upload langsung ke bot dan dapatkan link boombox-nya.
 
 ### Opsi
 
 | Nama | Tipe | Wajib | Deskripsi |
 |------|------|-------|-----------|
-| `file` | Attachment | Ya | File audio (.mp3, .ogg, .wav) |
+| `file` | Attachment | Ya | File audio format `.mp3`, `.wav`, atau `.ogg` (Maks. 25MB) |
 
-### Batasan
-- Format: `.mp3`, `.ogg`, `.wav`
-- Ukuran: Maksimal 25MB
-- Storage: Link aktif selama 7 hari
+---
 
-### Permission
-Tidak ada.
+## `/setup-boombox`
 
-### Tier
-**Pro** — Upload custom tidak tersedia di Free.
+**Deskripsi:** (Khusus Admin) Buat dedicated channel khusus Boombox. Di channel ini, member server kamu gak perlu ketik slash command — cukup kirim link YouTube atau TikTok apa saja, bot bakal otomatis membalas dengan link audio in-game!
 
-### Contoh Penggunaan
-```
-/uploadbb file:[upload file.mp3]
-```
+### Opsi
 
-**Hasil:**
-```
-✅ Upload Berhasil!
-
-File: my-song.mp3
-Size: 4.2 MB
-Durasi: ~3:20
-
-Boombox Link:
-https://cdn.usacore.io/bb/custom_abc123.mp3
-(Aktif 7 hari)
-```
+| Nama | Tipe | Wajib | Deskripsi |
+|------|------|-------|-----------|
+| `channel` | Channel | Ya | Channel Discord yang ingin dijadikan tempat convert otomatis |

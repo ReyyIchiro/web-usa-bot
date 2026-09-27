@@ -1,145 +1,65 @@
 ---
-title: Roleplay & SA-MP
-description: Command untuk komunitas GTA SA-MP — SSRP, karakter RP, Boombox, name generator, server directory.
+title: Roleplay & SA-MP Essentials
+description: Panduan command roleplay GTA SA-MP — SSRP Studio, AI Character Story, Name Generator, dan Live Server Info.
 ---
 
-
-
----
-
-## `/ssrp`
-
-**Deskripsi:** SSRP (Screenshot Roleplay) — Buat screenshot RP berkualitas tinggi langsung dari Discord dengan layout dan frame profesional.
-
-### Subcommand
-
-#### `/ssrp buat`
-
-| Nama | Tipe | Wajib | Deskripsi |
-|------|------|-------|-----------|
-| `nama_karakter` | String | Ya | Nama lengkap karakter RP |
-| `deskripsi` | String | Ya | Narasi/deskripsi scene RP (max 500 karakter) |
-| `foto` | Attachment | Tidak | Foto/screenshot karakter (opsional) |
-
-#### `/ssrp auto` (Pro)
-
-| Nama | Tipe | Wajib | Deskripsi |
-|------|------|-------|-----------|
-| `scene` | String | Ya | Deskripsi scene dalam bahasa natural — AI akan membangun SSRP secara otomatis |
-
-### Permission
-Tidak ada.
-
-### Tier
-- Manual (`/ssrp buat`): **Free**
-- Auto AI (`/ssrp auto`): **Pro**
-
-### Contoh Penggunaan
-```
-/ssrp buat nama_karakter:"Ahmad Santoso" deskripsi:"Sedang memimpin rapat darurat geng di gudang tua Pelabuhan Los Santos"
-```
-
-```
-/ssrp auto scene:"Penembakan di pusat kota, karakter adalah detektif yang tiba di TKP"
-```
+Kumpulan fitur yang didesain khusus untuk melengkapi kebutuhan player dan server komunitas GTA San Andreas Multiplayer (SA-MP).
 
 ---
 
-## `/namegen`
+## `/ssrp` — SSRP Studio 2.0
 
-**Deskripsi:** Generate nama karakter RP Indonesia yang realistis sesuai setting GTA SA-MP.
+**Deskripsi:** Mengubah teks dialog chatlog in-game menjadi Screenshot Roleplay (SSRP) berkualitas tinggi. Font dialog, outline hitam, dan warna teks akan disesuaikan mirip persis dengan tampilan asli GTA San Andreas.
 
-### Opsi
-
-| Nama | Tipe | Wajib | Default | Deskripsi |
-|------|------|-------|---------|-----------|
-| `jumlah` | Integer (1–10) | Tidak | 5 | Jumlah nama yang di-generate |
-| `gender` | Choice | Tidak | Random | `laki-laki` / `perempuan` |
-| `etnis` | Choice | Tidak | Random | `jawa`, `sunda`, `batak`, `melayu`, `chinese`, `betawi` |
-
-### Permission
-Tidak ada.
-
-### Tier
-**Free**
-
-### Contoh Penggunaan
-```
-/namegen jumlah:10 gender:laki-laki etnis:jawa
-```
-
-**Hasil:**
-```
-🎭 10 Nama Karakter RP:
-1. Budi Santoso
-2. Agus Wijaya
-3. Hendra Kusuma
-...
-```
+### Cara Penggunaan
+Ketik `/ssrp` untuk membuka modal editor interaktif:
+1. Upload screenshot background in-game kamu
+2. Paste dialog atau chatlog roleplay (mendukung `/me`, `/do`, dialog percakapan, dan tag warna)
+3. Pilih posisi teks (kiri atas, kiri bawah, kanan)
+4. Bot akan merender gambar final siap posting ke forum atau channel showcase!
 
 ---
 
-## `/createcs`
+## `/createcs` — AI Character Story Generator
 
-**Deskripsi:** Generate character story (latar belakang karakter) menggunakan AI. Hasil dalam format naratif yang kaya.
+**Deskripsi:** Bikin latar belakang cerita karakter roleplay (Character Story) standar forum seperti Jogjagamers (JGRP) atau server RP lainnya dengan bantuan AI pintar. Cerita yang dihasilkan mengalir natural, mendalam, dan tidak kaku seperti robot.
 
 ### Opsi
 
 | Nama | Tipe | Wajib | Deskripsi |
 |------|------|-------|-----------|
-| `nama` | String | Ya | Nama karakter |
-| `profesi` | String | Ya | Pekerjaan/latar belakang karakter (e.g., "polisi korup", "pedagang senjata", "dokter") |
-| `kepribadian` | String | Tidak | Deskripsi kepribadian singkat |
-
-### Permission
-Tidak ada.
-
-### Tier
-- **Free**: 2x/hari per user
-- **Pro**: Unlimited
-
-### Contoh Penggunaan
-```
-/createcs nama:"Reza Mahardika" profesi:"mantan tentara yang menjadi mercenary" kepribadian:"dingin, taktis, tidak percaya siapapun"
-```
+| `nama` | String | Ya | Nama lengkap karakter (format: Firstname_Lastname) |
+| `asal` | String | Ya | Tempat kelahiran dan kebangsaan karakter |
+| `alur` | String | Tidak | Ringkasan singkat alur hidup atau cita-cita karakter |
 
 ---
 
-## `/serverdirectory`
+## `/namegen` — Generator Nama Karakter RP
 
-**Deskripsi:** Cari dan tampilkan informasi server SA-MP secara real-time.
+**Deskripsi:** Cari inspirasi nama fiksi realistis berformat `Nama_Karakter` yang sesuai dengan tema karakter yang ingin kamu mainkan.
 
-### Subcommand
-
-#### `/serverdirectory cari`
+### Opsi
 
 | Nama | Tipe | Wajib | Deskripsi |
 |------|------|-------|-----------|
-| `query` | String | Ya | Nama server atau IP:Port |
+| `origin` | Choice | Tidak | Pilihan asal: `Amerika`, `Italia`, `Rusia`, `Jepang`, `Meksiko/Latin`, `Inggris` |
+| `gender` | Choice | Tidak | `Laki-laki` atau `Perempuan` |
 
-#### `/serverdirectory popular`
-Tampilkan daftar server SA-MP dengan player count terbanyak saat ini.
+---
 
-### Permission
-Tidak ada.
+## `/serverinfo` & `/serverdirectory`
 
-### Tier
-**Free**
+**Deskripsi:** Pantau status server SA-MP secara realtime langsung dari Discord.
 
-### Contoh Penggunaan
-```
-/serverdirectory cari query:"Indonesia Roleplay"
-/serverdirectory popular
-```
+### Opsi `/serverinfo`
 
-**Hasil:**
-```
-🌐 Server SA-MP Ditemukan
+| Nama | Tipe | Wajib | Deskripsi |
+|------|------|-------|-----------|
+| `ip` | String | Ya | IP Address atau domain server SA-MP |
+| `port` | Integer | Tidak | Port server (default: 7777) |
 
-Nama: Indonesia Roleplay Universe
-IP: 146.190.xx.xx:7777
-Players: 847/1000
-Gamemode: Indonesia Roleplay 4.5
-Map: San Andreas
-Language: Indonesian
-```
+Bot akan menampilkan:
+- Nama server & Gamemode
+- Jumlah player online saat ini
+- Ping / Latency
+- Cuaca & waktu in-game

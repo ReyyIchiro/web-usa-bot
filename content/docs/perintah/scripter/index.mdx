@@ -1,204 +1,68 @@
 ---
-title: Scripter Tools
-description: Referensi command tools untuk pengembang mod SA-MP — compile, decompile, obfuscate, dan scan malware Lua.
+title: Scripter & Dev Tools
+description: Panduan command untuk pengembang mod GTA SA-MP — compile LuaJIT, decompile, obfuscate, dan scan malware mod.
 ---
 
+Fitur khusus yang dirancang untuk para modder, developer, dan scripter komunitas GTA San Andreas Multiplayer (MoonLoader, CLEO, dan SA-MP Script).
 
-
-> ⚠️ **Disclaimer:** Gunakan fitur ini secara bertanggung jawab. Hanya untuk pengembangan mod yang sah dan analisis keamanan. Pelanggaran mengakibatkan akses dicabut.
-
-Semua Scripter Tools memerlukan tier **Pro**. Semua file melewati scan malware sebelum diproses.
+> ⚠️ **Catatan Penting:** Gunakan semua tools ini secara bijak hanya untuk pengembangan mod legal, perbaikan script sendiri, dan menjaga keamanan komunitas.
 
 ---
 
-## `/compilelua`
+## `/compilelua` — Compile Lua ke Bytecode
 
-**Deskripsi:** Compile file `.lua` menjadi bytecode `.luac` menggunakan LuaJIT. Berguna untuk mendistribusikan mod tanpa mengekspos source code.
+**Deskripsi:** Mengkompilasi file source code `.lua` menjadi file bytecode `.luac` menggunakan engine **LuaJIT**.
+- Membantu kamu membagikan mod tanpa memperlihatkan source code mentah
+- Setiap file otomatis melalui pemindaian malware sebelum dikompilasi demi keamanan server
 
 ### Opsi
 
 | Nama | Tipe | Wajib | Deskripsi |
 |------|------|-------|-----------|
-| `file` | Attachment | Ya | File `.lua` yang ingin dikompilasi |
-
-### Batasan
-- Hanya file `.lua` yang diterima
-- Ukuran maksimal: **500KB**
-
-### Permission
-Tidak ada — semua member bisa gunakan (dengan rate limit tier).
-
-### Tier
-**Pro** — Tidak tersedia di Free.
-
-### Cooldown
-Tergantung kuota tier.
-
-### Contoh Penggunaan
-```
-/compilelua file:[upload file.lua]
-```
-
-**Hasil:**
-```
-✅ File berhasil dikompilasi menjadi bytecode .luac.
-[lampiran: compiled_nama-file.luac]
-```
-
-### Proses Internal
-1. File diunduh dari Discord
-2. Nama file di-sanitize (path traversal protection)
-3. Scan malware dijalankan sebelum kompilasi
-4. LuaJIT mengkompilasi ke bytecode
-5. File hasil dikirim dan temporary file dihapus
-6. Log dikirim ke Security Log channel
-
-### Error Umum
-| Error | Penyebab | Solusi |
-|-------|----------|--------|
-| Hanya file .lua yang didukung | Upload file bukan .lua | Upload file dengan ekstensi .lua |
-| Ukuran terlalu besar | File >500KB | Split file atau kompres kode |
-| Gagal compile | Syntax error di kode Lua | Cek syntax file terlebih dahulu |
-| Terdeteksi malware | File mengandung pola berbahaya | File tidak bisa diproses |
-
-### Command Terkait
-- [`/decompilelua`](#decompilelua) — Decompile bytecode kembali ke Lua
-- [`/scan`](#scan) — Scan malware file tanpa compile
+| `file` | Attachment | Ya | Upload file script `.lua` kamu (Maks. 500KB) |
 
 ---
 
-## `/decompilelua`
+## `/decompilelua` — Decompile Bytecode ke Kode Terbaca
 
-**Deskripsi:** Decompile file `.luac` (bytecode) kembali ke kode Lua yang dapat dibaca. Berguna untuk debugging mod yang source-nya hilang.
+**Deskripsi:** Mendekompilasi file bytecode `.luac` kembali menjadi source code Lua yang dapat dipelajari.
+- Sangat berguna untuk kamu yang kehilangan source code asli mod lama
+- Membantu kamu membedah struktur script untuk mencari bug atau error in-game
 
 ### Opsi
 
 | Nama | Tipe | Wajib | Deskripsi |
 |------|------|-------|-----------|
-| `file` | Attachment | Ya | File `.luac` yang ingin di-decompile |
-
-### Batasan
-- Hanya file `.luac` yang diterima
-- Ukuran maksimal: **500KB**
-- Hasil decompile mungkin tidak identik dengan source asli (bytecode tidak menyimpan komentar dan nama variabel lokal)
-
-### Permission
-Tidak ada.
-
-### Tier
-**Pro**
-
-### Contoh Penggunaan
-```
-/decompilelua file:[upload file.luac]
-```
-
-**Hasil:**
-```
-✅ Decompile selesai.
-[lampiran: decompiled_nama-file.lua]
-```
-
-### Error Umum
-| Error | Penyebab | Solusi |
-|-------|----------|--------|
-| Hanya file .luac | Upload file salah | Upload file dengan ekstensi .luac |
-| Gagal decompile | File corrupt atau diproteksi | File tidak bisa direcovery |
+| `file` | Attachment | Ya | Upload file bytecode `.luac` (Maks. 500KB) |
 
 ---
 
-## `/obfuscate`
+## `/obfuscate` — Proteksi Kode Script
 
-**Deskripsi:** Obfuscate kode Lua untuk melindungi intellectual property mod dari pembacaan langsung.
+**Deskripsi:** Mengamankan file script Lua kamu dengan mengacak nama variabel, fungsi, dan string agar tidak mudah dibajak atau diubah tanpa izin.
 
 ### Opsi
 
 | Nama | Tipe | Wajib | Deskripsi |
 |------|------|-------|-----------|
-| `file` | Attachment | Ya | File `.lua` yang ingin di-obfuscate |
-
-### Permission
-Tidak ada.
-
-### Tier
-**Pro**
-
-### Peringatan
-Obfuscation bukan enkripsi — kode tetap bisa di-reverse dengan upaya yang cukup. Gunakan sebagai lapisan perlindungan tambahan, bukan satu-satunya proteksi.
-
-### Contoh Penggunaan
-```
-/obfuscate file:[upload file.lua]
-```
-
-### Command Terkait
-- [`/deobfuscate`](#deobfuscate) — Analisis kode yang di-obfuscate
+| `file` | Attachment | Ya | Upload file `.lua` yang ingin kamu lindungi |
 
 ---
 
-## `/deobfuscate`
+## `/deobfuscate` — Rapikan & Bersihkan Kode
 
-**Deskripsi:** Analisis dan deobfuscate kode Lua yang telah di-obfuscate. Berguna untuk analisis keamanan mod yang mencurigakan.
+**Deskripsi:** Membersihkan format hex escape dan merapikan indentasi kode script yang teracak untuk kebutuhan inspeksi keamanan.
 
 ### Opsi
 
 | Nama | Tipe | Wajib | Deskripsi |
 |------|------|-------|-----------|
-| `file` | Attachment | Ya | File `.lua` yang di-obfuscate |
-
-### Permission
-Tidak ada.
-
-### Tier
-**Pro**
-
-### Catatan
-Hasilnya mungkin tidak 100% identik dengan source asli — variabel dan fungsi mungkin memiliki nama yang di-generate.
+| `file` | Attachment | Ya | Upload file script yang ingin kamu analisa |
 
 ---
 
-## `/scan`
+## `/scan` — Scan Malware File Mod
 
-**Deskripsi:** Scan manual file Lua untuk mendeteksi pola malware sebelum dijalankan di server SA-MP.
-
-### Opsi
-
-| Nama | Tipe | Wajib | Deskripsi |
-|------|------|-------|-----------|
-| `file` | Attachment | Ya | File yang ingin di-scan |
-
-### File yang Didukung
-`.lua`, `.luac`, `.cs`, `.asi`, `.txt`
-
-### Permission
-Tidak ada.
-
-### Tier
-- **Free**: 3x/hari per user
-- **Pro**: Unlimited
-
-### Contoh Penggunaan
-```
-/scan file:[upload file.lua]
-```
-
-**Hasil bersih:**
-```
-✅ File Aman
-Tidak ditemukan pola berbahaya dalam file.
-Checksum: abc123...
-```
-
-**Hasil terdeteksi:**
-```
-🚨 Malware Terdeteksi!
-Pola yang ditemukan:
-- Token stealer pattern (baris 45)
-- Suspicious network call (baris 103)
-```
-
-### Error Umum
-| Error | Penyebab | Solusi |
-|-------|----------|--------|
-| Tipe file tidak didukung | Upload file selain yang didukung | Gunakan file dengan ekstensi yang valid |
-| File terlalu besar | Melebihi batas ukuran | Split atau kompres file |
+**Deskripsi:** Punya file mod dari internet dan ragu apakah aman? Upload file mod kamu ke `/scan` sebelum dipasang ke folder GTA San Andreas.
+- **Format yang Didukung:** `.lua`, `.luac`, `.cs` (CLEO), `.asi`, `.dll`, dan `.sf` (SAMPFUNCS)
+- **Deteksi:** Pola Discord webhook stealer, keylogger, trojan downloader, dan backdoor script

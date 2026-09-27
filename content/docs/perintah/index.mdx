@@ -1,79 +1,90 @@
 ---
-title: Command Reference
+title: Panduan Command Bot
 description: Daftar referensi lengkap seluruh slash command USA Core Bot yang dikelompokkan berdasarkan kategori fitur.
 ---
 
-USA Core menggunakan sistem **Discord Slash Commands** modern (`/`). Semua perintah dilengkapi autocomplete, validasi input, dan pesan konfirmasi interaktif.
+USA Core menggunakan sistem **Discord Slash Commands** modern (`/`). Semua perintah dilengkapi autocomplete, tombol interaktif, modal formulir, dan konfirmasi pesan yang ramah pengguna.
 
 ## Cara Menggunakan Command
 
-Ketik garis miring `/` di Discord channel mana saja tempat bot memiliki izin, lalu pilih command yang diinginkan dari menu pop-up.
+Cukup ketik garis miring `/` di channel Discord mana saja tempat bot aktif, lalu pilih command yang ingin kamu gunakan:
 
 ```
 /nama_command [opsi_1] [opsi_2]
 ```
 
-Setiap command memiliki tingkatan permission Discord dan ketersediaan tier tertentu:
-- **Free**: Dapat langsung digunakan oleh semua server tanpa biaya.
-- **Pro**: Memerlukan aktivasi tier Pro via `/redeem` atau langganan aktif.
-- **Enterprise**: Fitur khusus komunitas berskala besar dengan kapasitas custom.
+Setiap command memiliki tingkat akses:
+- **Free**: Langsung bisa dipakai oleh semua server secara gratis selamanya.
+- **Pro**: Membutuhkan lisensi Pro aktif (bisa diaktifkan via `/redeem`).
+- **Enterprise**: Kapasitas tanpa batas khusus server besar dan komunitas partner.
 
 ---
 
 ## Kategori Command
 
-Pilih kategori di bawah untuk melihat dokumentasi parameter, opsi wajib/opsional, hak akses permission, serta contoh penggunaan praktis:
+Pilih kategori di bawah untuk melihat penjelasan lengkap, opsi parameter, dan contoh cara pakainya:
 
 ### 1. [Security & A.E.G.I.S SOC](/docs/perintah/security)
-Perintah keamanan dan automod cerdas:
-- `/automod` — Dashboard konfigurasi perlindungan otomatis
-- `/autoscan` — Stealth-scan file `.lua`, `.cs`, `.asi`
+Perlindungan server dan anti-virus file mod:
+- `/automod` — Dashboard visual Auto-Moderasi & Anti-Raid
+- `/autoscan` — Stealth-scan file `.lua`, `.cs`, `.asi`, `.dll`
+- `/setup-crashlog` — Analisa kode crash game SA-MP otomatis
+- `/bypass` — Lewati safelink/iklan receh dalam 1 detik
 - `/blacklist` — Kelola daftar hitam server & global
-- `/bypass` — Scanner redirect URL & link phishing
-- `/purge` — Bersihkan pesan secara massal dengan filter
-- `/modpanel` — Panel kontrol moderasi cepat
+- `/purge` — Hapus pesan massal dengan filter rapi
+- `/modpanel` — Dashboard moderasi cepat (Ban, Kick, Warn, Case)
+- `/perms` — Audit perizinan role & snapshot keamanan
 
-### 2. [Scripter Tools](/docs/perintah/scripter)
-Toolkit scripter SA-MP MoonLoader & CLEO:
-- `/compilelua` — Kompilasi file `.lua` ke bytecode `.luac`
-- `/decompilelua` — Dekompilasi bytecode ke kode sumber
-- `/obfuscate` — Proteksi kode Lua
-- `/deobfuscate` — Analisis kode yang diobfuskasi
-- `/scan` — Cek malware pada script sebelum dieksekusi
+### 2. [Boombox Audio In-Game](/docs/perintah/boombox)
+Konversi audio web ke audio streaming in-game SA-MP:
+- `/convertbb` — Ubah link YouTube/TikTok/SoundCloud jadi link audio in-game
+- `/searchbb` — Cari lagu favorit langsung di Discord
+- `/uploadbb` — Upload file audio lokal (.mp3, .wav, .ogg)
+- `/setup-boombox` — Setup auto-channel konversi Boombox
 
-### 3. [Roleplay & SA-MP Tools](/docs/perintah/roleplay)
-Fitur spesifik GTA San Andreas Multiplayer:
-- `/ssrp` — Generator screenshot roleplay chatlog
+### 3. [Roleplay & SA-MP Essentials](/docs/perintah/roleplay)
+Fitur spesifik komunitas GTA San Andreas Multiplayer:
+- `/ssrp` — SSRP Studio 2.0 (chatlog ke screenshot GTA SA)
+- `/createcs` — AI Character Story generator format forum
 - `/namegen` — Generator nama karakter RP realistis
-- `/serverdirectory` — Informasi live server SA-MP
-- `/createcs` — Generator Character Story AI
+- `/serverinfo` — Pantau status server SA-MP realtime
+- `/serverdirectory` — Direktori server SA-MP komunitas
+- `/nick` — Ganti nama sesuai aturan format roleplay
 
-### 4. [RTM Marketplace](/docs/perintah/marketplace)
-Sistem transaksi anonim dan rekber aman:
-- `/rtm` — Menu marketplace dan pembuatan listing
-- `/reputasi` — Sistem reputasi & ulasan terverifikasi
-- `/rtmAdmin` — Panel investigasi & rekber bagi admin
+### 4. [RTM Marketplace & Rekber](/docs/perintah/marketplace)
+Sistem transaksi anonim dan rekber terpercaya:
+- `/rtm` — Central Hub Marketplace (Jual, Cari, Tukar, Watchlist)
+- `/ticket-config` — Setup room Rekber (Escrow), fee & QRIS
+- `/reputasi` — Cek skor kepercayaan & ulasan trader
+- `/rtm-admin` — Panel investigasi admin & penanganan sengketa
 
-### 5. [Boombox Audio Converter](/docs/perintah/boombox)
-Konversi audio web ke audio streaming in-game:
-- `/convertbb` — Konversi link YouTube/TikTok/SoundCloud ke audio stream HTTP
-- `/searchbb` — Cari track audio dari database komunitas
-- `/uploadbb` — Simpan preset audio boombox kustom
+### 5. [Terminal Mabar & Fitur Komunitas](/docs/perintah/engagement)
+Bikin server makin ramai dan betah:
+- `/party` — Terminal Mabar (LFG) dengan tombol Join/Leave
+- `/tiktok` — Notifikasi otomatis TikTok Live & Video
+- `/setup-booster` — Banner ucapan terima kasih untuk server booster
+- `/start-game` & `/lms` — Minigames interaktif & Last Man Standing
+- `/leveling-hub` — Leveling XP chat & leaderboard komunitas
+- `/giveaway` — Undian berhadiah dengan tombol join
+- `/poll` — Polling suara interaktif
+- `/suggest` — Kotak saran komunitas dengan upvote/downvote
+- `/sticky` — Pesan tempel otomatis di bawah channel
 
-### 6. [Engagement, Utilitas & Party](/docs/perintah/engagement)
-Fitur interaksi komunitas dan LFG party:
-- `/giveaway` — Sistem undian berhadiah dengan syarat role
-- `/poll` — Polling interaktif multiple choice
-- `/ticket` — Sistem tiket bantuan dengan log transcript
-- `/tiktok` — Notifikasi live & video TikTok otomatis
-- `/party` — Matchmaking LFG (Looking for Group) gaming
-- `/leveling` — Sistem XP, level, dan role rewards
-- `/rolemenu` — Menu dropdown self-assign role
+### 6. [Scripter & Dev Tools](/docs/perintah/scripter)
+Toolkit andalan modder MoonLoader & CLEO:
+- `/compilelua` — Kompilasi source Lua ke bytecode `.luac` (LuaJIT)
+- `/decompilelua` — Dekompilasi bytecode kembali ke source code
+- `/obfuscate` — Proteksi script dari pembajak kode
+- `/deobfuscate` — Bersihkan hex escape untuk analisa keamanan
+- `/scan` — Cek malware pada file mod sebelum dipakai
 
 ### 7. [Admin & Konfigurasi Server](/docs/perintah/admin)
 Pengaturan bot dan manajemen server:
-- `/help` — Panduan bantuan perintah di Discord
-- `/redeem` — Aktivasi lisensi key Pro/Enterprise
-- `/tierinfo` — Informasi status langganan dan kuota aktif
-- `/logsetup` — Konfigurasi channel log moderasi & SOC
-- `/botconfig` — Pengaturan preferensi bahasa dan respon bot
+- `/panel` — Master Visual Admin GUI Hub
+- `/ticket-config` — Setup tiket bantuan & Rekber QRIS
+- `/setup-logs` — Hubungkan channel Security & Audit Log
+- `/setup-threads` — Otomasi pembuatan forum / thread
+- `/setup-sociabuzz` — Integrasi donasi SociaBuzz webhook
+- `/backup` — Backup dan restore konfigurasi bot
+- `/redeem` — Klaim lisensi Pro/Enterprise
+- `/quota` — Cek sisa kuota harian bot

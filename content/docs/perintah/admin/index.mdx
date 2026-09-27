@@ -1,200 +1,93 @@
 ---
-title: Admin & Konfigurasi
-description: Command admin untuk konfigurasi server, audit log, backup, webhook, dan manajemen tier.
+title: Admin & Konfigurasi Server
+description: Panduan command admin, GUI dashboard, setup channel otomatis, dan konfigurasi bot Discord USA Core.
 ---
 
+Semua command di bawah dirancang dengan filosofi **100% GUI-Driven** — kamu gak perlu repot edit file config atau copy-paste ID channel/role. Cukup gunakan menu dropdown, modal formulir, dan tombol interaktif langsung di Discord.
 
-
----
-
-## `/help`
-
-**Deskripsi:** Tampilkan daftar semua command yang tersedia dengan filter kategori.
-
-### Opsi
-
-| Nama | Tipe | Wajib | Deskripsi |
-|------|------|-------|-----------|
-| `kategori` | Choice | Tidak | Filter: `security`, `scripter`, `roleplay`, `boombox`, `rtm`, `engagement`, `admin` |
-
-### Permission
-Tidak ada.
-
-### Tier
-**Free**
-
-### Contoh Penggunaan
-```
-/help
-/help kategori:security
-```
+Sebagian besar command ini membutuhkan izin **Administrator** atau **Manage Server**.
 
 ---
 
-## `/redeem`
+## Panel Kontrol & Hub Utama
 
-**Deskripsi:** Aktifkan key Pro atau Enterprise untuk server Anda.
+### `/panel`
+**Deskripsi:** Membuka master control panel admin untuk mengontrol konfigurasi bot secara visual.
 
-### Opsi
+### `/modpanel`
+**Deskripsi:** Dashboard moderasi interaktif. Lakukan tindakan Ban, Kick, Timeout/Mute, Warn, serta lihat riwayat kasus pelanggaran member dalam satu tampilan.
 
-| Nama | Tipe | Wajib | Deskripsi |
-|------|------|-------|-----------|
-| `key` | String | Ya | Key aktivasi yang diterima |
+### `/ticket-config`
+**Deskripsi:** Panel setup sistem tiket bantuan dan jasa Rekber (Escrow).
+- Pilih role Staff & Middleman langsung lewat dropdown
+- Tentukan persentase potongan fee rekber
+- Masukkan nomor rekening dan upload gambar QRIS pembayaran langsung lewat modal interaktif
+- Kirim embed panel tiket ke channel publik hanya dengan satu klik
 
-### Permission
-- **Administrator** — wajib
+### `/leveling-hub`
+**Deskripsi:** Dashboard master untuk mengelola sistem XP chat, role rewards, ekonomi, dan minigames komunitas.
 
-### Tier
-Tersedia untuk semua tier (untuk upgrade).
-
-### Contoh Penggunaan
-```
-/redeem key:USACORE-XXXX-XXXX-XXXX
-```
-
-**Hasil sukses:**
-```
-✅ Tier Berhasil Diaktifkan!
-Server: My Server
-Tier: Pro
-Berlaku: 30 hari (hingga 11 Sep 2026)
-Fitur baru diaktifkan!
-```
-
-### Catatan
-- Key bersifat portable — tidak terikat ke server tertentu
-- Key yang sama bisa dipindah ke server lain via `/redeem` di server baru (otomatis menonaktifkan server lama)
-- Key tidak bisa digunakan bersamaan di 2 server
+### `/premium-hub` & `/premium`
+**Deskripsi:** Panel kontrol lisensi premium untuk owner server: cek masa aktif, generate voucher key, dan cek status server.
 
 ---
 
-## `/tierinfo`
+## Setup Channel Otomatis
 
-**Deskripsi:** Tampilkan informasi tier aktif server, tanggal kadaluarsa, dan kuota penggunaan.
+### `/setup-boombox`
+**Deskripsi:** Menyiapkan channel khusus untuk Boombox audio. Di channel ini, member cukup kirim link YouTube/TikTok dan bot otomatis membalas link audio siap pakai untuk `/boombox` in-game SA-MP.
 
-### Permission
-- **Manage Server** — wajib
+### `/setup-crashlog`
+**Deskripsi:** Menyiapkan channel otomatis untuk menganalisa crash game GTA SA-MP. Member tinggal tempel kode crash (misal `0x0040fb80`), dan bot langsung menganalisa mod penyebabnya.
 
-### Contoh Penggunaan
-```
-/tierinfo
-```
+### `/setup-party`
+**Deskripsi:** Konfigurasi Terminal Mabar (`/party`). Atur kategori voice/text channel sementara yang otomatis dibuat dan dihapus saat party selesai.
 
-**Hasil:**
-```
-📋 Informasi Tier Server
+### `/setup-ssrp`
+**Deskripsi:** Setup channel khusus untuk generator Screenshot Roleplay (SSRP).
 
-Tier: Pro
-Aktif sejak: 12 Agt 2026
-Berlaku hingga: 11 Sep 2026
-Sisa: 29 hari
+### `/setup-cs`
+**Deskripsi:** Setup channel dan panel formulir AI Character Story generator.
 
-Kuota Bulan Ini:
-• Boombox Converts: 234/∞
-• Bypass: 87/∞
-• Scan: 45/∞
-• AI Requests: 156/∞
-```
+### `/setup-booster`
+**Deskripsi:** Atur notifikasi otomatis saat ada member yang melakukan Server Boost, lengkap dengan pesan ucapan terima kasih dan banner gambar kustom.
 
----
+### `/setup-logs`
+**Deskripsi:** Menghubungkan log audit A.E.G.I.S (join/leave, edit/delete pesan, update role, dan security scan) ke channel tertentu.
 
-## `/auditlog`
+### `/setup-suggest`
+**Deskripsi:** Mengaktifkan kotak saran otomatis di mana setiap pesan akan diubah menjadi embed saran dengan tombol upvote dan downvote.
 
-**Deskripsi:** Tampilkan riwayat audit log server dengan filter.
+### `/setup-threads`
+**Deskripsi:** Mengaktifkan pembuatan thread otomatis di channel showcase mod, screenshot, atau diskusi.
 
-### Opsi
-
-| Nama | Tipe | Wajib | Deskripsi |
-|------|------|-------|-----------|
-| `tipe` | Choice | Tidak | Jenis event yang difilter |
-| `user` | User | Tidak | Filter berdasarkan user |
-| `limit` | Integer (1–50) | Tidak | Jumlah entri (default: 20) |
-
-### Permission
-- **View Audit Log** — wajib
-
-### Tier
-- **Free**: 7 hari terakhir
-- **Pro**: 90 hari terakhir
+### `/setup-sociabuzz`
+**Deskripsi:** Integrasi donasi SociaBuzz. Bot otomatis memberikan role donor dan mengirim notifikasi saat ada donasi masuk via webhook.
 
 ---
 
-## `/backup`
+## Keamanan & Audit Server
 
-**Deskripsi:** Buat atau restore backup konfigurasi server USA Core.
+### `/perms`
+**Deskripsi:** Permission Audit & Management Suite.
+- Scan seluruh role dan channel untuk mendeteksi celah izin berbahaya (seperti izin Administrator yang bocor)
+- Buat snapshot backup izin server dan pulihkan kapan saja jika terjadi kesalahan pengaturan
 
-### Subcommand
+### `/backup`
+**Deskripsi:** Sistem backup dan restore struktur konfigurasi bot di server kamu.
 
-#### `/backup create`
-Buat snapshot konfigurasi saat ini.
+### `/purge`
+**Deskripsi:** Hapus pesan massal (1–100) dengan filter spesifik: bot, user tertentu, atau pesan yang mengandung kata tertentu.
 
-#### `/backup restore`
-Restore konfigurasi dari backup.
-
-| Nama | Tipe | Wajib | Deskripsi |
-|------|------|-------|-----------|
-| `backup_id` | String | Ya | ID backup yang ingin di-restore |
-
-#### `/backup list`
-Tampilkan daftar backup tersedia.
-
-### Permission
-- **Administrator** — wajib
-
-### Tier
-**Pro**
+### `/nickconfig`
+**Deskripsi:** Atur kebijakan nama member di server (misal mewajibkan format roleplay `Nama_Karakter` tanpa spasi).
 
 ---
 
-## `/serverinfo`
+## Utilitas Lisensi & Kuota
 
-**Deskripsi:** Tampilkan informasi detail server Discord.
+### `/redeem [key]`
+**Deskripsi:** Masukkan kode lisensi voucher untuk mengaktifkan tier Pro atau Enterprise di server kamu.
 
-### Permission
-Tidak ada.
-
-### Tier
-**Free**
-
----
-
-## `/tiktok`
-
-Lihat dokumentasi lengkap di [Engagement Commands](/docs/perintah/engagement#tiktok).
-
----
-
-## `/aimodel`
-
-**Deskripsi:** Konfigurasi model AI custom untuk server — persona, knowledge base, dan batasan.
-
-### Subcommand
-
-#### `/aimodel setup`
-
-| Nama | Tipe | Wajib | Deskripsi |
-|------|------|-------|-----------|
-| `persona` | String | Ya | Deskripsi kepribadian AI (max 500 karakter) |
-| `nama` | String | Tidak | Nama AI (default: nama bot) |
-
-#### `/aimodel knowledge`
-Tambah knowledge base untuk AI server.
-
-| Nama | Tipe | Wajib | Deskripsi |
-|------|------|-------|-----------|
-| `file` | Attachment | Ya | File .txt atau .md berisi knowledge base |
-
-#### `/aimodel channel`
-Set channel di mana AI aktif merespons.
-
-### Permission
-- **Manage Server** — wajib
-
-### Tier
-**Pro**
-
-### Contoh Penggunaan
-```
-/aimodel setup persona:"Kamu adalah Asisten Moderasi Komunitas dengan nama 'Sentinel'. Kamu berbicara formal, tegas, dan membantu."
-/aimodel channel #ai-chat
-```
+### `/quota`
+**Deskripsi:** Cek sisa kuota harian bot untuk fitur AI, konversi Boombox, dan scan file mod.
