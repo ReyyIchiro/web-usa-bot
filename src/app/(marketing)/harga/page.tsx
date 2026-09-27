@@ -94,7 +94,7 @@ const tierFeatures = [
 
 function CellValue({ value }: { value: boolean | string }) {
   if (value === true)  return <div style={{ display: "flex", justifyContent: "center" }}><Check size={16} style={{ color: "#22c55e" }} /></div>;
-  if (value === false) return <div style={{ display: "flex", justifyContent: "center" }}><X size={14} style={{ color: "var(--border-hover)" }} /></div>;
+  if (value === false) return <div style={{ display: "flex", justifyContent: "center" }}><X size={14} style={{ color: "var(--text-muted)", opacity: 0.5 }} /></div>;
   return <div style={{ textAlign: "center", fontSize: "0.8rem", color: "var(--text-muted)", fontStyle: "italic" }}>{value}</div>;
 }
 
@@ -164,7 +164,7 @@ export default function HargaPage() {
               <span className="badge badge-accent" style={{ marginBottom: "1rem" }}>Pro</span>
               <div style={{ marginBottom: "1.25rem" }}>
                 <div style={{ display: "flex", alignItems: "baseline", gap: "0.375rem", marginBottom: "0.25rem" }}>
-                  <span style={{ fontSize: "2.25rem", fontWeight: 800, letterSpacing: "-0.03em" }}>Rp 5K</span>
+                  <span style={{ fontSize: "2.25rem", fontWeight: 800, letterSpacing: "-0.03em" }}>Rp 5.000</span>
                   <span style={{ fontSize: "0.875rem", color: "var(--text-muted)" }}>/ bulan</span>
                 </div>
                 <p style={{ fontSize: "0.875rem" }}>Hubungi kami untuk berlangganan.</p>
@@ -186,7 +186,7 @@ export default function HargaPage() {
               <span className="badge badge-amber" style={{ marginBottom: "1rem" }}>Enterprise</span>
               <div style={{ marginBottom: "1.25rem" }}>
                 <div style={{ display: "flex", alignItems: "baseline", gap: "0.375rem", marginBottom: "0.25rem" }}>
-                  <span style={{ fontSize: "2.25rem", fontWeight: 800, letterSpacing: "-0.03em" }}>Rp 10K</span>
+                  <span style={{ fontSize: "2.25rem", fontWeight: 800, letterSpacing: "-0.03em" }}>Rp 10.000</span>
                   <span style={{ fontSize: "0.875rem", color: "var(--text-muted)" }}>/ bulan</span>
                 </div>
                 <p style={{ fontSize: "0.875rem" }}>Komunitas besar & kebutuhan khusus.</p>
@@ -268,7 +268,7 @@ export default function HargaPage() {
                       </td>
                     </tr>
                     {section.items.map((feat, i) => (
-                      <tr key={feat.name} style={{ background: i % 2 === 0 ? "transparent" : "rgba(255,255,255,.012)" }}>
+                      <tr key={feat.name} style={{ background: i % 2 === 0 ? "transparent" : "rgba(128,128,128,.04)" }}>
                         <td style={{ padding: "0.625rem 1.25rem", color: "var(--text-primary)", borderBottom: "1px solid var(--border)" }}>
                           {feat.name}
                         </td>

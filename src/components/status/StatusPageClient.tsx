@@ -150,7 +150,7 @@ function ServerCard({ server, rank }: { server: BotServer; rank: number }) {
             width: "48px", height: "48px", borderRadius: "50%",
             background: "var(--surface-2)", border: "1px solid var(--border)",
             display: "flex", alignItems: "center", justifyContent: "center",
-            fontSize: "1.25rem", fontWeight: 700, color: "var(--accent-glow)",
+            fontSize: "1.25rem", fontWeight: 700, color: "var(--accent)",
             flexShrink: 0,
           }}>
             {server.guild_name.charAt(0).toUpperCase()}
@@ -179,8 +179,8 @@ function ServerCard({ server, rank }: { server: BotServer; rank: number }) {
               </span>
             )}
             {isCommunity && (
-              <span style={{ fontSize: "0.6rem", padding: "0.125rem 0.4rem", borderRadius: "0.25rem", background: "var(--accent-glow)", color: "var(--accent)", fontWeight: 800, textTransform: "uppercase", letterSpacing: "0.05em" }}>
-                COMMUNITY
+              <span style={{ fontSize: "0.625rem", padding: "0.1rem 0.4rem", borderRadius: "4px", background: "var(--accent-dim)", color: "var(--accent)", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.05em" }}>
+                Community
               </span>
             )}
             {boost && (
@@ -212,8 +212,8 @@ function ServerCard({ server, rank }: { server: BotServer; rank: number }) {
           border: "1px solid var(--border)",
         }}>
           <div style={{ fontSize: "0.6875rem", color: "var(--text-muted)", marginBottom: "0.2rem" }}>
-            <Bot size={10} style={{ display: "inline", marginRight: "0.25rem" }} />
-            Manusia
+            <Users size={10} style={{ display: "inline", marginRight: "0.25rem" }} />
+            Member Asli
           </div>
           <div style={{ fontFamily: "var(--font-mono)", fontWeight: 700, fontSize: "0.9375rem", color: "#22c55e" }}>
             {formatNumber(server.human_count)}
@@ -360,8 +360,8 @@ export default function StatusPageClient({
           {!snapshot && (
             <div style={{ background: "rgba(239,68,68,.08)", border: "1px solid rgba(239,68,68,.25)", borderRadius: "0.875rem", padding: "1.25rem", marginBottom: "2rem", fontSize: "0.9rem", color: "var(--text-muted)" }}>
               <strong style={{ color: "#ef4444" }}>Data status tidak tersedia.</strong>{" "}
-              Bot mungkin sedang restart atau tabel <code>public_status_snapshot</code> belum dikonfigurasi.{" "}
-              <a href={brand.supportServerUrl} target="_blank" rel="noopener noreferrer" style={{ color: "var(--accent)" }}>Discord Support</a>.
+              Bot mungkin sedang restart atau tabel sinkronisasi belum mengirim data terbaru.{" "}
+              Hubungi kami di <a href={brand.supportServerUrl} target="_blank" rel="noopener noreferrer" style={{ color: "var(--accent)", textDecoration: "underline" }}>Discord Support</a> jika kendala berlanjut.
             </div>
           )}
 

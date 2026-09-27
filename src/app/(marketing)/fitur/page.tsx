@@ -426,27 +426,46 @@ export default function FiturPage() {
                 <span style={{ fontSize: "0.8125rem", color: "var(--text-muted)", fontWeight: 500 }}>
                   Command:
                 </span>
-                {module.commands.map((cmd) => (
-                  <Link
-                    key={cmd}
-                    href={`/docs/perintah`}
-                    style={{
-                      fontFamily: "var(--font-mono)",
-                      fontSize: "0.8125rem",
-                      background: "var(--surface-2)",
-                      border: "1px solid var(--border)",
-                      borderRadius: "6px",
-                      padding: "0.2rem 0.5rem",
-                      color: module.color,
-                      textDecoration: "none",
-                      transition: "border-color 0.15s ease",
-                    }}
-                  >
-                    {cmd}
-                  </Link>
-                ))}
+                {module.commands.map((cmd) => {
+                  const docPath =
+                    module.id === "security" ? "/docs/perintah/security" :
+                    module.id === "scripter" ? "/docs/perintah/scripter" :
+                    module.id === "roleplay" ? "/docs/perintah/roleplay" :
+                    module.id === "marketplace" ? "/docs/perintah/marketplace" :
+                    module.id === "engagement" ? "/docs/perintah/engagement" :
+                    module.id === "ai" ? "/docs/perintah/roleplay" :
+                    "/docs/perintah";
+
+                  return (
+                    <Link
+                      key={cmd}
+                      href={docPath}
+                      style={{
+                        fontFamily: "var(--font-mono)",
+                        fontSize: "0.8125rem",
+                        background: "var(--surface-2)",
+                        border: "1px solid var(--border)",
+                        borderRadius: "6px",
+                        padding: "0.2rem 0.5rem",
+                        color: module.color,
+                        textDecoration: "none",
+                        transition: "border-color 0.15s ease",
+                      }}
+                    >
+                      {cmd}
+                    </Link>
+                  );
+                })}
                 <Link
-                  href={`/docs`}
+                  href={
+                    module.id === "security" ? "/docs/perintah/security" :
+                    module.id === "scripter" ? "/docs/perintah/scripter" :
+                    module.id === "roleplay" ? "/docs/perintah/roleplay" :
+                    module.id === "marketplace" ? "/docs/perintah/marketplace" :
+                    module.id === "engagement" ? "/docs/perintah/engagement" :
+                    module.id === "ai" ? "/docs/perintah/roleplay" :
+                    "/docs/perintah"
+                  }
                   style={{
                     fontSize: "0.8125rem",
                     color: "var(--text-muted)",
@@ -475,8 +494,8 @@ export default function FiturPage() {
             <Link href="/invite" className="btn btn-primary">
               Invite Bot <ChevronRight size={16} />
             </Link>
-            <Link href="/docs/mulai" className="btn btn-secondary">
-              Panduan Mulai
+            <Link href="/docs/panduan" className="btn btn-secondary">
+              Panduan Setup
             </Link>
           </div>
         </div>
