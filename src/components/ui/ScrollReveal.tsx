@@ -16,6 +16,8 @@ interface ScrollRevealProps {
 /**
  * ScrollReveal - fades + slides children into view on scroll using Framer Motion.
  */
+const customEase = [0.16, 1, 0.3, 1] as const;
+
 export function ScrollReveal({
   children,
   className = "",
@@ -27,6 +29,7 @@ export function ScrollReveal({
 }: ScrollRevealProps) {
   return (
     <motion.div
+      suppressHydrationWarning
       className={className}
       style={style}
       initial={{ opacity: 0, y }}
@@ -35,7 +38,7 @@ export function ScrollReveal({
       transition={{
         duration,
         delay,
-        ease: [0.16, 1, 0.3, 1], // Smoother easing
+        ease: customEase,
       }}
     >
       {children}
@@ -80,13 +83,14 @@ export function ScrollRevealGrid({
       y: 0,
       transition: {
         duration,
-        ease: [0.16, 1, 0.3, 1] as any, // Smoother easing
+        ease: customEase,
       },
     },
   };
 
   return (
     <motion.div
+      suppressHydrationWarning
       className={className}
       style={style}
       variants={containerVariants}
@@ -96,11 +100,11 @@ export function ScrollRevealGrid({
     >
       {Array.isArray(children)
         ? (children as ReactNode[]).map((child, i) => (
-            <motion.div key={i} variants={itemVariants} style={{ display: "contents" }}>
+            <motion.div key={i} suppressHydrationWarning variants={itemVariants} style={{ display: "contents" }}>
               {child}
             </motion.div>
           ))
-        : <motion.div variants={itemVariants} style={{ display: "contents" }}>{children}</motion.div>}
+        : <motion.div suppressHydrationWarning variants={itemVariants} style={{ display: "contents" }}>{children}</motion.div>}
     </motion.div>
   );
 }

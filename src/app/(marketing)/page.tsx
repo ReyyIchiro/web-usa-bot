@@ -3,10 +3,9 @@ import Link from "next/link";
 import { brand } from "../../../brand.config";
 import {
   Shield, Code2, Gamepad2, ShoppingBag, Zap, Bot,
-  ArrowRight, ChevronRight, Server, Users, Activity,
-  Check, Wifi
+  ArrowRight, ChevronRight, Check
 } from "lucide-react";
-import { ScrollReveal, ScrollRevealGrid } from "@/components/ui/ScrollReveal";
+import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { Terminal3D } from "@/components/marketing/Terminal3D";
 import { supabase } from "@/lib/supabase/client";
 

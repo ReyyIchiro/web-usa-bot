@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useRef } from "react";
-import { motion, useScroll, useTransform, useMotionValue, useSpring, useMotionTemplate } from "motion/react";
+import { motion, useTransform, useMotionValue, useSpring } from "motion/react";
 import Link from "next/link";
 import { Server, Users, Wifi } from "lucide-react";
 
