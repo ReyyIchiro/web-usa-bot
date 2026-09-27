@@ -1,9 +1,17 @@
 "use client";
 
-import { useEffect, useState, useRef, useCallback } from "react";
+import { useRef, useCallback, useSyncExternalStore } from "react";
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 import { flushSync } from "react-dom";
+
+interface ViewTransition {
+  skipTransition: () => void;
+  ready: Promise<void>;
+  finished: Promise<void>;
+}
+
+const subscribe = () => () => {};
 
 /**
  * ThemeToggle - tombol toggle dark/light mode.
@@ -15,13 +23,9 @@ import { flushSync } from "react-dom";
  */
 export function ThemeToggle() {
   const { setTheme, resolvedTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
+  const mounted = useSyncExternalStore(subscribe, () => true, () => false);
   // Store the current ViewTransition object so we can skip it on rapid re-click
-  const activeTransition = useRef<any>(null);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const activeTransition = useRef<ViewTransition | null>(null);
 
   const toggle = useCallback((e: React.MouseEvent) => {
     const next = resolvedTheme === "dark" ? "light" : "dark";
@@ -53,7 +57,13 @@ export function ThemeToggle() {
       Math.max(y, window.innerHeight - y),
     );
 
-    const transition = (document as any).startViewTransition(() => {
+    const doc = document as unknown as { startViewTransition?: (cb: () => void) => ViewTransition };
+    if (!doc.startViewTransition) {
+      setTheme(next);
+      return;
+    }
+
+    const transition = doc.startViewTransition(() => {
       flushSync(() => {
         setTheme(next);
       });

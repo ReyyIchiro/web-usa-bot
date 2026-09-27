@@ -39,9 +39,14 @@ export default function GlobalError({
             <h1 style={{ fontSize: "2rem", fontWeight: 900, letterSpacing: "-0.04em", marginBottom: "0.5rem" }}>
               Kegagalan Sistem Kritis
             </h1>
-            <p style={{ color: "var(--text-muted, #888)", marginBottom: "2rem", lineHeight: 1.6 }}>
+            <p style={{ color: "var(--text-muted, #888)", marginBottom: "1.5rem", lineHeight: 1.6 }}>
               Maaf, mesin inti {brand.name} mengalami gangguan fatal. Harap muat ulang halaman.
             </p>
+            {error?.digest && (
+              <p style={{ fontSize: "0.75rem", color: "var(--text-muted, #888)", fontFamily: "monospace", marginBottom: "1.5rem" }}>
+                Kode Referensi: {error.digest}
+              </p>
+            )}
             
             <button 
               onClick={() => reset()}

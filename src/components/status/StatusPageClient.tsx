@@ -4,7 +4,7 @@ import { useEffect, useState, useMemo } from "react";
 import { supabase } from "@/lib/supabase/client";
 import type { PublicStatusSnapshot, BotServer } from "@/lib/supabase/types";
 import Image from "next/image";
-import { Server, Users, Activity, Clock, Wifi, Cpu, Bot, Search, ChevronDown } from "lucide-react";
+import { Server, Users, Activity, Clock, Wifi, Cpu, Search, ChevronDown } from "lucide-react";
 import { brand } from "../../../brand.config";
 
 
@@ -255,8 +255,8 @@ export default function StatusPageClient({
   initialSnapshot, 
   initialServers 
 }: { 
-  initialSnapshot: any; 
-  initialServers: any[]; 
+  initialSnapshot: PublicStatusSnapshot | null; 
+  initialServers: BotServer[]; 
 }) {
   const [snapshot, setSnapshot] = useState<PublicStatusSnapshot | null>(initialSnapshot);
   const [servers, setServers]   = useState<BotServer[]>(initialServers);
