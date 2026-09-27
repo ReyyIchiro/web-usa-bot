@@ -13,81 +13,81 @@ export const metadata: Metadata = {
 
 const tierFeatures = [
   {
-    category: "Security",
+    category: "Keamanan & A.E.G.I.S SOC",
     items: [
-      { name: "Automod dasar (spam/link/invite/kata)",    free: true,        pro: true, enterprise: true },
-      { name: "Whitelist channel & role",                  free: true,        pro: true, enterprise: true },
-      { name: "A.E.G.I.S SOC – scan malware",             free: false,       pro: true, enterprise: true },
-      { name: "Ghost Mode",                               free: false,       pro: true, enterprise: true },
-      { name: "Punishment bertingkat (level 1–4)",        free: false,       pro: true, enterprise: true },
-      { name: "Bypass / URL Scanner",                     free: false,       pro: true, enterprise: true },
-      { name: "Honeypot anti-raid",                       free: false,       pro: true, enterprise: true },
-      { name: "Global blacklist lintas-server",           free: false,       pro: true, enterprise: true },
+      { name: "Automod dasar (anti-spam, link, invite, badwords)", free: true,        pro: true, enterprise: true },
+      { name: "Whitelist channel & role khusus",                  free: true,        pro: true, enterprise: true },
+      { name: "A.E.G.I.S stealth-scan malware (.lua/.cs/.asi)",    free: false,       pro: true, enterprise: true },
+      { name: "SA-MP Crashlog Analyzer",                           free: "Terbatas",  pro: true, enterprise: true },
+      { name: "URL Shortlink Bypass Engine (/bypass)",             free: "5× / hari", pro: "50× / hari", enterprise: "Unlimited" },
+      { name: "Honeypot anti-raid bot penyerang",                  free: false,       pro: true, enterprise: true },
+      { name: "Global blacklist lintas-server",                    free: false,       pro: true, enterprise: true },
+      { name: "Audit izin role & backup server (/perms)",          free: false,       pro: true, enterprise: true },
     ],
   },
   {
-    category: "Scripter Tools (SA-MP)",
+    category: "Boombox Audio Engine (SA-MP)",
     items: [
-      { name: "Compile Lua → Bytecode",                  free: false,       pro: true, enterprise: true },
-      { name: "Decompile Bytecode",                       free: false,       pro: true, enterprise: true },
-      { name: "Obfuscate & Deobfuscate",                 free: false,       pro: true, enterprise: true },
-      { name: "Scan malware Lua",                         free: "Terbatas",  pro: true, enterprise: true },
+      { name: "Konversi YouTube, TikTok, SoundCloud",             free: "10× / hari",pro: "Unlimited", enterprise: "Unlimited" },
+      { name: "Support Spotify & Apple Music",                     free: "5× / hari", pro: "Unlimited", enterprise: "Unlimited" },
+      { name: "Direct audio upload (.mp3, .wav, .ogg)",            free: false,       pro: true, enterprise: true },
+      { name: "Ekstraksi instan TikWM & InnerTube (1-2s)",         free: true,        pro: true, enterprise: true },
+      { name: "Dedicated Boombox Channel (/setup-boombox)",        free: false,       pro: true, enterprise: true },
+      { name: "Multi-tier failover & prioritas CDN",               free: false,       pro: true, enterprise: true },
     ],
   },
   {
-    category: "Roleplay & SA-MP",
+    category: "Roleplay & SA-MP Essentials",
     items: [
-      { name: "SSRP Screenshot Builder",                 free: true,        pro: true, enterprise: true },
-      { name: "SSRP Auto-Builder AI",                    free: false,       pro: true, enterprise: true },
-      { name: "Character Story Generator AI",            free: "2×/hari",   pro: true, enterprise: true },
-      { name: "Name Generator",                          free: true,        pro: true, enterprise: true },
-      { name: "Boombox Converter",                       free: "5×/hari",   pro: true, enterprise: true },
-      { name: "Server Directory SA-MP",                  free: true,        pro: true, enterprise: true },
+      { name: "SSRP Studio 2.0 (chatlog ke screenshot)",          free: true,        pro: true, enterprise: true },
+      { name: "AI Character Story Generator (/createcs)",          free: "3× / hari", pro: "Unlimited", enterprise: "Unlimited" },
+      { name: "Generator Nama Karakter RP (/namegen)",             free: true,        pro: true, enterprise: true },
+      { name: "Live SA-MP Server Directory & Query",               free: true,        pro: true, enterprise: true },
+      { name: "Nickname Policy Enforcer (/nickconfig)",            free: true,        pro: true, enterprise: true },
     ],
   },
   {
-    category: "Marketplace & Ekonomi",
+    category: "RTM Marketplace & Rekber QRIS",
     items: [
-      { name: "RTM Marketplace",                         free: false,       pro: true, enterprise: true },
-      { name: "Rekber / Escrow",                         free: false,       pro: true, enterprise: true },
-      { name: "Sistem reputasi",                         free: false,       pro: true, enterprise: true },
-      { name: "Leveling & XP",                           free: true,        pro: true, enterprise: true },
-      { name: "Economy hub",                             free: "Dasar",     pro: true, enterprise: true },
-      { name: "Minigame",                                free: true,        pro: true, enterprise: true },
+      { name: "Akses Marketplace Anonim (Jual, Cari, Tukar)",      free: false,       pro: true, enterprise: true },
+      { name: "Tiket Rekber (Escrow) otomatis",                    free: false,       pro: true, enterprise: true },
+      { name: "Pengiriman info QRIS & fee otomatis di tiket",      free: false,       pro: true, enterprise: true },
+      { name: "Watchlist Keyword Alert (notifikasi DM)",           free: false,       pro: true, enterprise: true },
+      { name: "Sistem Reputasi & Trust Score trader",              free: false,       pro: true, enterprise: true },
+      { name: "Transcript HTML bukti transaksi",                  free: false,       pro: true, enterprise: true },
+      { name: "Admin Audit & Reveal Identity (/rtm-admin)",        free: false,       pro: true, enterprise: true },
     ],
   },
   {
-    category: "Engagement & Utilitas",
+    category: "Scripter & Dev Tools",
     items: [
-      { name: "Giveaway & Poll",                         free: true,        pro: true, enterprise: true },
-      { name: "Suggestion box",                          free: true,        pro: true, enterprise: true },
-      { name: "Ticket support + transcript",             free: "1 kategori",pro: true, enterprise: true },
-      { name: "Sticky message",                          free: true,        pro: true, enterprise: true },
-      { name: "Auto-thread",                             free: true,        pro: true, enterprise: true },
-      { name: "Party matching (LFG)",                   free: true,        pro: true, enterprise: true },
-      { name: "TikTok live/video notify",               free: false,       pro: "3 akun", enterprise: true },
-      { name: "Dropdown role menu",                      free: true,        pro: true, enterprise: true },
-      { name: "Embed & Panel builder",                   free: true,        pro: true, enterprise: true },
+      { name: "Compile Lua → Bytecode (.luac)",                    free: false,       pro: true, enterprise: true },
+      { name: "Decompile Bytecode (.luac)",                        free: false,       pro: true, enterprise: true },
+      { name: "Obfuscate proteksi kode script",                    free: false,       pro: true, enterprise: true },
+      { name: "Deobfuscate & code beautifier",                     free: false,       pro: true, enterprise: true },
+      { name: "Scan file mod instan (/scan)",                      free: "Terbatas",  pro: true, enterprise: true },
     ],
   },
   {
-    category: "AI & Konfigurasi",
+    category: "Komunitas, Party & Engagement",
     items: [
-      { name: "AI Chat (persona custom)",                free: false,       pro: true, enterprise: true },
-      { name: "Knowledge base AI per server",            free: false,       pro: true, enterprise: true },
-      { name: "Audit log granular",                      free: "Dasar",     pro: true, enterprise: true },
-      { name: "Webhook per tipe event",                  free: false,       pro: true, enterprise: true },
-      { name: "Backup & restore channel",               free: false,       pro: true, enterprise: true },
+      { name: "Terminal Mabar (/party LFG)",                       free: true,        pro: true, enterprise: true },
+      { name: "Notifikasi TikTok Live & Video otomatis",           free: false,       pro: "5 akun", enterprise: "Unlimited" },
+      { name: "Server Booster Reward Banner",                      free: false,       pro: true, enterprise: true },
+      { name: "Minigames interaktif & Last Man Standing",          free: true,        pro: true, enterprise: true },
+      { name: "Leveling XP & Leaderboard Supabase",                free: true,        pro: true, enterprise: true },
+      { name: "Giveaway, Poll, & Kotak Saran (/suggest)",          free: true,        pro: true, enterprise: true },
+      { name: "Auto-Thread & Sticky Message",                      free: true,        pro: true, enterprise: true },
+      { name: "Dropdown Role Menu (/rolemenu)",                    free: true,        pro: true, enterprise: true },
     ],
   },
   {
-    category: "Support & SLA",
+    category: "Support & Layanan",
     items: [
-      { name: "Dokumentasi & Community support",         free: true,        pro: true, enterprise: true },
-      { name: "Prioritas support",                       free: false,       pro: false, enterprise: true },
-      { name: "Onboarding langsung",                     free: false,       pro: false, enterprise: true },
-      { name: "SLA uptime 99.9%",                        free: false,       pro: false, enterprise: true },
-      { name: "Custom konfigurasi",                      free: false,       pro: false, enterprise: true },
+      { name: "Dokumentasi lengkap & support komunitas",          free: true,        pro: true, enterprise: true },
+      { name: "Bantuan onboarding & setup langsung",               free: false,       pro: false, enterprise: true },
+      { name: "Uptime SLA 99.9%",                                  free: false,       pro: false, enterprise: true },
+      { name: "Server prioritas & akses fitur baru duluan",        free: false,       pro: false, enterprise: true },
     ],
   },
 ];
@@ -136,13 +136,13 @@ export default function HargaPage() {
                   <span style={{ fontSize: "2.25rem", fontWeight: 800, letterSpacing: "-0.03em" }}>Rp 0</span>
                   <span style={{ fontSize: "0.875rem", color: "var(--text-muted)" }}>/ selamanya</span>
                 </div>
-                <p style={{ fontSize: "0.875rem" }}>Fitur dasar untuk memulai komunitas.</p>
+                <p style={{ fontSize: "0.875rem" }}>Pas banget buat server baru yang mau mulai rapi dan seru tanpa biaya.</p>
               </div>
               <Link href="/invite" className="btn btn-secondary" style={{ width: "100%", justifyContent: "center", marginBottom: "1.25rem" }}>
                 Invite Gratis
               </Link>
               <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "0.5rem" }}>
-                {["Automod dasar", "SSRP Manual", "Party matching", "Ticket (1 kategori)", "Giveaway & poll", "Leveling & minigame"].map(f => (
+                {["Automod dasar & anti-spam", "SSRP Studio (Screenshot RP)", "Terminal Mabar /party", "Boombox audio (kuota harian)", "Giveaway, poll & leveling XP", "Kotak saran & tiket bantuan"].map(f => (
                   <li key={f} style={{ display: "flex", alignItems: "center", gap: "0.5rem", fontSize: "0.875rem", color: "var(--text-secondary)" }}>
                     <Check size={13} style={{ color: "#22c55e", flexShrink: 0 }} /> {f}
                   </li>
@@ -167,13 +167,13 @@ export default function HargaPage() {
                   <span style={{ fontSize: "2.25rem", fontWeight: 800, letterSpacing: "-0.03em" }}>Rp 5.000</span>
                   <span style={{ fontSize: "0.875rem", color: "var(--text-muted)" }}>/ bulan</span>
                 </div>
-                <p style={{ fontSize: "0.875rem" }}>Hubungi kami untuk berlangganan.</p>
+                <p style={{ fontSize: "0.875rem" }}>Fitur lengkap anti-lag buat komunitas aktif dan server RP ramai.</p>
               </div>
               <Link href={brand.supportServerUrl} target="_blank" rel="noopener noreferrer" className="btn btn-primary" style={{ width: "100%", justifyContent: "center", marginBottom: "1.25rem" }}>
-                Hubungi Tim <ExternalLink size={13} />
+                Pilih Pro <ExternalLink size={13} />
               </Link>
               <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "0.5rem" }}>
-                {["Semua fitur Free", "A.E.G.I.S SOC penuh", "Scripter Tools Lua", "RTM Marketplace", "AI Chat & Story", "Boombox unlimited", "TikTok notify (3 akun)"].map(f => (
+                {["Semua fitur Free", "A.E.G.I.S SOC & stealth-scan mod", "SA-MP Crashlog Analyzer", "Boombox audio unlimited (prioritas)", "AI Character Story & auto-builder", "RTM Marketplace & Rekber QRIS", "Notifikasi TikTok Live (5 akun)", "Scripter tools (compile & decompile)"].map(f => (
                   <li key={f} style={{ display: "flex", alignItems: "center", gap: "0.5rem", fontSize: "0.875rem", color: "var(--text-secondary)" }}>
                     <Check size={13} style={{ color: "var(--accent)", flexShrink: 0 }} /> {f}
                   </li>
@@ -189,13 +189,13 @@ export default function HargaPage() {
                   <span style={{ fontSize: "2.25rem", fontWeight: 800, letterSpacing: "-0.03em" }}>Rp 10.000</span>
                   <span style={{ fontSize: "0.875rem", color: "var(--text-muted)" }}>/ bulan</span>
                 </div>
-                <p style={{ fontSize: "0.875rem" }}>Komunitas besar & kebutuhan khusus.</p>
+                <p style={{ fontSize: "0.875rem" }}>Performa maksimal tanpa batas buat server besar & komunitas partner.</p>
               </div>
               <Link href={brand.supportServerUrl} target="_blank" rel="noopener noreferrer" className="btn btn-secondary" style={{ width: "100%", justifyContent: "center", borderColor: "rgba(245,158,11,.3)", color: "#f59e0b", marginBottom: "1.25rem" }}>
                 Hubungi Kami <ExternalLink size={13} />
               </Link>
               <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "0.5rem" }}>
-                {["Semua fitur Pro", "Kuota tak terbatas", "Prioritas support", "Onboarding langsung", "SLA 99.9%", "Custom AI persona"].map(f => (
+                {["Semua fitur Pro", "Bypass shortlink tanpa batas", "Koneksi dedicated & antrean prioritas", "Bantuan onboarding & setup langsung", "Jaminan uptime bot 99.9%", "Akses fitur eksperimental duluan"].map(f => (
                   <li key={f} style={{ display: "flex", alignItems: "center", gap: "0.5rem", fontSize: "0.875rem", color: "var(--text-secondary)" }}>
                     <Check size={13} style={{ color: "#f59e0b", flexShrink: 0 }} /> {f}
                   </li>
