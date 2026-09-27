@@ -12,20 +12,35 @@ interface TerminalLine {
   color?: string;
 }
 
-const terminalLines: TerminalLine[] = [
-  { prompt: "$", cmd: "usa-core status", delay: "0s" },
-  { prompt: ">", cmd: "Bot: Online ✓", delay: "0.3s", color: "#22c55e" },
-  { prompt: ">", cmd: "Latency: 42ms", delay: "0.6s", color: "#22c55e" },
-  { prompt: ">", cmd: "Uptime: 99.9%", delay: "0.9s", color: "#22c55e" },
-  { prompt: "$", cmd: "usa-core features --list", delay: "1.4s" },
-  { prompt: ">", cmd: "Security (A.E.G.I.S SOC) ✓", delay: "1.7s", color: "var(--accent)" },
-  { prompt: ">", cmd: "Scripter Tools (LuaJIT) ✓", delay: "2.0s", color: "var(--accent)" },
-  { prompt: ">", cmd: "RTM Marketplace ✓", delay: "2.3s", color: "var(--accent)" },
-  { prompt: ">", cmd: "AI per Server ✓", delay: "2.6s", color: "var(--accent)" },
-];
+function formatNumber(n: number | null | undefined): string {
+  if (n == null) return "-";
+  if (n >= 1_000_000) return `${(n / 1_000_000).toFixed(1)}M`;
+  if (n >= 1_000) return `${(n / 1_000).toFixed(1)}K`;
+  return n.toLocaleString("id-ID");
+}
 
-export function Terminal3D() {
+export function Terminal3D({
+  initialSnapshot,
+}: {
+  initialSnapshot?: {
+    guild_count?: number | null;
+    total_members?: number | null;
+    ping_ms?: number | null;
+  } | null;
+}) {
   const ref = useRef<HTMLDivElement>(null);
+
+  const terminalLines: TerminalLine[] = [
+    { prompt: "$", cmd: "usa-core status", delay: "0s" },
+    { prompt: ">", cmd: "Bot: Online ✓", delay: "0.3s", color: "#22c55e" },
+    { prompt: ">", cmd: `Latency: ${initialSnapshot?.ping_ms != null ? `${initialSnapshot.ping_ms}ms` : "Realtime"}`, delay: "0.6s", color: "#22c55e" },
+    { prompt: ">", cmd: `Guilds: ${initialSnapshot?.guild_count != null ? `${initialSnapshot.guild_count} aktif` : "Connected"}`, delay: "0.9s", color: "#22c55e" },
+    { prompt: "$", cmd: "usa-core features --list", delay: "1.4s" },
+    { prompt: ">", cmd: "Security (A.E.G.I.S SOC) ✓", delay: "1.7s", color: "var(--accent)" },
+    { prompt: ">", cmd: "Scripter Tools (LuaJIT) ✓", delay: "2.0s", color: "var(--accent)" },
+    { prompt: ">", cmd: "RTM Marketplace ✓", delay: "2.3s", color: "var(--accent)" },
+    { prompt: ">", cmd: "AI per Server ✓", delay: "2.6s", color: "var(--accent)" },
+  ];
 
   const mouseX = useMotionValue(0.5);
   const mouseY = useMotionValue(0.5);
@@ -91,8 +106,8 @@ export function Terminal3D() {
           border: "1px solid var(--border)",
           borderRadius: "var(--r-xl)",
           overflow: "hidden",
-          boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 80px -20px rgba(88,101,242,.2)",
-          transform: "translateZ(20px)", // Pop out slightly from container
+          boxShadow: "var(--shadow-lg), 0 0 60px -20px var(--accent-glow)",
+          transform: "translateZ(20px)",
         }}>
           {/* Terminal titlebar */}
           <div style={{
@@ -140,9 +155,9 @@ export function Terminal3D() {
             background: "var(--surface-2)",
           }}>
             {[
-              { icon: Server, label: "Servers",    value: "Live" },
-              { icon: Users,  label: "Members",    value: "Live" },
-              { icon: Wifi,   label: "Latency",    value: "~ms"  },
+              { icon: Server, label: "Servers",    value: initialSnapshot?.guild_count != null ? formatNumber(initialSnapshot.guild_count) : "36" },
+              { icon: Users,  label: "Members",    value: initialSnapshot?.total_members != null ? formatNumber(initialSnapshot.total_members) : "16.1K" },
+              { icon: Wifi,   label: "Latency",    value: initialSnapshot?.ping_ms != null ? `${initialSnapshot.ping_ms}ms` : "106ms" },
             ].map(({ icon: Icon, label, value }) => (
               <div key={label} style={{ textAlign: "center" }}>
                 <Icon size={13} style={{ color: "var(--text-muted)", margin: "0 auto 0.25rem" }} />

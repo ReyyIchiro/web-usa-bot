@@ -22,8 +22,8 @@ export function ScrollReveal({
   style,
   delay = 0,
   y = 50,
-  duration = 1.2,
-  once = false, // Changed to false to repeat on scroll up/down
+  duration = 0.8,
+  once = true,
 }: ScrollRevealProps) {
   return (
     <motion.div
@@ -92,7 +92,7 @@ export function ScrollRevealGrid({
       variants={containerVariants}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: false, margin: "-40px" }} // Repeat
+      viewport={{ once: true, margin: "-40px" }}
     >
       {Array.isArray(children)
         ? (children as ReactNode[]).map((child, i) => (

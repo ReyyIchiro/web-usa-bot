@@ -8,10 +8,14 @@ import {
 } from "lucide-react";
 import { ScrollReveal, ScrollRevealGrid } from "@/components/ui/ScrollReveal";
 import { Terminal3D } from "@/components/marketing/Terminal3D";
+import { supabase } from "@/lib/supabase/client";
+
 export const metadata: Metadata = {
   title: `${brand.name} - ${brand.tagline}`,
   description: brand.description,
 };
+
+export const revalidate = 60; // Refresh live status snapshot every 60 seconds
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 
@@ -73,7 +77,13 @@ const tiers = [
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
-export default function HomePage() {
+export default async function HomePage() {
+  const { data: snap } = await supabase
+    .from("public_status_snapshot")
+    .select("guild_count, total_members, ping_ms")
+    .eq("id", 1)
+    .single();
+
   return (
     <>
       {/* ── HERO ─────────────────────────────────────────────────────────────── */}
@@ -100,8 +110,6 @@ export default function HomePage() {
             <div className="hero-grid" style={{ display: "grid", gap: "3rem", alignItems: "center" }}>
               {/* Left: copy */}
               <div style={{ position: "relative", zIndex: 1 }}>
-                {/* Version badge removed - no AI slop */}
-
                 <h1 style={{
                   fontSize: "clamp(2.25rem, 5.5vw, 4rem)",
                   fontWeight: 800,
@@ -121,12 +129,11 @@ export default function HomePage() {
                   maxWidth: "520px",
                   marginBottom: "2rem",
                 }}>
-                  Kita tahu betapa ribetnya manage server SA-MP - mod Lua yang beredar bebas,
-                  spam, dan transaksi yang rawan penipuan. USA Core hadir untuk menyelesaikan
-                  semua itu, satu command sekaligus.
+                  Automod cerdas A.E.G.I.S, scanner malware mod Lua, sistem rekber RTM anonim,
+                  dan audio Boombox in-game. Satu bot untuk menyelesaikan semua kebutuhan server Anda.
                 </p>
 
-                <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap", marginBottom: "2.5rem" }}>
+                <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
                   <Link href="/invite" className="btn btn-primary btn-lg">
                     Invite Sekarang <ArrowRight size={16} />
                   </Link>
@@ -134,25 +141,11 @@ export default function HomePage() {
                     Dokumentasi <ChevronRight size={16} />
                   </Link>
                 </div>
-
-                {/* Social proof */}
-                <div style={{ display: "flex", gap: "2rem", flexWrap: "wrap" }}>
-                  {[
-                    { icon: Server,   label: "Multi-server"   },
-                    { icon: Shield,   label: "Security-first" },
-                    { icon: Activity, label: "SA-MP Native"   },
-                  ].map(({ icon: Icon, label }) => (
-                    <div key={label} style={{ display: "flex", alignItems: "center", gap: "0.375rem", fontSize: "0.8125rem", color: "var(--text-muted)" }}>
-                      <Icon size={13} style={{ color: "var(--accent)" }} />
-                      {label}
-                    </div>
-                  ))}
-                </div>
               </div>
 
               {/* Right: terminal */}
               <div style={{ position: "relative", zIndex: 1, perspective: "1000px" }}>
-                <Terminal3D />
+                <Terminal3D initialSnapshot={snap} />
               </div>
             </div>
           </div>

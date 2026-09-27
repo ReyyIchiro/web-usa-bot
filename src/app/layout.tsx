@@ -5,7 +5,6 @@ import "fumadocs-ui/style.css";
 import { brand } from "../../brand.config";
 import { RootProvider } from "fumadocs-ui/provider/next";
 import Script from "next/script";
-import { CustomCursor } from "@/components/ui/CustomCursor";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -111,14 +110,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="id" suppressHydrationWarning>
+    <html lang="id" suppressHydrationWarning data-scroll-behavior="smooth">
       <head>
       </head>
       <body
         className={`${inter.variable} ${geistMono.variable}`}
         style={{ fontFamily: "var(--font-inter, var(--font-sans))" }}
       >
-        <CustomCursor />
         <div className="global-bg-grid" />
         <Script
           id="json-ld"
