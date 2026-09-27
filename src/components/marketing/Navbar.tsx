@@ -5,9 +5,10 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { brand } from "../../../brand.config";
-import { Menu, X, ExternalLink } from "lucide-react";
+import { Menu, X, ExternalLink, Heart } from "lucide-react";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
-import { motion } from "motion/react";
+import { motion, AnimatePresence } from "motion/react";
+
 const navLinks = [
   { href: "/fitur",  label: "Fitur"  },
   { href: "/harga",  label: "Harga"  },
@@ -16,10 +17,10 @@ const navLinks = [
 ];
 
 export function Navbar() {
-  const [isOpen, setIsOpen]     = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+  const [isOpen, setIsOpen]           = useState(false);
+  const [scrolled, setScrolled]       = useState(false);
   const [hoveredPath, setHoveredPath] = useState<string | null>(null);
-  const pathname                = usePathname();
+  const pathname                      = usePathname();
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 16);
@@ -28,7 +29,21 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", handler);
   }, []);
 
-  useEffect(() => { setIsOpen(false); }, [pathname]);
+  useEffect(() => { 
+    setIsOpen(false); 
+  }, [pathname]);
+
+  // Lock body scroll on mobile drawer
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isOpen]);
 
   const isActive = (href: string) =>
     pathname === href || pathname.startsWith(href + "/");
@@ -37,13 +52,13 @@ export function Navbar() {
     <>
       {/* ── Floating Navbar ────────────────────────────────────────────── */}
       <header
-        className="navbar-glass"
+        className={`navbar-glass ${scrolled ? "scrolled" : ""}`}
         style={{
           position: "fixed",
           top: "12px",
           left: "50%",
           transform: "translateX(-50%)",
-          width: "min(920px, calc(100vw - 2rem))",
+          width: "min(960px, calc(100vw - 2rem))",
           zIndex: 100,
           height: "56px",
           borderRadius: "20px",
@@ -67,6 +82,7 @@ export function Navbar() {
             <Image
               src={brand.logo} alt={brand.name} width={26} height={26}
               style={{ borderRadius: "6px" }}
+              priority
             />
             <span style={{
               fontSize: "0.9rem", fontWeight: 700,
@@ -95,7 +111,6 @@ export function Navbar() {
                     borderRadius: "12px",
                     fontSize: "0.875rem",
                     fontWeight: active ? 600 : 500,
-                    // Text color changes to accent on hover
                     color: isHovered ? "var(--accent)" : active ? "var(--text-primary)" : "var(--text-muted)",
                     textDecoration: "none",
                     position: "relative",
@@ -103,49 +118,18 @@ export function Navbar() {
                     transition: "color 0.2s ease"
                   }}
                 >
-                  {/* Hover Background (Theme styled) */}
                   {isHovered && !active && (
                     <motion.div
                       layoutId="navbar-hover-pill"
                       style={{
                         position: "absolute",
                         inset: 0,
-                        background: "rgba(88, 101, 242, 0.08)", // subtle accent background
-                        borderRadius: "12px",
-                        zIndex: -1,
+                        borderRadius: "10px",
+                        background: "var(--surface)",
+                        border: "1px solid var(--border)",
+                        zIndex: 0,
                       }}
-                      transition={{ type: "spring", stiffness: 400, damping: 25 }}
-                    />
-                  )}
-                  {/* Active Background */}
-                  {active && (
-                    <motion.div
-                      layoutId="navbar-active-pill"
-                      style={{
-                        position: "absolute",
-                        inset: 0,
-                        background: "rgba(88, 101, 242, 0.12)",
-                        borderRadius: "12px",
-                        zIndex: -1,
-                      }}
-                      transition={{ type: "spring", stiffness: 400, damping: 25 }}
-                    />
-                  )}
-                  {/* Hover/Active Underline Glow */}
-                  {(isHovered || active) && (
-                    <motion.div
-                      layoutId="navbar-glow-line"
-                      style={{
-                        position: "absolute",
-                        bottom: "-6px", // move it slightly closer
-                        left: "25%",
-                        right: "25%",
-                        height: "2px",
-                        background: "var(--accent)",
-                        boxShadow: "0 0 10px 2px rgba(88, 101, 242, 0.4)",
-                        borderRadius: "2px",
-                      }}
-                      transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                      transition={{ type: "spring", stiffness: 350, damping: 30 }}
                     />
                   )}
                   <span style={{ position: "relative", zIndex: 1 }}>{link.label}</span>
@@ -155,14 +139,15 @@ export function Navbar() {
 
             <div style={{ width: "1px", height: "14px", background: "var(--border)", margin: "0 0.375rem" }} />
 
+            {/* Support Server */}
             <a
               href={brand.supportServerUrl}
               target="_blank" rel="noopener noreferrer"
               style={{
                 display: "inline-flex", alignItems: "center", gap: "0.25rem",
-                padding: "0.375rem 0.75rem",
+                padding: "0.375rem 0.65rem",
                 borderRadius: "10px",
-                fontSize: "0.875rem", fontWeight: 500,
+                fontSize: "0.84rem", fontWeight: 500,
                 color: "var(--text-muted)",
                 textDecoration: "none",
                 transition: "color 0.15s ease, background 0.15s ease",
@@ -177,6 +162,30 @@ export function Navbar() {
               }}
             >
               Support <ExternalLink size={11} />
+            </a>
+
+            {/* Donation Link */}
+            <a
+              href={brand.donationUrl}
+              target="_blank" rel="noopener noreferrer"
+              title="Dukung kreator bot via Sociabuzz"
+              style={{
+                display: "inline-flex", alignItems: "center", gap: "0.25rem",
+                padding: "0.375rem 0.65rem",
+                borderRadius: "10px",
+                fontSize: "0.84rem", fontWeight: 500,
+                color: "#f59e0b",
+                textDecoration: "none",
+                transition: "color 0.15s ease, background 0.15s ease",
+              }}
+              onMouseEnter={e => {
+                (e.currentTarget as HTMLElement).style.background = "rgba(245, 158, 11, 0.1)";
+              }}
+              onMouseLeave={e => {
+                (e.currentTarget as HTMLElement).style.background = "transparent";
+              }}
+            >
+              <Heart size={12} style={{ fill: "#f59e0b" }} /> Donasi
             </a>
 
             <ThemeToggle />
@@ -231,71 +240,135 @@ export function Navbar() {
         </nav>
       </header>
 
-      {/* ── Mobile drawer ──────────────────────────────────────────────── */}
-      {isOpen && (
-        <div className="nav-mobile-drawer" style={{
-          position: "fixed", top: "76px", left: "1rem", right: "1rem",
-          zIndex: 99,
-          background: "rgba(12,12,16,0.92)",
-          border: "1px solid rgba(255,255,255,.1)",
-          borderRadius: "16px",
-          padding: "0.625rem",
-          backdropFilter: "blur(24px)",
-          WebkitBackdropFilter: "blur(24px)",
-          boxShadow: "0 16px 48px rgba(0,0,0,.6)",
-          animation: "slideDown 0.2s cubic-bezier(0.4,0,0.2,1)",
-        }}>
-          {navLinks.map((link) => {
-            const active = isActive(link.href);
-            return (
-              <Link
-                key={link.href}
-                href={link.href}
-                style={{
-                  display: "flex", alignItems: "center",
-                  padding: "0.625rem 0.875rem",
-                  fontSize: "0.9375rem", fontWeight: active ? 600 : 500,
-                  color: active ? "var(--accent)" : "var(--text-muted)",
-                  borderRadius: "10px",
-                  background: active ? "var(--accent-dim)" : "transparent",
-                  textDecoration: "none",
-                  transition: "background 0.15s ease, color 0.15s ease",
-                }}
-              >
-                {link.label}
-              </Link>
-            );
-          })}
-          <div style={{ borderTop: "1px solid var(--border)", margin: "0.5rem 0", paddingTop: "0.5rem", display: "flex", gap: "0.5rem", alignItems: "center" }}>
-            <ThemeToggle />
-            <Link
-              href="/invite"
+      {/* ── Mobile drawer & Backdrop ──────────────────────────────────── */}
+      <AnimatePresence>
+        {isOpen && (
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsOpen(false)}
               style={{
-                flex: 1, display: "flex", justifyContent: "center",
-                padding: "0.5rem",
-                borderRadius: "10px",
-                fontSize: "0.875rem", fontWeight: 600,
-                background: "var(--accent)", color: "#fff",
-                textDecoration: "none",
+                position: "fixed",
+                inset: 0,
+                background: "rgba(0,0,0,0.55)",
+                backdropFilter: "blur(6px)",
+                WebkitBackdropFilter: "blur(6px)",
+                zIndex: 98,
+              }}
+            />
+
+            {/* Drawer */}
+            <motion.div
+              initial={{ opacity: 0, y: -12, scale: 0.98 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -12, scale: 0.98 }}
+              transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+              className="nav-mobile-drawer"
+              style={{
+                position: "fixed",
+                top: "76px",
+                left: "1rem",
+                right: "1rem",
+                zIndex: 99,
+                background: "rgba(18, 18, 22, 0.96)",
+                border: "1px solid var(--border-hover)",
+                borderRadius: "16px",
+                padding: "0.75rem",
+                backdropFilter: "blur(28px)",
+                WebkitBackdropFilter: "blur(28px)",
+                boxShadow: "0 20px 48px rgba(0,0,0,.6)",
               }}
             >
-              Invite Bot
-            </Link>
-          </div>
-        </div>
-      )}
+              <div style={{ display: "flex", flexDirection: "column", gap: "0.25rem" }}>
+                {navLinks.map((link) => {
+                  const active = isActive(link.href);
+                  return (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      onClick={() => setIsOpen(false)}
+                      style={{
+                        display: "flex", alignItems: "center",
+                        padding: "0.625rem 0.875rem",
+                        fontSize: "0.9375rem", fontWeight: active ? 600 : 500,
+                        color: active ? "var(--accent)" : "var(--text-primary)",
+                        borderRadius: "10px",
+                        background: active ? "var(--accent-dim)" : "transparent",
+                        textDecoration: "none",
+                      }}
+                    >
+                      {link.label}
+                    </Link>
+                  );
+                })}
+              </div>
+
+              <div style={{ borderTop: "1px solid var(--border)", margin: "0.625rem 0", paddingTop: "0.625rem", display: "flex", flexDirection: "column", gap: "0.5rem" }}>
+                <a
+                  href={brand.supportServerUrl}
+                  target="_blank" rel="noopener noreferrer"
+                  style={{
+                    display: "flex", alignItems: "center", justifyContent: "space-between",
+                    padding: "0.5rem 0.875rem",
+                    fontSize: "0.875rem",
+                    color: "var(--text-secondary)",
+                    textDecoration: "none",
+                  }}
+                >
+                  <span>Discord Support Server</span>
+                  <ExternalLink size={13} />
+                </a>
+
+                <a
+                  href={brand.donationUrl}
+                  target="_blank" rel="noopener noreferrer"
+                  style={{
+                    display: "flex", alignItems: "center", justifyContent: "space-between",
+                    padding: "0.5rem 0.875rem",
+                    fontSize: "0.875rem",
+                    color: "#f59e0b",
+                    textDecoration: "none",
+                  }}
+                >
+                  <span style={{ display: "flex", alignItems: "center", gap: "0.375rem" }}>
+                    <Heart size={13} style={{ fill: "#f59e0b" }} /> Donasi Kreator (Sociabuzz)
+                  </span>
+                  <ExternalLink size={13} />
+                </a>
+              </div>
+
+              <div style={{ borderTop: "1px solid var(--border)", paddingTop: "0.625rem", display: "flex", gap: "0.5rem", alignItems: "center" }}>
+                <ThemeToggle />
+                <Link
+                  href="/invite"
+                  onClick={() => setIsOpen(false)}
+                  style={{
+                    flex: 1, display: "flex", justifyContent: "center",
+                    padding: "0.55rem",
+                    borderRadius: "10px",
+                    fontSize: "0.875rem", fontWeight: 600,
+                    background: "var(--accent)", color: "#fff",
+                    textDecoration: "none",
+                  }}
+                >
+                  Invite Bot
+                </Link>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
 
       <style>{`
         @media (max-width: 680px) {
           .nav-desktop       { display: none !important; }
           .nav-mobile-toggle { display: flex !important; align-items: center; justify-content: center; }
         }
-        @keyframes slideDown {
-          from { opacity: 0; transform: translateY(-8px); }
-          to   { opacity: 1; transform: translateY(0); }
-        }
         .light .nav-mobile-drawer, [data-theme="light"] .nav-mobile-drawer {
-          background: rgba(250,250,250,0.95) !important;
+          background: rgba(250,250,250,0.96) !important;
           border-color: rgba(0,0,0,.08) !important;
           box-shadow: 0 16px 48px rgba(0,0,0,.15) !important;
         }

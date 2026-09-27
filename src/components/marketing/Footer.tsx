@@ -11,14 +11,15 @@ const footerLinks = {
     { href: "/invite", label: "Invite Bot" },
   ],
   Dokumentasi: [
-    { href: "/docs/mulai",    label: "Mulai Cepat" },
+    { href: "/docs",          label: "Mulai Cepat" },
     { href: "/docs/perintah", label: "Command Reference" },
     { href: "/docs/panduan",  label: "Panduan Setup" },
     { href: "/docs/faq",      label: "FAQ" },
     { href: "/docs/changelog",label: "Changelog" },
   ],
   Komunitas: [
-    { href: brand.supportServerUrl, label: "Discord Support", external: true },
+    { href: brand.supportServerUrl, label: "Discord Server", external: true },
+    { href: brand.donationUrl,      label: "Donasi Sociabuzz ☕", external: true },
     { href: brand.githubUrl,        label: "GitHub",          external: true },
   ],
   Legal: [
