@@ -15,12 +15,13 @@ export const brand = {
   url: "https://usacore.vercel.app", // Ganti dengan domain final
   inviteUrl: "https://discord.com/oauth2/authorize?client_id=1531622222828142633",
   supportServerUrl: "https://discord.gg/CnHuMnpKkV",
+  donationUrl: "https://sociabuzz.com/atepp",
   githubUrl: "https://github.com/ReyyIchiro",
   clientId: "1531622222828142633",
 
-  // Logo
+  // Logo & Branding Assets
   logo: "/logo-v10.png",
-  ogImage: "/logo-v10.png",
+  ogImage: "/og-image.png",
 
   // Social / SEO
   keywords: [
