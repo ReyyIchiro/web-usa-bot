@@ -19,8 +19,8 @@ export const brand = {
   clientId: "1531622222828142633",
 
   // Logo
-  logo: "/logo-v9.png",
-  ogImage: "/logo-v9.png",
+  logo: "/logo-v10.png",
+  ogImage: "/logo-v10.png",
 
   // Social / SEO
   keywords: [

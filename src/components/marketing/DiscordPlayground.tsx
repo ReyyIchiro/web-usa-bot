@@ -4,6 +4,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Command, Music, ShieldAlert, Send } from "lucide-react";
 import Image from "next/image";
+import { brand } from "../../../brand.config";
 
 type Message = {
   id: string;
@@ -127,7 +128,7 @@ export function DiscordPlayground() {
               <div className="shrink-0 mt-0.5">
                 {msg.type === "bot" ? (
                   <div className="w-10 h-10 rounded-full bg-[#5865F2] flex items-center justify-center overflow-hidden">
-                    <Image src="/logo-v9.png" alt="Bot" width={40} height={40} className="object-cover" />
+                    <Image src={brand.logo} alt="Bot" width={40} height={40} className="object-cover" />
                   </div>
                 ) : (
                   <div className="w-10 h-10 rounded-full bg-emerald-500 flex items-center justify-center">
@@ -165,7 +166,7 @@ export function DiscordPlayground() {
             >
               <div className="shrink-0 mt-0.5">
                 <div className="w-10 h-10 rounded-full bg-[#5865F2] flex items-center justify-center overflow-hidden">
-                  <Image src="/logo-v9.png" alt="Bot" width={40} height={40} className="object-cover" />
+                  <Image src={brand.logo} alt="Bot" width={40} height={40} className="object-cover" />
                 </div>
               </div>
               <div className="flex-1 min-w-0 flex items-center">

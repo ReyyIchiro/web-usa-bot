@@ -46,7 +46,7 @@ export function Footer() {
           {/* Brand column */}
           <div>
             <Link href="/" style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem", marginBottom: "0.875rem", textDecoration: "none" }}>
-              <Image src="/logo-v9.png" alt={brand.name} width={26} height={26} style={{ borderRadius: "5px" }} />
+              <Image src={brand.logo} alt={brand.name} width={26} height={26} style={{ borderRadius: "5px" }} />
               <span style={{ fontSize: "0.9rem", fontWeight: 700, color: "var(--text-primary)", letterSpacing: "-0.02em" }}>
                 {brand.name}
               </span>

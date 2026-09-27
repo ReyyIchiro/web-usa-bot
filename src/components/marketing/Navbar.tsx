@@ -65,7 +65,7 @@ export function Navbar() {
             textDecoration: "none", flexShrink: 0,
           }}>
             <Image
-              src="/logo-v9.png" alt={brand.name} width={26} height={26}
+              src={brand.logo} alt={brand.name} width={26} height={26}
               style={{ borderRadius: "6px" }}
             />
             <span style={{

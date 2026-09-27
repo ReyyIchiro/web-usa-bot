@@ -31,7 +31,7 @@ export default function DocsLayoutWrapper({ children }: { children: ReactNode })
               padding: "4px",
               boxShadow: "0 2px 10px rgba(0,0,0,0.05)"
             }}>
-              <Image src="/logo-v9.png" alt="USA Core" width={22} height={22} style={{ borderRadius: "4px" }} />
+              <Image src={brand.logo} alt={brand.name} width={22} height={22} style={{ borderRadius: "4px" }} />
             </div>
             <span
               style={{
