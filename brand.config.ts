@@ -6,9 +6,9 @@
 export const brand = {
   name: "USA Core",
   shortName: "USA",
-  tagline: "Bot Discord untuk komunitas SAMP.",
+  tagline: "Bot Discord All-in-One Buat Komunitas SA-MP & Gaming",
   description:
-    "Automod heuristik A.E.G.I.S., scanner malware mod Lua, RTM marketplace anonim, Boombox audio SA-MP, dan 50+ fitur — semua dikonfigurasi langsung dari Discord.",
+    "Bikin server Discord kamu makin seru & aman! Dilengkapi Boombox audio in-game tercepat, SSRP roleplay studio, scanner malware mod A.E.G.I.S, marketplace RTM rekber QRIS, terminal mabar party, dan 50+ fitur interaktif tanpa ribet edit file.",
   version: "3.2.0",
 
   // URL & Links
@@ -35,10 +35,13 @@ export const brand = {
     "automod",
     "lua scanner",
     "malware detector",
-    "ssrp",
-    "boombox",
+    "crashlog analyzer",
+    "ssrp studio",
+    "boombox sa-mp",
     "rtm marketplace",
-    "rekber",
+    "rekber qris discord",
+    "party mabar lfg",
+    "tiktok live notify",
     "usa core",
     "bot discord sa-mp",
   ],

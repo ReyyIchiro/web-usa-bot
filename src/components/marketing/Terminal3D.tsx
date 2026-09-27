@@ -32,14 +32,14 @@ export function Terminal3D({
 
   const terminalLines: TerminalLine[] = [
     { prompt: "$", cmd: "usa-core status", delay: "0s" },
-    { prompt: ">", cmd: "Bot: Online ✓", delay: "0.3s", color: "#22c55e" },
-    { prompt: ">", cmd: `Latency: ${initialSnapshot?.ping_ms != null ? `${initialSnapshot.ping_ms}ms` : "Realtime"}`, delay: "0.6s", color: "#22c55e" },
-    { prompt: ">", cmd: `Guilds: ${initialSnapshot?.guild_count != null ? `${initialSnapshot.guild_count} aktif` : "Connected"}`, delay: "0.9s", color: "#22c55e" },
-    { prompt: "$", cmd: "usa-core features --list", delay: "1.4s" },
-    { prompt: ">", cmd: "Security (A.E.G.I.S SOC) ✓", delay: "1.7s", color: "var(--accent)" },
-    { prompt: ">", cmd: "Scripter Tools (LuaJIT) ✓", delay: "2.0s", color: "var(--accent)" },
-    { prompt: ">", cmd: "RTM Marketplace ✓", delay: "2.3s", color: "var(--accent)" },
-    { prompt: ">", cmd: "AI per Server ✓", delay: "2.6s", color: "var(--accent)" },
+    { prompt: ">", cmd: `Sistem: Online | Ping: ${initialSnapshot?.ping_ms != null ? `${initialSnapshot.ping_ms}ms` : "18ms"} ✓`, delay: "0.3s", color: "#22c55e" },
+    { prompt: ">", cmd: `Komunitas: ${initialSnapshot?.guild_count != null ? `${formatNumber(initialSnapshot.guild_count)} server terhubung` : "Aktif di puluhan server"} ✓`, delay: "0.6s", color: "#22c55e" },
+    { prompt: "$", cmd: "/convertbb url=\"youtube.com/track\"", delay: "1.1s" },
+    { prompt: ">", cmd: "Stream in-game ready dlm 1.2s (TikWM / InnerTube) ✓", delay: "1.4s", color: "var(--accent)" },
+    { prompt: "$", cmd: "/scan file=\"mod_cleo.cs\"", delay: "1.8s" },
+    { prompt: ">", cmd: "A.E.G.I.S: Bersih! Bebas keylogger & token stealer ✓", delay: "2.1s", color: "#22c55e" },
+    { prompt: "$", cmd: "/party create nama=\"Patroli SAPD Shift Malam\"", delay: "2.5s" },
+    { prompt: ">", cmd: "Terminal Mabar live! Slot 4/4 terisi otomatis ✓", delay: "2.8s", color: "#3b82f6" },
   ];
 
   const mouseX = useMotionValue(0.5);

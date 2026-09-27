@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { brand } from "../../../brand.config";
 import {
-  Shield, Code2, Gamepad2, ShoppingBag, Zap, Bot,
-  ArrowRight, ChevronRight, Check
+  Shield, Code2, Gamepad2, ShoppingBag,
+  ArrowRight, ChevronRight, Check, Music, Users
 } from "lucide-react";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { Terminal3D } from "@/components/marketing/Terminal3D";
@@ -20,54 +20,77 @@ export const revalidate = 60; // Refresh live status snapshot every 60 seconds
 
 const features = [
   {
-    icon: Shield, title: "Security & A.E.G.I.S SOC",
-    desc: "Automod heuristic, stealth-scan malware Lua/CS/ASI, honeypot anti-raid, URL scanner, dan global blacklist lintas-server.",
+    icon: Shield, title: "A.E.G.I.S SOC & Keamanan",
+    desc: "Auto-scan malware file .lua/.cs/.asi, analisa crashlog SA-MP, honeypot anti-raid, dan global blacklist biar server selalu aman.",
     color: "#22c55e", colorDim: "rgba(34,197,94,.1)", href: "/fitur#security", badge: "Pro",
   },
   {
-    icon: Code2, title: "Scripter Tools",
-    desc: "Compile/decompile Lua (LuaJIT) untuk MoonLoader & CLEO, obfuscate, deobfuscate, scan malware sebelum dijalankan.",
-    color: "var(--accent)", colorDim: "var(--accent-dim)", href: "/fitur#scripter", badge: "Eksklusif",
+    icon: Music, title: "Boombox Audio Tercepat",
+    desc: "Convert YouTube, TikTok, SoundCloud, dan Spotify ke link audio /boombox in-game secepat kilat (1-2 detik) dengan multi-tier failover.",
+    color: "#3b82f6", colorDim: "rgba(59,130,246,.1)", href: "/fitur#boombox", badge: "Populer",
   },
   {
-    icon: Gamepad2, title: "Roleplay & SA-MP Tools",
-    desc: "SSRP screenshot builder AI, Character Story generator, Name generator, Boombox konverter audio, Server Directory SA-MP.",
-    color: "#3b82f6", colorDim: "rgba(59,130,246,.1)", href: "/fitur#roleplay", badge: null,
+    icon: Gamepad2, title: "SSRP Studio & Roleplay AI",
+    desc: "Bikin screenshot RP estetik dari chatlog GTA SA, generate Character Story forum otomatis pakai AI, dan cari nama karakter realistis.",
+    color: "var(--accent)", colorDim: "var(--accent-dim)", href: "/fitur#roleplay", badge: null,
   },
   {
-    icon: ShoppingBag, title: "RTM Marketplace",
-    desc: "Marketplace anonim dengan rekber/escrow resmi. Identitas penjual-pembeli terlindungi. Admin punya tool reveal identity.",
-    color: "#f59e0b", colorDim: "rgba(245,158,11,.1)", href: "/fitur#marketplace", badge: "Enterprise",
+    icon: ShoppingBag, title: "RTM Marketplace & Rekber",
+    desc: "Jual-beli in-game aman tanpa takut bocor identitas. Dilengkapi tiket rekber QRIS otomatis dan log transcript rapi.",
+    color: "#f59e0b", colorDim: "rgba(245,158,11,.1)", href: "/fitur#marketplace", badge: "Pro",
   },
   {
-    icon: Zap, title: "Engagement & Utilitas",
-    desc: "Giveaway, polling, suggestion box, sticky message, auto-thread, booster notify, TikTok live/video notify, leveling & economy.",
-    color: "#f97316", colorDim: "rgba(249,115,22,.1)", href: "/fitur#engagement", badge: null,
+    icon: Users, title: "Terminal Mabar /party",
+    desc: "Cari teman mabar faction, heist, atau patroli lewat /party interaktif. Plus notifikasi TikTok Live, reward booster, dan leveling XP.",
+    color: "#f97316", colorDim: "rgba(249,115,22,.1)", href: "/fitur#engagement", badge: "Baru",
   },
   {
-    icon: Bot, title: "AI per Server",
-    desc: "Chat AI dengan persona dan knowledge base custom per server. Character story generator, SSRP auto-builder AI.",
-    color: "#a855f7", colorDim: "rgba(168,85,247,.1)", href: "/fitur#ai", badge: "Pro",
+    icon: Code2, title: "Scripter & Dev Tools",
+    desc: "Compile Lua ke bytecode LuaJIT, decompile .luac, obfuscate proteksi script, dan bypass 15+ jenis shortlink iklan receh dalam 1 detik.",
+    color: "#a855f7", colorDim: "rgba(168,85,247,.1)", href: "/fitur#scripter", badge: "Eksklusif",
   },
 ];
 
 const tiers = [
   {
     name: "Free", price: "Gratis", priceNote: "selamanya",
-    desc: "Mulai tanpa biaya.",
-    features: ["Automod dasar", "SSRP Basic", "Party matching", "Ticket support", "Giveaway & poll", "Leveling"],
+    desc: "Pas banget buat server baru yang mau mulai rapi dan seru.",
+    features: [
+      "Automod dasar & anti-spam",
+      "SSRP Studio (Screenshot RP)",
+      "Terminal Mabar /party",
+      "Boombox converter (kuota harian)",
+      "Giveaway, poll & leveling XP",
+      "Tiket support & saran komunitas",
+    ],
     cta: "Invite Gratis", href: "/invite", featured: false, accent: false,
   },
   {
     name: "Pro", price: "Rp 5.000", priceNote: "/ bulan",
-    desc: "Fitur penuh untuk komunitas aktif.",
-    features: ["Semua fitur Free", "A.E.G.I.S SOC", "Scripter Tools", "AI Chat & Story", "RTM Marketplace", "TikTok notify", "Boombox unlimited"],
-    cta: "Lihat Detail", href: "/harga", featured: true, accent: true,
+    desc: "Fitur lengkap anti-lag buat komunitas aktif dan server RP ramai.",
+    features: [
+      "Semua fitur Free",
+      "A.E.G.I.S SOC & stealth scan malware",
+      "Crashlog analyzer SA-MP otomatis",
+      "Boombox audio unlimited (prioritas)",
+      "AI Character Story & auto-builder",
+      "RTM Marketplace & Rekber QRIS",
+      "Notifikasi TikTok Live otomatis",
+      "Scripter tools (compile & decompile)",
+    ],
+    cta: "Pilih Pro", href: "/harga", featured: true, accent: true,
   },
   {
     name: "Enterprise", price: "Rp 10.000", priceNote: "/ bulan",
-    desc: "SLA & onboarding untuk komunitas besar.",
-    features: ["Semua fitur Pro", "Kuota tak terbatas", "Prioritas support", "Onboarding langsung", "SLA 99.9%", "Custom AI persona"],
+    desc: "Performa maksimal tanpa batas buat server besar & komunitas partner.",
+    features: [
+      "Semua fitur Pro",
+      "Bypass shortlink tanpa batas",
+      "Koneksi dedicated & antrean prioritas",
+      "Bantuan setup & onboarding langsung",
+      "Jaminan uptime bot 99.9%",
+      "Akses fitur eksperimental duluan",
+    ],
     cta: "Hubungi Kami", href: brand.supportServerUrl, featured: false, accent: false,
   },
 ];
@@ -117,8 +140,8 @@ export default async function HomePage() {
                   color: "var(--text-primary)",
                   marginBottom: "1.25rem",
                 }}>
-                  Bot Discord yang dibangun untuk<br />
-                  komunitas <span className="text-gradient">SA&#8209;MP </span>
+                  Bot Discord All-in-One Buat<br />
+                  Komunitas <span className="text-gradient">SA&#8209;MP & Gaming</span>
                 </h1>
 
                 <p style={{
@@ -128,8 +151,7 @@ export default async function HomePage() {
                   maxWidth: "520px",
                   marginBottom: "2rem",
                 }}>
-                  Automod cerdas A.E.G.I.S, scanner malware mod Lua, sistem rekber RTM anonim,
-                  dan audio Boombox in-game. Satu bot untuk menyelesaikan semua kebutuhan server Anda.
+                  Gak perlu pusing setting manual atau copy-paste ID rumit. Dari Boombox audio in-game tercepat, SSRP Studio, scanner malware mod A.E.G.I.S, sampai Rekber QRIS otomatis — semua siap pakai langsung dari Discord kamu.
                 </p>
 
                 <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
@@ -259,12 +281,18 @@ export default async function HomePage() {
                 }}>
                   <Shield size={19} style={{ color: "#22c55e" }} />
                 </div>
-                <h3 style={{ fontSize: "1.125rem", marginBottom: "0.75rem" }}>A.E.G.I.S - Security Operation Center</h3>
-                <p style={{ marginBottom: "1.25rem", maxWidth: "400px" }}>
-                  Engine heuristik yang berjalan diam-diam. Stealth-scan setiap file <code>.lua</code>, <code>.cs</code>, <code>.asi</code> - deteksi malware sebelum tersebar.
+                <h3 style={{ fontSize: "1.125rem", marginBottom: "0.75rem" }}>A.E.G.I.S — Keamanan Mod & Crashlog SA-MP</h3>
+                <p style={{ marginBottom: "1.25rem", maxWidth: "420px" }}>
+                  Engine proteksi pintar yang scan file <code>.lua</code>, <code>.cs</code>, <code>.asi</code> secara diam-diam. Dilengkapi pendeteksi crashlog otomatis buat bantu warga server yang sering crash.
                 </p>
                 <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
-                  {["Ghost Mode (privasi penuh)", "Punishment bertingkat (level 1–4)", "URL Scanner anti-phishing", "Honeypot anti-raid", "Global blacklist lintas-server"].map(item => (
+                  {[
+                    "Stealth-scan: deteksi token stealer & keylogger sebelum tersebar",
+                    "Crashlog Analyzer: cari tahu penyebab crash game dari error code",
+                    "Honeypot anti-raid & proteksi serbuan bot jahat",
+                    "Bypass shortlink iklan receh (ouo.io, sfrm.in, dll) dalam 1 detik",
+                    "Global blacklist lintas-server buat saring pelaku scam",
+                  ].map(item => (
                     <div key={item} style={{ display: "flex", alignItems: "center", gap: "0.5rem", fontSize: "0.875rem", color: "var(--text-secondary)" }}>
                       <Check size={13} style={{ color: "#22c55e", flexShrink: 0 }} /> {item}
                     </div>
@@ -277,9 +305,9 @@ export default async function HomePage() {
             <ScrollReveal delay={0.1}>
               <div className="card card-p-lg" style={{ borderColor: "rgba(245,158,11,.2)", height: "100%" }}>
                 <ShoppingBag size={22} style={{ color: "#f59e0b", marginBottom: "1rem" }} />
-                <h3 style={{ fontSize: "1rem", marginBottom: "0.5rem" }}>RTM - Marketplace Anonim</h3>
-                <p style={{ fontSize: "0.875rem" }}>
-                  Jual-beli tanpa identitas terekspos. Rekber/escrow resmi terintegrasi. Reveal identity hanya untuk investigasi sengketa.
+                <h3 style={{ fontSize: "1rem", marginBottom: "0.5rem" }}>RTM Marketplace & Rekber QRIS</h3>
+                <p style={{ fontSize: "0.875rem", lineHeight: 1.6 }}>
+                  Jual-beli item in-game tanpa khawatir identitas bocor. Tiket escrow rekber otomatis bikinin info pembayaran QRIS dan simpan transcript transaksi rapi.
                 </p>
               </div>
             </ScrollReveal>
@@ -287,10 +315,10 @@ export default async function HomePage() {
             {/* Boombox */}
             <ScrollReveal delay={0.2}>
               <div className="card card-p-lg" style={{ height: "100%" }}>
-                <Zap size={22} style={{ color: "#3b82f6", marginBottom: "1rem" }} />
-                <h3 style={{ fontSize: "1rem", marginBottom: "0.5rem" }}>Boombox Audio Converter</h3>
-                <p style={{ fontSize: "0.875rem" }}>
-                  YouTube, TikTok, SoundCloud → link audio langsung untuk command <code>/boombox</code> in-game SA-MP.
+                <Music size={22} style={{ color: "#3b82f6", marginBottom: "1rem" }} />
+                <h3 style={{ fontSize: "1rem", marginBottom: "0.5rem" }}>Boombox Audio In-Game Tercepat</h3>
+                <p style={{ fontSize: "0.875rem", lineHeight: 1.6 }}>
+                  Cukup ketik <code>/convertbb</code>, link YouTube atau TikTok langsung disulap jadi link audio <code>/boombox</code> SA-MP dalam 1-2 detik tanpa buffer.
                 </p>
               </div>
             </ScrollReveal>
