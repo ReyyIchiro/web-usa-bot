@@ -1,0 +1,79 @@
+---
+title: Command Reference
+description: Daftar referensi lengkap seluruh slash command USA Core Bot yang dikelompokkan berdasarkan kategori fitur.
+---
+
+USA Core menggunakan sistem **Discord Slash Commands** modern (`/`). Semua perintah dilengkapi autocomplete, validasi input, dan pesan konfirmasi interaktif.
+
+## Cara Menggunakan Command
+
+Ketik garis miring `/` di Discord channel mana saja tempat bot memiliki izin, lalu pilih command yang diinginkan dari menu pop-up.
+
+```
+/nama_command [opsi_1] [opsi_2]
+```
+
+Setiap command memiliki tingkatan permission Discord dan ketersediaan tier tertentu:
+- **Free**: Dapat langsung digunakan oleh semua server tanpa biaya.
+- **Pro**: Memerlukan aktivasi tier Pro via `/redeem` atau langganan aktif.
+- **Enterprise**: Fitur khusus komunitas berskala besar dengan kapasitas custom.
+
+---
+
+## Kategori Command
+
+Pilih kategori di bawah untuk melihat dokumentasi parameter, opsi wajib/opsional, hak akses permission, serta contoh penggunaan praktis:
+
+### 1. [Security & A.E.G.I.S SOC](/docs/perintah/security)
+Perintah keamanan dan automod cerdas:
+- `/automod` — Dashboard konfigurasi perlindungan otomatis
+- `/autoscan` — Stealth-scan file `.lua`, `.cs`, `.asi`
+- `/blacklist` — Kelola daftar hitam server & global
+- `/bypass` — Scanner redirect URL & link phishing
+- `/purge` — Bersihkan pesan secara massal dengan filter
+- `/modpanel` — Panel kontrol moderasi cepat
+
+### 2. [Scripter Tools](/docs/perintah/scripter)
+Toolkit scripter SA-MP MoonLoader & CLEO:
+- `/compilelua` — Kompilasi file `.lua` ke bytecode `.luac`
+- `/decompilelua` — Dekompilasi bytecode ke kode sumber
+- `/obfuscate` — Proteksi kode Lua
+- `/deobfuscate` — Analisis kode yang diobfuskasi
+- `/scan` — Cek malware pada script sebelum dieksekusi
+
+### 3. [Roleplay & SA-MP Tools](/docs/perintah/roleplay)
+Fitur spesifik GTA San Andreas Multiplayer:
+- `/ssrp` — Generator screenshot roleplay chatlog
+- `/namegen` — Generator nama karakter RP realistis
+- `/serverdirectory` — Informasi live server SA-MP
+- `/createcs` — Generator Character Story AI
+
+### 4. [RTM Marketplace](/docs/perintah/marketplace)
+Sistem transaksi anonim dan rekber aman:
+- `/rtm` — Menu marketplace dan pembuatan listing
+- `/reputasi` — Sistem reputasi & ulasan terverifikasi
+- `/rtmAdmin` — Panel investigasi & rekber bagi admin
+
+### 5. [Boombox Audio Converter](/docs/perintah/boombox)
+Konversi audio web ke audio streaming in-game:
+- `/convertbb` — Konversi link YouTube/TikTok/SoundCloud ke audio stream HTTP
+- `/searchbb` — Cari track audio dari database komunitas
+- `/uploadbb` — Simpan preset audio boombox kustom
+
+### 6. [Engagement, Utilitas & Party](/docs/perintah/engagement)
+Fitur interaksi komunitas dan LFG party:
+- `/giveaway` — Sistem undian berhadiah dengan syarat role
+- `/poll` — Polling interaktif multiple choice
+- `/ticket` — Sistem tiket bantuan dengan log transcript
+- `/tiktok` — Notifikasi live & video TikTok otomatis
+- `/party` — Matchmaking LFG (Looking for Group) gaming
+- `/leveling` — Sistem XP, level, dan role rewards
+- `/rolemenu` — Menu dropdown self-assign role
+
+### 7. [Admin & Konfigurasi Server](/docs/perintah/admin)
+Pengaturan bot dan manajemen server:
+- `/help` — Panduan bantuan perintah di Discord
+- `/redeem` — Aktivasi lisensi key Pro/Enterprise
+- `/tierinfo` — Informasi status langganan dan kuota aktif
+- `/logsetup` — Konfigurasi channel log moderasi & SOC
+- `/botconfig` — Pengaturan preferensi bahasa dan respon bot

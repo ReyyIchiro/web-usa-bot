@@ -15,6 +15,15 @@ const nextConfig: NextConfig = {
   experimental: {
     optimizePackageImports: ["lucide-react", "motion"],
   },
+  async redirects() {
+    return [
+      {
+        source: "/docs/mulai",
+        destination: "/docs",
+        permanent: false,
+      },
+    ];
+  },
 };
 
 const withMDX = createMDX();
